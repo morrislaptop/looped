@@ -1,0 +1,22 @@
+{
+  "name": "looped",
+  "version": "0.0.1",
+  "description": "A Laravel inspired TypeScript framework",
+  "main": "index.js",
+  "repository": "git@github.com:morrislaptop/looped.git",
+  "author": "Craig Morris <craig.michael.morris@gmail.com>",
+  "license": "MIT",
+  "private": false,
+  "scripts": {
+    "test": "jest"
+  },
+  "devDependencies": {
+    "jest": "^24.5.0",
+    "lerna": "^3.13.1",
+    "supertest": "^4.0.2"
+  },
+  "dependencies": {
+    "koa": "^2.7.0",
+    "koa-router": "^7.4.0"
+  }
+}
