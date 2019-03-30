@@ -1,4 +1,4 @@
-import { server } from '../app/index'
+import { server } from '../../app/index'
 
 // require supertest
 const request = require("supertest");
@@ -12,8 +12,9 @@ afterEach(() => {
 describe("routes: index", () => {
   test("should respond as expected", async () => {
     const response = await request(server).get("/");
+
     expect(response.status).toEqual(200);
     expect(response.type).toEqual("application/json");
-    expect(response.body.data).toEqual("Sending some JSON");
+    expect(response.body).toEqual({ hello: 'world' });
   });
 });
