@@ -1,5 +1,4 @@
-// require the Koa server
-const server = require("../app/index");
+import { server } from '../app/index'
 
 // require supertest
 const request = require("supertest");

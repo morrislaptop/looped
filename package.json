@@ -11,12 +11,17 @@
     "test": "jest"
   },
   "devDependencies": {
+    "@types/jest": "^24.0.11",
     "jest": "^24.5.0",
     "lerna": "^3.13.1",
-    "supertest": "^4.0.2"
+    "supertest": "^4.0.2",
+    "ts-jest": "^24.0.0"
   },
   "dependencies": {
+    "@types/koa-router": "^7.0.40",
+    "googleapis": "^38.0.0",
     "koa": "^2.7.0",
-    "koa-router": "^7.4.0"
+    "koa-router": "^7.4.0",
+    "typescript": "^3.4.1"
   }
 }

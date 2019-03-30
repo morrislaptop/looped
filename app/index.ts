@@ -1,7 +1,6 @@
-const Koa = require("koa");
-const Router = require("koa-router");
-const router = new Router();
-const app = new Koa();
+import * as Koa from 'koa'
+import { router } from '../packages/router'
+const app = new Koa()
 const PORT = process.env.PORT || 8081;
 
 router.get("/", async ctx => {
@@ -16,4 +15,4 @@ const server = app.listen(PORT).on("error", err => {
   console.error(err);
 });
 
-module.exports = server;
+export { server }
