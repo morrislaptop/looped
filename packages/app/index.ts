@@ -9,7 +9,7 @@ export class LoopedApp extends Koa
     this.use(this.responseToContext)
   }
   
-  async responseToContext(ctx, next) {
+  async responseToContext(ctx: Koa.Context, next: Function) {
     const result = await next()
     
     ctx.body = result

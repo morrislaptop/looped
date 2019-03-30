@@ -1,7 +1,11 @@
+import 'reflect-metadata'
+
 import { LoopedRouter } from '../../packages/router'
 import { LoopedApp } from '../../packages/app'
 
 import * as request from 'supertest'
+import { createConnection } from 'typeorm';
+import { Photo } from '../models/Photo'
 
 // Run tests
 describe("routes: index", () => {
@@ -35,8 +39,21 @@ describe("routes: index", () => {
     // Arrange.
     const app = new LoopedApp()
     const router = new LoopedRouter()
+
+    await createConnection({
+      type: 'postgres',
+      url: 'postgresql://127.0.0.1:5432/looped',
+      synchronize: true,
+      entities: [
+        Photo
+      ]
+    })
+
+    const photo = new Photo
+    photo.name = 'Test Photo'
+    await photo.save()
     
-    router.get("/", async ctx => {
+    router.get("/photos/:photo", async (photo: Photo) => {
       return { hello: 'world' }
     });
     

@@ -15,14 +15,17 @@
     "@types/supertest": "^2.0.7",
     "jest": "^24.5.0",
     "lerna": "^3.13.1",
+    "pg": "^7.9.0",
     "supertest": "^4.0.2",
     "ts-jest": "^24.0.0"
   },
   "dependencies": {
     "@types/koa-router": "^7.0.40",
+    "@types/node": "^11.12.2",
     "googleapis": "^38.0.0",
     "koa": "^2.7.0",
     "koa-router": "^7.4.0",
+    "reflect-metadata": "^0.1.13",
     "ts-node": "^8.0.3",
     "typeorm": "^0.2.16",
     "typescript": "^3.4.1"
