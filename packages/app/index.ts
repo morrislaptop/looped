@@ -1,13 +1,17 @@
 import * as Koa from 'koa'
 
-const app = new Koa()
+export class LoopedApp extends Koa
+{
+  public constructor()
+  {
+    super()
 
-async function responseToContext(ctx, next) {
-  const result = await next()
+    this.use(this.responseToContext)
+  }
   
-  ctx.body = result
+  async responseToContext(ctx, next) {
+    const result = await next()
+    
+    ctx.body = result
+  }
 }
-
-app.use(responseToContext)
-
-export { app }

@@ -1,5 +1,5 @@
 import * as Router from 'koa-router'
 
-const router = new Router();
+export class LoopedRouter extends Router {
 
-export { router }
+}
