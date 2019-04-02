@@ -24,10 +24,14 @@
     "@types/node": "^11.12.2",
     "googleapis": "^38.0.0",
     "koa": "^2.7.0",
+    "koa-bodyparser": "^4.2.1",
+    "koa-multer": "^1.0.2",
     "koa-router": "^7.4.0",
     "reflect-metadata": "^0.1.13",
+    "routing-controllers": "^0.7.7",
     "ts-node": "^8.0.3",
     "typeorm": "^0.2.16",
+    "typeorm-routing-controllers-extensions": "^0.2.0",
     "typescript": "^3.4.1"
   }
 }

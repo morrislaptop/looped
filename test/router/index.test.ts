@@ -2,6 +2,8 @@ import 'reflect-metadata'
 
 import { LoopedRouter } from '../../packages/router'
 import { LoopedApp } from '../../packages/app'
+import { EntityFromParam } from 'typeorm-routing-controllers-extensions'
+import { JsonController, Get, createKoaServer, useKoaServer, Controller } from 'routing-controllers'
 
 import * as request from 'supertest'
 import { createConnection } from 'typeorm';
@@ -52,24 +54,33 @@ describe("routes: index", () => {
     const photo = new Photo
     photo.name = 'Test Photo'
     await photo.save()
-    
-    router.get("/photos/:photo", async (photo: Photo) => {
-      return { hello: 'world' }
-    });
-    
-    app.use(router.routes());
+
+    @Controller()
+    class PhotoController
+    {
+      @Get("/photos/:id")
+      show(@EntityFromParam("id") photo: Photo) {
+        console.log('got a photo', photo)
+        return photo;
+      }
+    }
+
+    useKoaServer(app, {
+      controllers: [PhotoController]
+    })
     
     const server = app.listen(process.env.PORT || 8081).on("error", err => {
       console.error(err)
     });
     
     // Act.
-    const response = await request(server).get("/")
+    const response = await request(server).get("/photos/" + photo.id)
+    console.log(response.body)
 
     // Assert.
-    expect(response.status).toEqual(200)
-    expect(response.type).toEqual("application/json")
-    expect(response.body).toEqual({ hello: 'world' })
+    // expect(response.status).toEqual(200)
+    // expect(response.type).toEqual("application/json")
+    // expect(response.body).toEqual({ hello: 'world' })
 
     server.close()
   })
