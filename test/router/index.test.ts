@@ -42,7 +42,7 @@ describe("routes: index", () => {
     const app = new LoopedApp()
     const router = new LoopedRouter()
 
-    await createConnection({
+    const connection = await createConnection({
       type: 'postgres',
       url: 'postgresql://127.0.0.1:5432/looped',
       synchronize: true,
@@ -83,5 +83,6 @@ describe("routes: index", () => {
     // expect(response.body).toEqual({ hello: 'world' })
 
     server.close()
+    connection.close()
   })
 })
