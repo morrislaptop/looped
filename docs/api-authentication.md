@@ -1,5 +1,7 @@
 # API Authentication
 
+::: v-pre 
+
 - [Introduction](#introduction)
 - [Configuration](#configuration)
     - [Database Migrations](#database-preparation)

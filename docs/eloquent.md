@@ -1,5 +1,7 @@
 # Eloquent: Getting Started
 
+::: v-pre 
+
 - [Introduction](#introduction)
 - [Defining Models](#defining-models)
     - [Eloquent Model Conventions](#eloquent-model-conventions)

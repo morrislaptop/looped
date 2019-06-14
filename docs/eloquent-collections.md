@@ -1,5 +1,7 @@
 # Eloquent: Collections
 
+::: v-pre 
+
 - [Introduction](#introduction)
 - [Available Methods](#available-methods)
 - [Custom Collections](#custom-collections)

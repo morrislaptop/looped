@@ -1,5 +1,7 @@
 # Laravel Socialite
 
+::: v-pre 
+
 - [Introduction](#introduction)
 - [Upgrading Socialite](#upgrading-socialite)
 - [Installation](#installation)

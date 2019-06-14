@@ -1,5 +1,9 @@
 # Laravel Cashier
 
+::: v-pre 
+
+::: v-pre 
+
 - [Introduction](#introduction)
 - [Upgrading Cashier](#upgrading-cashier)
 - [Installation](#installation)

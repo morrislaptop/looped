@@ -1,5 +1,7 @@
 # Compiling Assets (Mix)
 
+::: v-pre 
+
 - [Introduction](#introduction)
 - [Installation & Setup](#installation)
 - [Running Mix](#running-mix)

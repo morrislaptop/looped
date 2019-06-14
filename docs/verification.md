@@ -1,5 +1,7 @@
 # Email Verification
 
+::: v-pre 
+
 - [Introduction](#introduction)
 - [Database Considerations](#verification-database)
 - [Routing](#verification-routing)

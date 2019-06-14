@@ -1,5 +1,7 @@
 # Events
 
+::: v-pre 
+
 - [Introduction](#introduction)
 - [Registering Events & Listeners](#registering-events-and-listeners)
     - [Generating Events & Listeners](#generating-events-and-listeners)

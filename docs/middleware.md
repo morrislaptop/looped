@@ -1,5 +1,7 @@
 # Middleware
 
+::: v-pre 
+
 - [Introduction](#introduction)
 - [Defining Middleware](#defining-middleware)
 - [Registering Middleware](#registering-middleware)

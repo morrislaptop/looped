@@ -1,5 +1,7 @@
 # Authorization
 
+::: v-pre 
+
 - [Introduction](#introduction)
 - [Gates](#gates)
     - [Writing Gates](#writing-gates)

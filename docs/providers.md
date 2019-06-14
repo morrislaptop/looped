@@ -1,5 +1,7 @@
 # Service Providers
 
+::: v-pre 
+
 - [Introduction](#introduction)
 - [Writing Service Providers](#writing-service-providers)
     - [The Register Method](#the-register-method)

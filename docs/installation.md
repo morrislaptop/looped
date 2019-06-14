@@ -1,5 +1,7 @@
 # Installation
 
+::: v-pre 
+
 - [Installation](#installation)
     - [Server Requirements](#server-requirements)
     - [Installing Laravel](#installing-laravel)

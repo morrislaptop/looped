@@ -1,5 +1,7 @@
 # Database: Getting Started
 
+::: v-pre 
+
 - [Introduction](#introduction)
     - [Configuration](#configuration)
     - [Read & Write Connections](#read-and-write-connections)

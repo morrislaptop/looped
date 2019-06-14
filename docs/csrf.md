@@ -1,5 +1,7 @@
 # CSRF Protection
 
+::: v-pre 
+
 - [Introduction](#csrf-introduction)
 - [Excluding URIs](#csrf-excluding-uris)
 - [X-CSRF-Token](#csrf-x-csrf-token)

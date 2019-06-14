@@ -1,5 +1,7 @@
 # Localization
 
+::: v-pre 
+
 - [Introduction](#introduction)
     - [Configuring The Locale](#configuring-the-locale)
 - [Defining Translation Strings](#defining-translation-strings)

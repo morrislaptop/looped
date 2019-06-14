@@ -1,5 +1,7 @@
 # Database Testing
 
+::: v-pre 
+
 - [Introduction](#introduction)
 - [Generating Factories](#generating-factories)
 - [Resetting The Database After Each Test](#resetting-the-database-after-each-test)

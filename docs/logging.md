@@ -1,5 +1,7 @@
 # Logging
 
+::: v-pre 
+
 - [Introduction](#introduction)
 - [Configuration](#configuration)
     - [Building Log Stacks](#building-log-stacks)

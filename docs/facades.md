@@ -1,5 +1,7 @@
 # Facades
 
+::: v-pre 
+
 - [Introduction](#introduction)
 - [When To Use Facades](#when-to-use-facades)
     - [Facades Vs. Dependency Injection](#facades-vs-dependency-injection)

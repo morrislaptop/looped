@@ -1,5 +1,7 @@
 # Laravel Scout
 
+::: v-pre 
+
 - [Introduction](#introduction)
 - [Installation](#installation)
     - [Queueing](#queueing)

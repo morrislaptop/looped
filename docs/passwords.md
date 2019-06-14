@@ -1,5 +1,7 @@
 # Resetting Passwords
 
+::: v-pre 
+
 - [Introduction](#introduction)
 - [Database Considerations](#resetting-database)
 - [Routing](#resetting-routing)

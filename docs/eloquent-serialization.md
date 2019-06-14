@@ -1,5 +1,7 @@
 # Eloquent: Serialization
 
+::: v-pre 
+
 - [Introduction](#introduction)
 - [Serializing Models & Collections](#serializing-models-and-collections)
     - [Serializing To Arrays](#serializing-to-arrays)
