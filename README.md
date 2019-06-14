@@ -4,7 +4,30 @@ Looped is a port of the Laravel DX to TypeScript.
 
 ## Features
 
-# Alfas
+Prologue
+
+- [ ] Release Notes
+- [ ] Upgrade Guide
+- [ ] Contribution Guide
+- [ ] API Documentation
+
+Getting Started
+
+- [ ] Installation
+- [ ] Configuration
+- [ ] Directory Structure
+- [ ] Homestead
+- [ ] Valet
+- [ ] Deployment
+
+Architecture Concepts
+
+- [ ] Request Lifecycle
+- [ ] Service Container
+- [ ] Service Providers
+- [ ] Facades
+- [ ] Contracts
+
 The Basics
 
 - [ ] Routing

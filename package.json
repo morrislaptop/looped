@@ -36,7 +36,9 @@
         "test": "jest",
         "start": "ts-node bootstrap/server.ts",
         "serve": "nodemon",
-        "debug": "nodemon --config nodemon-debug.json"
+        "debug": "nodemon --config nodemon-debug.json",
+        "docs:dev": "vuepress dev docs",
+        "docs:build": "vuepress build docs"
     },
     "devDependencies": {
         "@types/jest": "^24.0.13",
@@ -45,6 +47,7 @@
         "jest": "^24.8.0",
         "nodemon": "^1.19.1",
         "supertest": "^4.0.2",
-        "ts-jest": "^24.0.2"
+        "ts-jest": "^24.0.2",
+        "vuepress": "^1.0.0-rc.1"
     }
 }
