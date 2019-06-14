@@ -10,193 +10,9 @@
 
 Laravel includes a variety of global "helper" PHP functions. Many of these functions are used by the framework itself; however, you are free to use them in your own applications if you find them convenient.
 
-
-## Available Methods
-
-<style>
-    .collection-method-list > p {
-        column-count: 3; -moz-column-count: 3; -webkit-column-count: 3;
-        column-gap: 2em; -moz-column-gap: 2em; -webkit-column-gap: 2em;
-    }
-
-    .collection-method-list a {
-        display: block;
-    }
-</style>
-
-### Arrays & Objects
-
-<div class="collection-method-list" markdown="1">
-
-[Arr::add](#method-array-add)
-[Arr::collapse](#method-array-collapse)
-[Arr::divide](#method-array-divide)
-[Arr::dot](#method-array-dot)
-[Arr::except](#method-array-except)
-[Arr::first](#method-array-first)
-[Arr::flatten](#method-array-flatten)
-[Arr::forget](#method-array-forget)
-[Arr::get](#method-array-get)
-[Arr::has](#method-array-has)
-[Arr::last](#method-array-last)
-[Arr::only](#method-array-only)
-[Arr::pluck](#method-array-pluck)
-[Arr::prepend](#method-array-prepend)
-[Arr::pull](#method-array-pull)
-[Arr::random](#method-array-random)
-[Arr::set](#method-array-set)
-[Arr::sort](#method-array-sort)
-[Arr::sortRecursive](#method-array-sort-recursive)
-[Arr::where](#method-array-where)
-[Arr::wrap](#method-array-wrap)
-[data_fill](#method-data-fill)
-[data_get](#method-data-get)
-[data_set](#method-data-set)
-[head](#method-head)
-[last](#method-last)
-</div>
-
-### Paths
-
-<div class="collection-method-list" markdown="1">
-
-[app_path](#method-app-path)
-[base_path](#method-base-path)
-[config_path](#method-config-path)
-[database_path](#method-database-path)
-[mix](#method-mix)
-[public_path](#method-public-path)
-[resource_path](#method-resource-path)
-[storage_path](#method-storage-path)
-
-</div>
-
-### Strings
-
-<div class="collection-method-list" markdown="1">
-
-[\__](#method-__)
-[class_basename](#method-class-basename)
-[e](#method-e)
-[preg_replace_array](#method-preg-replace-array)
-[Str::after](#method-str-after)
-[Str::before](#method-str-before)
-[Str::camel](#method-camel-case)
-[Str::contains](#method-str-contains)
-[Str::containsAll](#method-str-contains-all)
-[Str::endsWith](#method-ends-with)
-[Str::finish](#method-str-finish)
-[Str::is](#method-str-is)
-[Str::kebab](#method-kebab-case)
-[Str::limit](#method-str-limit)
-[Str::orderedUuid](#method-str-ordered-uuid)
-[Str::plural](#method-str-plural)
-[Str::random](#method-str-random)
-[Str::replaceArray](#method-str-replace-array)
-[Str::replaceFirst](#method-str-replace-first)
-[Str::replaceLast](#method-str-replace-last)
-[Str::singular](#method-str-singular)
-[Str::slug](#method-str-slug)
-[Str::snake](#method-snake-case)
-[Str::start](#method-str-start)
-[Str::startsWith](#method-starts-with)
-[Str::studly](#method-studly-case)
-[Str::title](#method-title-case)
-[Str::uuid](#method-str-uuid)
-[trans](#method-trans)
-[trans_choice](#method-trans-choice)
-
-</div>
-
-### URLs
-
-<div class="collection-method-list" markdown="1">
-
-[action](#method-action)
-[asset](#method-asset)
-[route](#method-route)
-[secure_asset](#method-secure-asset)
-[secure_url](#method-secure-url)
-[url](#method-url)
-
-</div>
-
-### Miscellaneous
-
-<div class="collection-method-list" markdown="1">
-
-[abort](#method-abort)
-[abort_if](#method-abort-if)
-[abort_unless](#method-abort-unless)
-[app](#method-app)
-[auth](#method-auth)
-[back](#method-back)
-[bcrypt](#method-bcrypt)
-[blank](#method-blank)
-[broadcast](#method-broadcast)
-[cache](#method-cache)
-[class_uses_recursive](#method-class-uses-recursive)
-[collect](#method-collect)
-[config](#method-config)
-[cookie](#method-cookie)
-[csrf_field](#method-csrf-field)
-[csrf_token](#method-csrf-token)
-[dd](#method-dd)
-[decrypt](#method-decrypt)
-[dispatch](#method-dispatch)
-[dispatch_now](#method-dispatch-now)
-[dump](#method-dump)
-[encrypt](#method-encrypt)
-[env](#method-env)
-[event](#method-event)
-[factory](#method-factory)
-[filled](#method-filled)
-[info](#method-info)
-[logger](#method-logger)
-[method_field](#method-method-field)
-[now](#method-now)
-[old](#method-old)
-[optional](#method-optional)
-[policy](#method-policy)
-[redirect](#method-redirect)
-[report](#method-report)
-[request](#method-request)
-[rescue](#method-rescue)
-[resolve](#method-resolve)
-[response](#method-response)
-[retry](#method-retry)
-[session](#method-session)
-[tap](#method-tap)
-[throw_if](#method-throw-if)
-[throw_unless](#method-throw-unless)
-[today](#method-today)
-[trait_uses_recursive](#method-trait-uses-recursive)
-[transform](#method-transform)
-[validator](#method-validator)
-[value](#method-value)
-[view](#method-view)
-[with](#method-with)
-
-</div>
-
-
-## Method Listing
-
-<style>
-    #collection-method code {
-        font-size: 14px;
-    }
-
-    #collection-method:not(.first-collection-method) {
-        margin-top: 50px;
-    }
-</style>
-
-
 ## Arrays & Objects
 
-
-#### `Arr::add()` {#collection-method .first-collection-method}
+#### `Arr::add()`
 
 The `Arr::add` method adds a given key / value pair to an array if the given key doesn't already exist in the array or is set to `null`:
 
@@ -212,7 +28,7 @@ The `Arr::add` method adds a given key / value pair to an array if the given key
 
 
 
-#### `Arr::collapse()` {#collection-method}
+#### `Arr::collapse()`
 
 The `Arr::collapse` method collapses an array of arrays into a single array:
 
@@ -223,7 +39,7 @@ The `Arr::collapse` method collapses an array of arrays into a single array:
     // [1, 2, 3, 4, 5, 6, 7, 8, 9]
 
 
-#### `Arr::divide()` {#collection-method}
+#### `Arr::divide()`
 
 The `Arr::divide` method returns two arrays, one containing the keys, and the other containing the values of the given array:
 
@@ -236,7 +52,7 @@ The `Arr::divide` method returns two arrays, one containing the keys, and the ot
     // $values: ['Desk']
 
 
-#### `Arr::dot()` {#collection-method}
+#### `Arr::dot()`
 
 The `Arr::dot` method flattens a multi-dimensional array into a single level array that uses "dot" notation to indicate depth:
 
@@ -249,7 +65,7 @@ The `Arr::dot` method flattens a multi-dimensional array into a single level arr
     // ['products.desk.price' => 100]
 
 
-#### `Arr::except()` {#collection-method}
+#### `Arr::except()`
 
 The `Arr::except` method removes the given key / value pairs from an array:
 
@@ -262,7 +78,7 @@ The `Arr::except` method removes the given key / value pairs from an array:
     // ['name' => 'Desk']
 
 
-#### `Arr::first()` {#collection-method}
+#### `Arr::first()`
 
 The `Arr::first` method returns the first element of an array passing a given truth test:
 
@@ -283,7 +99,7 @@ A default value may also be passed as the third parameter to the method. This va
     $first = Arr::first($array, $callback, $default);
 
 
-#### `Arr::flatten()` {#collection-method}
+#### `Arr::flatten()`
 
 The `Arr::flatten` method flattens a multi-dimensional array into a single level array:
 
@@ -296,7 +112,7 @@ The `Arr::flatten` method flattens a multi-dimensional array into a single level
     // ['Joe', 'PHP', 'Ruby']
 
 
-#### `Arr::forget()` {#collection-method}
+#### `Arr::forget()`
 
 The `Arr::forget` method removes a given key / value pair from a deeply nested array using "dot" notation:
 
@@ -309,7 +125,7 @@ The `Arr::forget` method removes a given key / value pair from a deeply nested a
     // ['products' => []]
 
 
-#### `Arr::get()` {#collection-method}
+#### `Arr::get()`
 
 The `Arr::get` method retrieves a value from a deeply nested array using "dot" notation:
 
@@ -330,7 +146,7 @@ The `Arr::get` method also accepts a default value, which will be returned if th
     // 0
 
 
-#### `Arr::has()` {#collection-method}
+#### `Arr::has()`
 
 The `Arr::has` method checks whether a given item or items exists in an array using "dot" notation:
 
@@ -347,7 +163,7 @@ The `Arr::has` method checks whether a given item or items exists in an array us
     // false
 
 
-#### `Arr::last()` {#collection-method}
+#### `Arr::last()`
 
 The `Arr::last` method returns the last element of an array passing a given truth test:
 
@@ -368,7 +184,7 @@ A default value may be passed as the third argument to the method. This value wi
     $last = Arr::last($array, $callback, $default);
 
 
-#### `Arr::only()` {#collection-method}
+#### `Arr::only()`
 
 The `Arr::only` method returns only the specified key / value pairs from the given array:
 
@@ -381,7 +197,7 @@ The `Arr::only` method returns only the specified key / value pairs from the giv
     // ['name' => 'Desk', 'price' => 100]
 
 
-#### `Arr::pluck()` {#collection-method}
+#### `Arr::pluck()`
 
 The `Arr::pluck` method retrieves all of the values for a given key from an array:
 
@@ -405,7 +221,7 @@ You may also specify how you wish the resulting list to be keyed:
     // [1 => 'Taylor', 2 => 'Abigail']
 
 
-#### `Arr::prepend()` {#collection-method}
+#### `Arr::prepend()`
 
 The `Arr::prepend` method will push an item onto the beginning of an array:
 
@@ -428,7 +244,7 @@ If needed, you may specify the key that should be used for the value:
     // ['name' => 'Desk', 'price' => 100]
 
 
-#### `Arr::pull()` {#collection-method}
+#### `Arr::pull()`
 
 The `Arr::pull` method returns and removes a key / value pair from an array:
 
@@ -449,7 +265,7 @@ A default value may be passed as the third argument to the method. This value wi
     $value = Arr::pull($array, $key, $default);
 
 
-#### `Arr::random()` {#collection-method}
+#### `Arr::random()`
 
 The `Arr::random` method returns a random value from an array:
 
@@ -470,7 +286,7 @@ You may also specify the number of items to return as an optional second argumen
     // [2, 5] - (retrieved randomly)
 
 
-#### `Arr::set()` {#collection-method}
+#### `Arr::set()`
 
 The `Arr::set` method sets a value within a deeply nested array using "dot" notation:
 
@@ -483,7 +299,7 @@ The `Arr::set` method sets a value within a deeply nested array using "dot" nota
     // ['products' => ['desk' => ['price' => 200]]]
 
 
-#### `Arr::sort()` {#collection-method}
+#### `Arr::sort()`
 
 The `Arr::sort` method sorts an array by its values:
 
@@ -518,7 +334,7 @@ You may also sort the array by the results of the given Closure:
     */
 
 
-#### `Arr::sortRecursive()` {#collection-method}
+#### `Arr::sortRecursive()`
 
 The `Arr::sortRecursive` method recursively sorts an array using the `sort` function for numeric sub=arrays and `ksort` for associative sub-arrays:
 
@@ -541,7 +357,7 @@ The `Arr::sortRecursive` method recursively sorts an array using the `sort` func
     */
 
 
-#### `Arr::where()` {#collection-method}
+#### `Arr::where()`
 
 The `Arr::where` method filters an array using the given Closure:
 
@@ -556,7 +372,7 @@ The `Arr::where` method filters an array using the given Closure:
     // [1 => '200', 3 => '400']
 
 
-#### `Arr::wrap()` {#collection-method}
+#### `Arr::wrap()`
 
 The `Arr::wrap` method wraps the given value in an array. If the given value is already an array it will not be changed:
 
@@ -579,7 +395,7 @@ If the given value is null, an empty array will be returned:
     // []
 
 
-#### `data_fill()` {#collection-method}
+#### `data_fill()`
 
 The `data_fill` function sets a missing value within a nested array or object using "dot" notation:
 
@@ -614,7 +430,7 @@ This function also accepts asterisks as wildcards and will fill the target accor
     */
 
 
-#### `data_get()` {#collection-method}
+#### `data_get()`
 
 The `data_get` function retrieves a value from a nested array or object using "dot" notation:
 
@@ -642,7 +458,7 @@ The function also accepts wildcards using asterisks, which may target any key of
     // ['Desk 1', 'Desk 2'];
 
 
-#### `data_set()` {#collection-method}
+#### `data_set()`
 
 The `data_set` function sets a value within a nested array or object using "dot" notation:
 
@@ -681,7 +497,7 @@ By default, any existing values are overwritten. If you wish to only set a value
     // ['products' => ['desk' => ['price' => 100]]]
 
 
-#### `head()` {#collection-method}
+#### `head()`
 
 The `head` function returns the first element in the given array:
 
@@ -692,7 +508,7 @@ The `head` function returns the first element in the given array:
     // 100
 
 
-#### `last()` {#collection-method}
+#### `last()`
 
 The `last` function returns the last element in the given array:
 
@@ -706,7 +522,7 @@ The `last` function returns the last element in the given array:
 ## Paths
 
 
-#### `app_path()` {#collection-method}
+#### `app_path()`
 
 The `app_path` function returns the fully qualified path to the `app` directory. You may also use the `app_path` function to generate a fully qualified path to a file relative to the application directory:
 
@@ -715,7 +531,7 @@ The `app_path` function returns the fully qualified path to the `app` directory.
     $path = app_path('Http/Controllers/Controller.php');
 
 
-#### `base_path()` {#collection-method}
+#### `base_path()`
 
 The `base_path` function returns the fully qualified path to the project root. You may also use the `base_path` function to generate a fully qualified path to a given file relative to the project root directory:
 
@@ -724,7 +540,7 @@ The `base_path` function returns the fully qualified path to the project root. Y
     $path = base_path('vendor/bin');
 
 
-#### `config_path()` {#collection-method}
+#### `config_path()`
 
 The `config_path` function returns the fully qualified path to the `config` directory. You may also use the `config_path` function to generate a fully qualified path to a given file within the application's configuration directory:
 
@@ -733,7 +549,7 @@ The `config_path` function returns the fully qualified path to the `config` dire
     $path = config_path('app.php');
 
 
-#### `database_path()` {#collection-method}
+#### `database_path()`
 
 The `database_path` function returns the fully qualified path to the `database` directory. You may also use the `database_path` function to generate a fully qualified path to a given file within the database directory:
 
@@ -742,14 +558,14 @@ The `database_path` function returns the fully qualified path to the `database` 
     $path = database_path('factories/UserFactory.php');
 
 
-#### `mix()` {#collection-method}
+#### `mix()`
 
 The `mix` function returns the path to a [versioned Mix file](/mix):
 
     $path = mix('css/app.css');
 
 
-#### `public_path()` {#collection-method}
+#### `public_path()`
 
 The `public_path` function returns the fully qualified path to the `public` directory. You may also use the `public_path` function to generate a fully qualified path to a given file within the public directory:
 
@@ -758,7 +574,7 @@ The `public_path` function returns the fully qualified path to the `public` dire
     $path = public_path('css/app.css');
 
 
-#### `resource_path()` {#collection-method}
+#### `resource_path()`
 
 The `resource_path` function returns the fully qualified path to the `resources` directory. You may also use the `resource_path` function to generate a fully qualified path to a given file within the resources directory:
 
@@ -767,7 +583,7 @@ The `resource_path` function returns the fully qualified path to the `resources`
     $path = resource_path('sass/app.scss');
 
 
-#### `storage_path()` {#collection-method}
+#### `storage_path()`
 
 The `storage_path` function returns the fully qualified path to the `storage` directory. You may also use the `storage_path` function to generate a fully qualified path to a given file within the storage directory:
 
@@ -779,7 +595,7 @@ The `storage_path` function returns the fully qualified path to the `storage` di
 ## Strings
 
 
-#### `__()` {#collection-method}
+#### `__()`
 
 The `__` function translates the given translation string or translation key using your [localization files](/localization):
 
@@ -790,7 +606,7 @@ The `__` function translates the given translation string or translation key usi
 If the specified translation string or key does not exist, the `__` function will return the given value. So, using the example above, the `__` function would return `messages.welcome` if that translation key does not exist.
 
 
-#### `class_basename()` {#collection-method}
+#### `class_basename()`
 
 The `class_basename` function returns the class name of the given class with the class' namespace removed:
 
@@ -799,7 +615,7 @@ The `class_basename` function returns the class name of the given class with the
     // Baz
 
 
-#### `e()` {#collection-method}
+#### `e()`
 
 The `e` function runs PHP's `htmlspecialchars` function with the `double_encode` option set to `true` by default:
 
@@ -808,7 +624,7 @@ The `e` function runs PHP's `htmlspecialchars` function with the `double_encode`
     // &lt;html&gt;foo&lt;/html&gt;
 
 
-#### `preg_replace_array()` {#collection-method}
+#### `preg_replace_array()`
 
 The `preg_replace_array` function replaces a given pattern in the string sequentially using an array:
 
@@ -819,7 +635,7 @@ The `preg_replace_array` function replaces a given pattern in the string sequent
     // The event will take place between 8:30 and 9:00
 
 
-#### `Str::after()` {#collection-method}
+#### `Str::after()`
 
 The `Str::after` method returns everything after the given value in a string:
 
@@ -830,7 +646,7 @@ The `Str::after` method returns everything after the given value in a string:
     // ' my name'
 
 
-#### `Str::before()` {#collection-method}
+#### `Str::before()`
 
 The `Str::before` method returns everything before the given value in a string:
 
@@ -841,7 +657,7 @@ The `Str::before` method returns everything before the given value in a string:
     // 'This is '
 
 
-#### `Str::camel()` {#collection-method}
+#### `Str::camel()`
 
 The `Str::camel` method converts the given string to `camelCase`:
 
@@ -852,7 +668,7 @@ The `Str::camel` method converts the given string to `camelCase`:
     // fooBar
 
 
-#### `Str::contains()` {#collection-method}
+#### `Str::contains()`
 
 The `Str::contains` method determines if the given string contains the given value (case sensitive):
 
@@ -871,7 +687,7 @@ You may also pass an array of values to determine if the given string contains a
     // true
 
 
-#### `Str::containsAll()` {#collection-method}
+#### `Str::containsAll()`
 
 The `Str::containsAll` method determines if the given string contains all array values:
 
@@ -882,7 +698,7 @@ The `Str::containsAll` method determines if the given string contains all array 
     // true
 
 
-#### `Str::endsWith()` {#collection-method}
+#### `Str::endsWith()`
 
 The `Str::endsWith` method determines if the given string ends with the given value:
 
@@ -893,7 +709,7 @@ The `Str::endsWith` method determines if the given string ends with the given va
     // true
 
 
-#### `Str::finish()` {#collection-method}
+#### `Str::finish()`
 
 The `Str::finish` method adds a single instance of the given value to a string if it does not already end with the value:
 
@@ -908,7 +724,7 @@ The `Str::finish` method adds a single instance of the given value to a string i
     // this/string/
 
 
-#### `Str::is()` {#collection-method}
+#### `Str::is()`
 
 The `Str::is` method determines if a given string matches a given pattern. Asterisks may be used to indicate wildcards:
 
@@ -923,7 +739,7 @@ The `Str::is` method determines if a given string matches a given pattern. Aster
     // false
 
 
-#### `Str::kebab()` {#collection-method}
+#### `Str::kebab()`
 
 The `Str::kebab` method converts the given string to `kebab-case`:
 
@@ -934,7 +750,7 @@ The `Str::kebab` method converts the given string to `kebab-case`:
     // foo-bar
 
 
-#### `Str::limit()` {#collection-method}
+#### `Str::limit()`
 
 The `Str::limit` method truncates the given string at the specified length:
 
@@ -953,7 +769,7 @@ You may also pass a third argument to change the string that will be appended to
     // The quick brown fox (...)
 
 
-#### `Str::orderedUuid()` {#collection-method}
+#### `Str::orderedUuid()`
 
 The `Str::orderedUuid` method generates a "timestamp first" UUID that may be efficiently stored in an indexed database column:
 
@@ -962,7 +778,7 @@ The `Str::orderedUuid` method generates a "timestamp first" UUID that may be eff
     return (string) Str::orderedUuid();
 
 
-#### `Str::plural()` {#collection-method}
+#### `Str::plural()`
 
 The `Str::plural` method converts a string to its plural form. This function currently only supports the English language:
 
@@ -989,7 +805,7 @@ You may provide an integer as a second argument to the function to retrieve the 
     // child
 
 
-#### `Str::random()` {#collection-method}
+#### `Str::random()`
 
 The `Str::random` method generates a random string of the specified length. This function uses PHP's `random_bytes` function:
 
@@ -998,7 +814,7 @@ The `Str::random` method generates a random string of the specified length. This
     $random = Str::random(40);
 
 
-#### `Str::replaceArray()` {#collection-method}
+#### `Str::replaceArray()`
 
 The `Str::replaceArray` method replaces a given value in the string sequentially using an array:
 
@@ -1011,7 +827,7 @@ The `Str::replaceArray` method replaces a given value in the string sequentially
     // The event will take place between 8:30 and 9:00
 
 
-#### `Str::replaceFirst()` {#collection-method}
+#### `Str::replaceFirst()`
 
 The `Str::replaceFirst` method replaces the first occurrence of a given value in a string:
 
@@ -1022,7 +838,7 @@ The `Str::replaceFirst` method replaces the first occurrence of a given value in
     // a quick brown fox jumps over the lazy dog
 
 
-#### `Str::replaceLast()` {#collection-method}
+#### `Str::replaceLast()`
 
 The `Str::replaceLast` method replaces the last occurrence of a given value in a string:
 
@@ -1033,7 +849,7 @@ The `Str::replaceLast` method replaces the last occurrence of a given value in a
     // the quick brown fox jumps over a lazy dog
 
 
-#### `Str::singular()` {#collection-method}
+#### `Str::singular()`
 
 The `Str::singular` method converts a string to its singular form. This function currently only supports the English language:
 
@@ -1048,7 +864,7 @@ The `Str::singular` method converts a string to its singular form. This function
     // child
 
 
-#### `Str::slug()` {#collection-method}
+#### `Str::slug()`
 
 The `Str::slug` method generates a URL friendly "slug" from the given string:
 
@@ -1059,7 +875,7 @@ The `Str::slug` method generates a URL friendly "slug" from the given string:
     // laravel-5-framework
 
 
-#### `Str::snake()` {#collection-method}
+#### `Str::snake()`
 
 The `Str::snake` method converts the given string to `snake_case`:
 
@@ -1070,7 +886,7 @@ The `Str::snake` method converts the given string to `snake_case`:
     // foo_bar
 
 
-#### `Str::start()` {#collection-method}
+#### `Str::start()`
 
 The `Str::start` method adds a single instance of the given value to a string if it does not already start with the value:
 
@@ -1085,7 +901,7 @@ The `Str::start` method adds a single instance of the given value to a string if
     // /this/string
 
 
-#### `Str::startsWith()` {#collection-method}
+#### `Str::startsWith()`
 
 The `Str::startsWith` method determines if the given string begins with the given value:
 
@@ -1096,7 +912,7 @@ The `Str::startsWith` method determines if the given string begins with the give
     // true
 
 
-#### `Str::studly()` {#collection-method}
+#### `Str::studly()`
 
 The `Str::studly` method converts the given string to `StudlyCase`:
 
@@ -1107,7 +923,7 @@ The `Str::studly` method converts the given string to `StudlyCase`:
     // FooBar
 
 
-#### `Str::title()` {#collection-method}
+#### `Str::title()`
 
 The `Str::title` method converts the given string to `Title Case`:
 
@@ -1118,7 +934,7 @@ The `Str::title` method converts the given string to `Title Case`:
     // A Nice Title Uses The Correct Case
 
 
-#### `Str::uuid()` {#collection-method}
+#### `Str::uuid()`
 
 The `Str::uuid` method generates a UUID (version 4):
 
@@ -1127,7 +943,7 @@ The `Str::uuid` method generates a UUID (version 4):
     return (string) Str::uuid();
 
 
-#### `trans()` {#collection-method}
+#### `trans()`
 
 The `trans` function translates the given translation key using your [localization files](/localization):
 
@@ -1136,7 +952,7 @@ The `trans` function translates the given translation key using your [localizati
 If the specified translation key does not exist, the `trans` function will return the given key. So, using the example above, the `trans` function would return `messages.welcome` if the translation key does not exist.
 
 
-#### `trans_choice()` {#collection-method}
+#### `trans_choice()`
 
 The `trans_choice` function translates the given translation key with inflection:
 
@@ -1148,7 +964,7 @@ If the specified translation key does not exist, the `trans_choice` function wil
 ## URLs
 
 
-#### `action()` {#collection-method}
+#### `action()`
 
 The `action` function generates a URL for the given controller action. You do not need to pass the full namespace of the controller. Instead, pass the controller class name relative to the `App\Http\Controllers` namespace:
 
@@ -1161,7 +977,7 @@ If the method accepts route parameters, you may pass them as the second argument
     $url = action('UserController@profile', ['id' => 1]);
 
 
-#### `asset()` {#collection-method}
+#### `asset()`
 
 The `asset` function generates a URL for an asset using the current scheme of the request (HTTP or HTTPS):
 
@@ -1174,7 +990,7 @@ You can configure the asset URL host by setting the `ASSET_URL` variable in your
     $url = asset('img/photo.jpg'); // http://example.com/assets/img/photo.jpg
 
 
-#### `route()` {#collection-method}
+#### `route()`
 
 The `route` function generates a URL for the given named route:
 
@@ -1189,14 +1005,14 @@ By default, the `route` function generates an absolute URL. If you wish to gener
     $url = route('routeName', ['id' => 1], false);
 
 
-#### `secure_asset()` {#collection-method}
+#### `secure_asset()`
 
 The `secure_asset` function generates a URL for an asset using HTTPS:
 
     $url = secure_asset('img/photo.jpg');
 
 
-#### `secure_url()` {#collection-method}
+#### `secure_url()`
 
 The `secure_url` function generates a fully qualified HTTPS URL to the given path:
 
@@ -1205,7 +1021,7 @@ The `secure_url` function generates a fully qualified HTTPS URL to the given pat
     $url = secure_url('user/profile', [1]);
 
 
-#### `url()` {#collection-method}
+#### `url()`
 
 The `url` function generates a fully qualified URL to the given path:
 
@@ -1225,7 +1041,7 @@ If no path is provided, a `Illuminate\Routing\UrlGenerator` instance is returned
 ## Miscellaneous
 
 
-#### `abort()` {#collection-method}
+#### `abort()`
 
 The `abort` function throws [an HTTP exception](/errors#http-exceptions) which will be rendered by the [exception handler](/errors#the-exception-handler):
 
@@ -1236,7 +1052,7 @@ You may also provide the exception's response text and custom response headers:
     abort(403, 'Unauthorized.', $headers);
 
 
-#### `abort_if()` {#collection-method}
+#### `abort_if()`
 
 The `abort_if` function throws an HTTP exception if a given boolean expression evaluates to `true`:
 
@@ -1245,7 +1061,7 @@ The `abort_if` function throws an HTTP exception if a given boolean expression e
 Like the `abort` method, you may also provide the exception's response text as the third argument and an array of custom response headers as the fourth argument.
 
 
-#### `abort_unless()` {#collection-method}
+#### `abort_unless()`
 
 The `abort_unless` function throws an HTTP exception if a given boolean expression evaluates to `false`:
 
@@ -1254,7 +1070,7 @@ The `abort_unless` function throws an HTTP exception if a given boolean expressi
 Like the `abort` method, you may also provide the exception's response text as the third argument and an array of custom response headers as the fourth argument.
 
 
-#### `app()` {#collection-method}
+#### `app()`
 
 The `app` function returns the [service container](/container) instance:
 
@@ -1265,7 +1081,7 @@ You may pass a class or interface name to resolve it from the container:
     $api = app('HelpSpot\API');
 
 
-#### `auth()` {#collection-method}
+#### `auth()`
 
 The `auth` function returns an [authenticator](/authentication) instance. You may use it instead of the `Auth` facade for convenience:
 
@@ -1276,7 +1092,7 @@ If needed, you may specify which guard instance you would like to access:
     $user = auth('admin')->user();
 
 
-#### `back()` {#collection-method}
+#### `back()`
 
 The `back` function generates a [redirect HTTP response](/responses#redirects) to the user's previous location:
 
@@ -1285,14 +1101,14 @@ The `back` function generates a [redirect HTTP response](/responses#redirects) t
     return back();
 
 
-#### `bcrypt()` {#collection-method}
+#### `bcrypt()`
 
 The `bcrypt` function [hashes](/hashing) the given value using Bcrypt. You may use it as an alternative to the `Hash` facade:
 
     $password = bcrypt('my-secret-password');
 
 
-#### `blank()` {#collection-method}
+#### `blank()`
 
 The `blank` function returns whether the given value is "blank":
 
@@ -1312,14 +1128,14 @@ The `blank` function returns whether the given value is "blank":
 For the inverse of `blank`, see the [`filled`](#method-filled) method.
 
 
-#### `broadcast()` {#collection-method}
+#### `broadcast()`
 
 The `broadcast` function [broadcasts](/broadcasting) the given [event](/events) to its listeners:
 
     broadcast(new UserRegistered($user));
 
 
-#### `cache()` {#collection-method}
+#### `cache()`
 
 The `cache` function may be used to get values from the [cache](/cache). If the given key does not exist in the cache, an optional default value will be returned:
 
@@ -1334,21 +1150,21 @@ You may add items to the cache by passing an array of key / value pairs to the f
     cache(['key' => 'value'], now()->addSeconds(10));
 
 
-#### `class_uses_recursive()` {#collection-method}
+#### `class_uses_recursive()`
 
 The `class_uses_recursive` function returns all traits used by a class, including traits used by all of its parent classes:
 
     $traits = class_uses_recursive(App\User::class);
 
 
-#### `collect()` {#collection-method}
+#### `collect()`
 
 The `collect` function creates a [collection](/collections) instance from the given value:
 
     $collection = collect(['taylor', 'abigail']);
 
 
-#### `config()` {#collection-method}
+#### `config()`
 
 The `config` function gets the value of a [configuration](/configuration) variable. The configuration values may be accessed using "dot" syntax, which includes the name of the file and the option you wish to access. A default value may be specified and is returned if the configuration option does not exist:
 
@@ -1361,28 +1177,28 @@ You may set configuration variables at runtime by passing an array of key / valu
     config(['app.debug' => true]);
 
 
-#### `cookie()` {#collection-method}
+#### `cookie()`
 
 The `cookie` function creates a new [cookie](/requests#cookies) instance:
 
     $cookie = cookie('name', 'value', $minutes);
 
 
-#### `csrf_field()` {#collection-method}
+#### `csrf_field()`
 
 The `csrf_field` function generates an HTML `hidden` input field containing the value of the CSRF token. For example, using [Blade syntax](/blade):
 
     {{ csrf_field() }}
 
 
-#### `csrf_token()` {#collection-method}
+#### `csrf_token()`
 
 The `csrf_token` function retrieves the value of the current CSRF token:
 
     $token = csrf_token();
 
 
-#### `dd()` {#collection-method}
+#### `dd()`
 
 The `dd` function dumps the given variables and ends execution of the script:
 
@@ -1393,28 +1209,28 @@ The `dd` function dumps the given variables and ends execution of the script:
 If you do not want to halt the execution of your script, use the [`dump`](#method-dump) function instead.
 
 
-#### `decrypt()` {#collection-method}
+#### `decrypt()`
 
 The `decrypt` function decrypts the given value using Laravel's [encrypter](/encryption):
 
     $decrypted = decrypt($encrypted_value);
 
 
-#### `dispatch()` {#collection-method}
+#### `dispatch()`
 
 The `dispatch` function pushes the given [job](/queues#creating-jobs) onto the Laravel [job queue](/queues):
 
     dispatch(new App\Jobs\SendEmails);
 
 
-#### `dispatch_now()` {#collection-method}
+#### `dispatch_now()`
 
 The `dispatch_now` function runs the given [job](/queues#creating-jobs) immediately and returns the value from its `handle` method:
 
     $result = dispatch_now(new App\Jobs\SendEmails);
 
 
-#### `dump()` {#collection-method}
+#### `dump()`
 
 The `dump` function dumps the given variables:
 
@@ -1427,14 +1243,14 @@ If you want to stop executing the script after dumping the variables, use the [`
 > {tip} You may use Artisan's `dump-server` command to intercept all `dump` calls and display them in your console window instead of your browser.
 
 
-#### `encrypt()` {#collection-method}
+#### `encrypt()`
 
 The `encrypt` function encrypts the given value using Laravel's [encrypter](/encryption):
 
     $encrypted = encrypt($unencrypted_value);
 
 
-#### `env()` {#collection-method}
+#### `env()`
 
 The `env` function retrieves the value of an [environment variable](/configuration#environment-configuration) or returns a default value:
 
@@ -1446,21 +1262,21 @@ The `env` function retrieves the value of an [environment variable](/configurati
 > {note} If you execute the `config:cache` command during your deployment process, you should be sure that you are only calling the `env` function from within your configuration files. Once the configuration has been cached, the `.env` file will not be loaded and all calls to the `env` function will return `null`.
 
 
-#### `event()` {#collection-method}
+#### `event()`
 
 The `event` function dispatches the given [event](/events) to its listeners:
 
     event(new UserRegistered($user));
 
 
-#### `factory()` {#collection-method}
+#### `factory()`
 
 The `factory` function creates a model factory builder for a given class, name, and amount. It can be used while [testing](/database-testing#writing-factories) or [seeding](/seeding#using-model-factories):
 
     $user = factory(App\User::class)->make();
 
 
-#### `filled()` {#collection-method}
+#### `filled()`
 
 The `filled` function returns whether the given value is not "blank":
 
@@ -1480,7 +1296,7 @@ The `filled` function returns whether the given value is not "blank":
 For the inverse of `filled`, see the [`blank`](#method-blank) method.
 
 
-#### `info()` {#collection-method}
+#### `info()`
 
 The `info` function will write information to the [log](/logging):
 
@@ -1491,7 +1307,7 @@ An array of contextual data may also be passed to the function:
     info('User login attempt failed.', ['id' => $user->id]);
 
 
-#### `logger()` {#collection-method}
+#### `logger()`
 
 The `logger` function can be used to write a `debug` level message to the [log](/logging):
 
@@ -1506,7 +1322,7 @@ A [logger](/errors#logging) instance will be returned if no value is passed to t
     logger()->error('You are not allowed here.');
 
 
-#### `method_field()` {#collection-method}
+#### `method_field()`
 
 The `method_field` function generates an HTML `hidden` input field containing the spoofed value of the form's HTTP verb. For example, using [Blade syntax](/blade):
 
@@ -1515,14 +1331,14 @@ The `method_field` function generates an HTML `hidden` input field containing th
     </form>
 
 
-#### `now()` {#collection-method}
+#### `now()`
 
 The `now` function creates a new `Illuminate\Support\Carbon` instance for the current time:
 
     $now = now();
 
 
-#### `old()` {#collection-method}
+#### `old()`
 
 The `old` function [retrieves](/requests#retrieving-input) an [old input](/requests#old-input) value flashed into the session:
 
@@ -1531,7 +1347,7 @@ The `old` function [retrieves](/requests#retrieving-input) an [old input](/reque
     $value = old('value', 'default');
 
 
-#### `optional()` {#collection-method}
+#### `optional()`
 
 The `optional` function accepts any argument and allows you to access properties or call methods on that object. If the given object is `null`, properties and methods will return `null` instead of causing an error:
 
@@ -1546,14 +1362,14 @@ The `optional` function also accepts a Closure as its second argument. The Closu
     });
 
 
-#### `policy()` {#collection-method}
+#### `policy()`
 
 The `policy` method retrieves a [policy](/authorization#creating-policies) instance for a given class:
 
     $policy = policy(App\User::class);
 
 
-#### `redirect()` {#collection-method}
+#### `redirect()`
 
 The `redirect` function returns a [redirect HTTP response](/responses#redirects), or returns the redirector instance if called with no arguments:
 
@@ -1564,14 +1380,14 @@ The `redirect` function returns a [redirect HTTP response](/responses#redirects)
     return redirect()->route('route.name');
 
 
-#### `report()` {#collection-method}
+#### `report()`
 
 The `report` function will report an exception using your [exception handler](/errors#the-exception-handler)'s `report` method:
 
     report($e);
 
 
-#### `request()` {#collection-method}
+#### `request()`
 
 The `request` function returns the current [request](/requests) instance or obtains an input item:
 
@@ -1580,7 +1396,7 @@ The `request` function returns the current [request](/requests) instance or obta
     $value = request('key', $default);
 
 
-#### `rescue()` {#collection-method}
+#### `rescue()`
 
 The `rescue` function executes the given Closure and catches any exceptions that occur during its execution. All exceptions that are caught will be sent to your [exception handler](/errors#the-exception-handler)'s `report` method; however, the request will continue processing:
 
@@ -1601,14 +1417,14 @@ You may also pass a second argument to the `rescue` function. This argument will
     });
 
 
-#### `resolve()` {#collection-method}
+#### `resolve()`
 
 The `resolve` function resolves a given class or interface name to its instance using the [service container](/container):
 
     $api = resolve('HelpSpot\API');
 
 
-#### `response()` {#collection-method}
+#### `response()`
 
 The `response` function creates a [response](/responses) instance or obtains an instance of the response factory:
 
@@ -1617,7 +1433,7 @@ The `response` function creates a [response](/responses) instance or obtains an 
     return response()->json(['foo' => 'bar'], 200, $headers);
 
 
-#### `retry()` {#collection-method}
+#### `retry()`
 
 The `retry` function attempts to execute the given callback until the given maximum attempt threshold is met. If the callback does not throw an exception, its return value will be returned. If the callback throws an exception, it will automatically be retried. If the maximum attempt count is exceeded, the exception will be thrown:
 
@@ -1626,7 +1442,7 @@ The `retry` function attempts to execute the given callback until the given maxi
     }, 100);
 
 
-#### `session()` {#collection-method}
+#### `session()`
 
 The `session` function may be used to get or set [session](/session) values:
 
@@ -1643,7 +1459,7 @@ The session store will be returned if no value is passed to the function:
     session()->put('key', $value);
 
 
-#### `tap()` {#collection-method}
+#### `tap()`
 
 The `tap` function accepts two arguments: an arbitrary `$value` and a Closure. The `$value` will be passed to the Closure and then be returned by the `tap` function. The return value of the Closure is irrelevant:
 
@@ -1661,7 +1477,7 @@ If no Closure is passed to the `tap` function, you may call any method on the gi
     ]);
 
 
-#### `throw_if()` {#collection-method}
+#### `throw_if()`
 
 The `throw_if` function throws the given exception if a given boolean expression evaluates to `true`:
 
@@ -1674,7 +1490,7 @@ The `throw_if` function throws the given exception if a given boolean expression
     );
 
 
-#### `throw_unless()` {#collection-method}
+#### `throw_unless()`
 
 The `throw_unless` function throws the given exception if a given boolean expression evaluates to `false`:
 
@@ -1687,21 +1503,21 @@ The `throw_unless` function throws the given exception if a given boolean expres
     );
 
 
-#### `today()` {#collection-method}
+#### `today()`
 
 The `today` function creates a new `Illuminate\Support\Carbon` instance for the current date:
 
     $today = today();
 
 
-#### `trait_uses_recursive()` {#collection-method}
+#### `trait_uses_recursive()`
 
 The `trait_uses_recursive` function returns all traits used by a trait:
 
     $traits = trait_uses_recursive(\Illuminate\Notifications\Notifiable::class);
 
 
-#### `transform()` {#collection-method}
+#### `transform()`
 
 The `transform` function executes a `Closure` on a given value if the value is not [blank](#method-blank) and returns the result of the `Closure`:
 
@@ -1720,14 +1536,14 @@ A default value or `Closure` may also be passed as the third parameter to the me
     // The value is blank
 
 
-#### `validator()` {#collection-method}
+#### `validator()`
 
 The `validator` function creates a new [validator](/validation) instance with the given arguments. You may use it instead of the `Validator` facade for convenience:
 
     $validator = validator($data, $rules, $messages);
 
 
-#### `value()` {#collection-method}
+#### `value()`
 
 The `value` function returns the value it is given. However, if you pass a `Closure` to the function, the `Closure` will be executed then its result will be returned:
 
@@ -1742,14 +1558,14 @@ The `value` function returns the value it is given. However, if you pass a `Clos
     // false
 
 
-#### `view()` {#collection-method}
+#### `view()`
 
 The `view` function retrieves a [view](/views) instance:
 
     return view('auth.login');
 
 
-#### `with()` {#collection-method}
+#### `with()`
 
 The `with` function returns the value it is given. If a `Closure` is passed as the second argument to the function, the `Closure` will be executed and its result will be returned:
 
