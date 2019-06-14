@@ -8,17 +8,17 @@
 - [Attribute Casting](#attribute-casting)
     - [Array & JSON Casting](#array-and-json-casting)
 
-<a name="introduction"></a>
+
 ## Introduction
 
-Accessors and mutators allow you to format Eloquent attribute values when you retrieve or set them on model instances. For example, you may want to use the [Laravel encrypter](/docs/{{version}}/encryption) to encrypt a value while it is stored in the database, and then automatically decrypt the attribute when you access it on an Eloquent model.
+Accessors and mutators allow you to format Eloquent attribute values when you retrieve or set them on model instances. For example, you may want to use the [Laravel encrypter](/encryption) to encrypt a value while it is stored in the database, and then automatically decrypt the attribute when you access it on an Eloquent model.
 
 In addition to custom accessors and mutators, Eloquent can also automatically cast date fields to [Carbon](https://github.com/briannesbitt/Carbon) instances or even [cast text fields to JSON](#attribute-casting).
 
-<a name="accessors-and-mutators"></a>
+
 ## Accessors & Mutators
 
-<a name="defining-an-accessor"></a>
+
 ### Defining An Accessor
 
 To define an accessor, create a `getFooAttribute` method on your model where `Foo` is the "studly" cased name of the column you wish to access. In this example, we'll define an accessor for the `first_name` attribute. The accessor will automatically be called by Eloquent when attempting to retrieve the value of the `first_name` attribute:
@@ -61,9 +61,9 @@ You may also use accessors to return new, computed values from existing attribut
         return "{$this->first_name} {$this->last_name}";
     }
 
-> {tip} If you would like these computed values to be added to the array / JSON representations of your model, [you will need to append them](https://laravel.com/docs/{{version}}/eloquent-serialization#appending-values-to-json).
+> {tip} If you would like these computed values to be added to the array / JSON representations of your model, [you will need to append them](https://laravel.com/eloquent-serialization#appending-values-to-json).
 
-<a name="defining-a-mutator"></a>
+
 ### Defining A Mutator
 
 To define a mutator, define a `setFooAttribute` method on your model where `Foo` is the "studly" cased name of the column you wish to access. So, again, let's define a mutator for the `first_name` attribute. This mutator will be automatically called when we attempt to set the value of the `first_name` attribute on the model:
@@ -96,7 +96,7 @@ The mutator will receive the value that is being set on the attribute, allowing 
 
 In this example, the `setFirstNameAttribute` function will be called with the value `Sally`. The mutator will then apply the `strtolower` function to the name and set its resulting value in the internal `$attributes` array.
 
-<a name="date-mutators"></a>
+
 ## Date Mutators
 
 By default, Eloquent will convert the `created_at` and `updated_at` columns to instances of [Carbon](https://github.com/briannesbitt/Carbon), which extends the PHP `DateTime` class and provides an assortment of helpful methods. You may add additional date attributes by setting the `$dates` property of your model:
@@ -155,7 +155,7 @@ By default, timestamps are formatted as `'Y-m-d H:i:s'`. If you need to customiz
         protected $dateFormat = 'U';
     }
 
-<a name="attribute-casting"></a>
+
 ## Attribute Casting
 
 The `$casts` property on your model provides a convenient method of converting attributes to common data types. The `$casts` property should be an array where the key is the name of the attribute being cast and the value is the type you wish to cast the column to. The supported cast types are: `integer`, `real`, `float`, `double`, `decimal:<digits>`, `string`, `boolean`, `object`, `array`, `collection`, `date`, `datetime`, and `timestamp`. When casting to `decimal`, you must define the number of digits (`decimal:2`).
@@ -188,7 +188,7 @@ Now the `is_admin` attribute will always be cast to a boolean when you access it
         //
     }
 
-<a name="array-and-json-casting"></a>
+
 ### Array & JSON Casting
 
 The `array` cast type is particularly useful when working with columns that are stored as serialized JSON. For example, if your database has a `JSON` or `TEXT` field type that contains serialized JSON, adding the `array` cast to that attribute will automatically deserialize the attribute to a PHP array when you access it on your Eloquent model:
@@ -223,10 +223,10 @@ Once the cast is defined, you may access the `options` attribute and it will aut
 
     $user->save();
 
-<a name="date-casting"></a>
+
 ### Date Casting
 
-When using the `date` or `datetime` cast type, you may specify the date's format. This format will be used when the [model is serialized to an array or JSON](/docs/{{version}}/eloquent-serialization):
+When using the `date` or `datetime` cast type, you may specify the date's format. This format will be used when the [model is serialized to an array or JSON](/eloquent-serialization):
 
     /**
      * The attributes that should be cast to native types.

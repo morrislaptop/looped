@@ -22,7 +22,7 @@
 - [Pessimistic Locking](#pessimistic-locking)
 - [Debugging](#debugging)
 
-<a name="introduction"></a>
+
 ## Introduction
 
 Laravel's database query builder provides a convenient, fluent interface to creating and running database queries. It can be used to perform most database operations in your application and works on all supported database systems.
@@ -31,7 +31,7 @@ The Laravel query builder uses PDO parameter binding to protect your application
 
 > {note} PDO does not support binding column names. Therefore, you should never allow user input to dictate the column names referenced by your queries, including "order by" columns, etc. If you must allow the user to select certain columns to query against, always validate the column names against a white-list of allowed columns.
 
-<a name="retrieving-results"></a>
+
 ## Retrieving Results
 
 #### Retrieving All Rows From A Table
@@ -100,10 +100,10 @@ If you would like to retrieve a Collection containing the values of a single col
         echo $title;
     }
 
-<a name="chunking-results"></a>
+
 ### Chunking Results
 
-If you need to work with thousands of database records, consider using the `chunk` method. This method retrieves a small chunk of the results at a time and feeds each chunk into a `Closure` for processing. This method is very useful for writing [Artisan commands](/docs/{{version}}/artisan) that process thousands of records. For example, let's work with the entire `users` table in chunks of 100 records at a time:
+If you need to work with thousands of database records, consider using the `chunk` method. This method retrieves a small chunk of the results at a time and feeds each chunk into a `Closure` for processing. This method is very useful for writing [Artisan commands](/artisan) that process thousands of records. For example, let's work with the entire `users` table in chunks of 100 records at a time:
 
     DB::table('users')->orderBy('id')->chunk(100, function ($users) {
         foreach ($users as $user) {
@@ -132,7 +132,7 @@ If you are updating database records while chunking results, your chunk results 
 
 > {note} When updating or deleting records inside the chunk callback, any changes to the primary key or foreign keys could affect the chunk query. This could potentially result in records not being included in the chunked results.
 
-<a name="aggregates"></a>
+
 ### Aggregates
 
 The query builder also provides a variety of aggregate methods such as `count`, `max`, `min`, `avg`, and `sum`. You may call any of these methods after constructing your query:
@@ -155,7 +155,7 @@ Instead of using the `count` method to determine if any records exist that match
 
     return DB::table('orders')->where('finalized', 1)->doesntExist();
 
-<a name="selects"></a>
+
 ## Selects
 
 #### Specifying A Select Clause
@@ -174,7 +174,7 @@ If you already have a query builder instance and you wish to add a column to its
 
     $users = $query->addSelect('age')->get();
 
-<a name="raw-expressions"></a>
+
 ## Raw Expressions
 
 Sometimes you may need to use a raw expression in a query. To create a raw expression, you may use the `DB::raw` method:
@@ -187,7 +187,7 @@ Sometimes you may need to use a raw expression in a query. To create a raw expre
 
 > {note} Raw statements will be injected into the query as strings, so you should be extremely careful to not create SQL injection vulnerabilities.
 
-<a name="raw-methods"></a>
+
 ### Raw Methods
 
 Instead of using `DB::raw`, you may also use the following methods to insert a raw expression into various parts of your query.
@@ -226,7 +226,7 @@ The `orderByRaw` method may be used to set a raw string as the value of the `ord
                     ->orderByRaw('updated_at - created_at DESC')
                     ->get();
 
-<a name="joins"></a>
+
 ## Joins
 
 #### Inner Join Clause
@@ -292,7 +292,7 @@ You may use the `joinSub`, `leftJoinSub`, and `rightJoinSub` methods to join a q
                 $join->on('users.id', '=', 'latest_posts.user_id');
             })->get();
 
-<a name="unions"></a>
+
 ## Unions
 
 The query builder also provides a quick way to "union" two queries together. For example, you may create an initial query and use the `union` method to union it with a second query:
@@ -307,7 +307,7 @@ The query builder also provides a quick way to "union" two queries together. For
 
 > {tip} The `unionAll` method is also available and has the same method signature as `union`.
 
-<a name="where-clauses"></a>
+
 ## Where Clauses
 
 #### Simple Where Clauses
@@ -451,7 +451,7 @@ The `whereColumn` method can also be passed an array of multiple conditions. The
                         ['updated_at', '>', 'created_at']
                     ])->get();
 
-<a name="parameter-grouping"></a>
+
 ### Parameter Grouping
 
 Sometimes you may need to create more advanced where clauses such as "where exists" clauses or nested parameter groupings. The Laravel query builder can handle these as well. To get started, let's look at an example of grouping constraints within parenthesis:
@@ -470,7 +470,7 @@ As you can see, passing a `Closure` into the `where` method instructs the query 
 
 > {tip} You should always group `orWhere` calls in order to avoid unexpected behavior when global scopes are applied.
 
-<a name="where-exists-clauses"></a>
+
 ### Where Exists Clauses
 
 The `whereExists` method allows you to write `where exists` SQL clauses. The `whereExists` method accepts a `Closure` argument, which will receive a query builder instance allowing you to define the query that should be placed inside of the "exists" clause:
@@ -490,7 +490,7 @@ The query above will produce the following SQL:
         select 1 from orders where orders.user_id = users.id
     )
 
-<a name="json-where-clauses"></a>
+
 ### JSON Where Clauses
 
 Laravel also supports querying JSON column types on databases that provide support for JSON column types. Currently, this includes MySQL 5.7, PostgreSQL, SQL Server 2016, and SQLite 3.9.0 (with the [JSON1 extension](https://www.sqlite.org/json1.html)). To query a JSON column, use the `->` operator:
@@ -525,7 +525,7 @@ You may use `whereJsonLength` to query JSON arrays by their length:
                     ->whereJsonLength('options->languages', '>', 1)
                     ->get();
 
-<a name="ordering-grouping-limit-and-offset"></a>
+
 ## Ordering, Grouping, Limit, & Offset
 
 #### orderBy
@@ -583,7 +583,7 @@ Alternatively, you may use the `limit` and `offset` methods:
                     ->limit(5)
                     ->get();
 
-<a name="conditional-clauses"></a>
+
 ## Conditional Clauses
 
 Sometimes you may want clauses to apply to a query only when something else is true. For instance you may only want to apply a `where` statement if a given input value is present on the incoming request. You may accomplish this using the `when` method:
@@ -610,7 +610,7 @@ You may pass another Closure as the third parameter to the `when` method. This C
                     })
                     ->get();
 
-<a name="inserts"></a>
+
 ## Inserts
 
 The query builder also provides an `insert` method for inserting records into the database table. The `insert` method accepts an array of column names and values:
@@ -636,7 +636,7 @@ If the table has an auto-incrementing id, use the `insertGetId` method to insert
 
 > {note} When using PostgreSQL the `insertGetId` method expects the auto-incrementing column to be named `id`. If you would like to retrieve the ID from a different "sequence", you may pass the column name as the second parameter to the `insertGetId` method.
 
-<a name="updates"></a>
+
 ## Updates
 
 In addition to inserting records into the database, the query builder can also update existing records using the `update` method. The `update` method, like the `insert` method, accepts an array of column and value pairs containing the columns to be updated. You may constrain the `update` query using `where` clauses:
@@ -657,7 +657,7 @@ The `updateOrInsert` method will first attempt to locate a matching database rec
             ['votes' => '2']
         );
 
-<a name="updating-json-columns"></a>
+
 ### Updating JSON Columns
 
 When updating a JSON column, you should use `->` syntax to access the appropriate key in the JSON object. This operation is only supported on MySQL 5.7+:
@@ -666,7 +666,7 @@ When updating a JSON column, you should use `->` syntax to access the appropriat
                 ->where('id', 1)
                 ->update(['options->enabled' => true]);
 
-<a name="increment-and-decrement"></a>
+
 ### Increment & Decrement
 
 The query builder also provides convenient methods for incrementing or decrementing the value of a given column. This is a shortcut, providing a more expressive and terse interface compared to manually writing the `update` statement.
@@ -685,7 +685,7 @@ You may also specify additional columns to update during the operation:
 
     DB::table('users')->increment('votes', 1, ['name' => 'John']);
 
-<a name="deletes"></a>
+
 ## Deletes
 
 The query builder may also be used to delete records from the table via the `delete` method. You may constrain `delete` statements by adding `where` clauses before calling the `delete` method:
@@ -698,7 +698,7 @@ If you wish to truncate the entire table, which will remove all rows and reset t
 
     DB::table('users')->truncate();
 
-<a name="pessimistic-locking"></a>
+
 ## Pessimistic Locking
 
 The query builder also includes a few functions to help you do "pessimistic locking" on your `select` statements. To run the statement with a "shared lock", you may use the `sharedLock` method on a query. A shared lock prevents the selected rows from being modified until your transaction commits:
@@ -709,7 +709,7 @@ Alternatively, you may use the `lockForUpdate` method. A "for update" lock preve
 
     DB::table('users')->where('votes', '>', 100)->lockForUpdate()->get();
 
-<a name="debugging"></a>
+
 ## Debugging
 
 You may use the `dd` or `dump` methods while building a query to dump the query bindings and SQL. The `dd` method will display the debug information and then stop executing the request. The `dump` method will display the debug information but allow the request to keep executing:

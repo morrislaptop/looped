@@ -22,12 +22,12 @@
 - [Mail & Local Development](#mail-and-local-development)
 - [Events](#events)
 
-<a name="introduction"></a>
+
 ## Introduction
 
 Laravel provides a clean, simple API over the popular [SwiftMailer](https://swiftmailer.symfony.com/) library with drivers for SMTP, Mailgun, Postmark, SparkPost, Amazon SES, and `sendmail`, allowing you to quickly get started sending mail through a local or cloud based service of your choice.
 
-<a name="driver-prerequisites"></a>
+
 ### Driver Prerequisites
 
 The API based drivers such as Mailgun, SparkPost, and Postmark are often simpler and faster than SMTP servers. If possible, you should use one of these drivers. All of the API drivers require the Guzzle HTTP library, which may be installed via the Composer package manager:
@@ -111,19 +111,19 @@ If you need to include [additional options](https://docs.aws.amazon.com/aws-sdk-
         ],
     ],
 
-<a name="generating-mailables"></a>
+
 ## Generating Mailables
 
 In Laravel, each type of email sent by your application is represented as a "mailable" class. These classes are stored in the `app/Mail` directory. Don't worry if you don't see this directory in your application, since it will be generated for you when you create your first mailable class using the `make:mail` command:
 
     php artisan make:mail OrderShipped
 
-<a name="writing-mailables"></a>
+
 ## Writing Mailables
 
 All of a mailable class' configuration is done in the `build` method. Within this method, you may call various methods such as `from`, `subject`, `view`, and `attach` to configure the email's presentation and delivery.
 
-<a name="configuring-the-sender"></a>
+
 ### Configuring The Sender
 
 #### Using The `from` Method
@@ -151,10 +151,10 @@ In addition, you may define a global "reply_to" address within your `config/mail
 
     'reply_to' => ['address' => 'example@example.com', 'name' => 'App Name'],
 
-<a name="configuring-the-view"></a>
+
 ### Configuring The View
 
-Within a mailable class' `build` method, you may use the `view` method to specify which template should be used when rendering the email's contents. Since each email typically uses a [Blade template](/docs/{{version}}/blade) to render its contents, you have the full power and convenience of the Blade templating engine when building your email's HTML:
+Within a mailable class' `build` method, you may use the `view` method to specify which template should be used when rendering the email's contents. Since each email typically uses a [Blade template](/blade) to render its contents, you have the full power and convenience of the Blade templating engine when building your email's HTML:
 
     /**
      * Build the message.
@@ -183,7 +183,7 @@ If you would like to define a plain-text version of your email, you may use the 
                     ->text('emails.orders.shipped_plain');
     }
 
-<a name="view-data"></a>
+
 ### View Data
 
 #### Via Public Properties
@@ -292,7 +292,7 @@ Once the data has been passed to the `with` method, it will automatically be ava
         Price: {{ $orderPrice }}
     </div>
 
-<a name="attachments"></a>
+
 ### Attachments
 
 To add attachments to an email, use the `attach` method within the mailable class' `build` method. The `attach` method accepts the full path to the file as its first argument:
@@ -326,7 +326,7 @@ When attaching files to a message, you may also specify the display name and / o
 
 #### Attaching Files from Disk
 
-If you have stored a file on one of your [filesystem disks](/docs/{{version}}/filesystem), you may attach it to the email using the `attachFromStorage` method:
+If you have stored a file on one of your [filesystem disks](/filesystem), you may attach it to the email using the `attachFromStorage` method:
 
     /**
      * Build the message.
@@ -384,7 +384,7 @@ The `attachData` method may be used to attach a raw string of bytes as an attach
                     ]);
     }
 
-<a name="inline-attachments"></a>
+
 ### Inline Attachments
 
 Embedding inline images into your emails is typically cumbersome; however, Laravel provides a convenient way to attach images to your emails and retrieving the appropriate CID. To embed an inline image, use the `embed` method on the `$message` variable within your email template. Laravel automatically makes the `$message` variable available to all of your email templates, so you don't need to worry about passing it in manually:
@@ -407,7 +407,7 @@ If you already have a raw data string you wish to embed into an email template, 
         <img src="{{ $message->embedData($data, $name) }}">
     </body>
 
-<a name="customizing-the-swiftmailer-message"></a>
+
 ### Customizing The SwiftMailer Message
 
 The `withSwiftMessage` method of the `Mailable` base class allows you to register a callback which will be invoked with the raw SwiftMailer message instance before sending the message. This gives you an opportunity to customize the message before it is delivered:
@@ -427,12 +427,12 @@ The `withSwiftMessage` method of the `Mailable` base class allows you to registe
         });
     }
 
-<a name="markdown-mailables"></a>
+
 ## Markdown Mailables
 
 Markdown mailable messages allow you to take advantage of the pre-built templates and components of mail notifications in your mailables. Since the messages are written in Markdown, Laravel is able to render beautiful, responsive HTML templates for the messages while also automatically generating a plain-text counterpart.
 
-<a name="generating-markdown-mailables"></a>
+
 ### Generating Markdown Mailables
 
 To generate a mailable with a corresponding Markdown template, you may use the `--markdown` option of the `make:mail` Artisan command:
@@ -452,7 +452,7 @@ Then, when configuring the mailable within its `build` method, call the `markdow
                     ->markdown('emails.orders.shipped');
     }
 
-<a name="writing-markdown-messages"></a>
+
 ### Writing Markdown Messages
 
 Markdown mailables use a combination of Blade components and Markdown syntax which allow you to easily construct mail messages while leveraging Laravel's pre-crafted components:
@@ -499,7 +499,7 @@ The table component allows you to transform a Markdown table into an HTML table.
     | Col 3 is      | Right-Aligned | $20      |
     @endcomponent
 
-<a name="customizing-the-components"></a>
+
 ### Customizing The Components
 
 You may export all of the Markdown mail components to your own application for customization. To export the components, use the `vendor:publish` Artisan command to publish the `laravel-mail` asset tag:
@@ -514,10 +514,10 @@ After exporting the components, the `resources/views/vendor/mail/html/themes` di
 
 > {tip} If you would like to build an entirely new theme for the Markdown components, write a new CSS file within the `html/themes` directory and change the `theme` option of your `mail` configuration file.
 
-<a name="sending-mail"></a>
+
 ## Sending Mail
 
-To send a message, use the `to` method on the `Mail` [facade](/docs/{{version}}/facades). The `to` method accepts an email address, a user instance, or a collection of users. If you pass an object or collection of objects, the mailer will automatically use their `email` and `name` properties when setting the email recipients, so make sure these attributes are available on your objects. Once you have specified your recipients, you may pass an instance of your mailable class to the `send` method:
+To send a message, use the `to` method on the `Mail` [facade](/facades). The `to` method accepts an email address, a user instance, or a collection of users. If you pass an object or collection of objects, the mailer will automatically use their `email` and `name` properties when setting the email recipients, so make sure these attributes are available on your objects. Once you have specified your recipients, you may pass an instance of your mailable class to the `send` method:
 
     <?php
 
@@ -555,7 +555,7 @@ You are not limited to just specifying the "to" recipients when sending a messag
         ->bcc($evenMoreUsers)
         ->send(new OrderShipped($order));
 
-<a name="rendering-mailables"></a>
+
 ## Rendering Mailables
 
 Sometimes you may wish to capture the HTML content of a mailable without sending it. To accomplish this, you may call the `render` method of the mailable. This method will return the evaluated contents of the mailable as a string:
@@ -564,7 +564,7 @@ Sometimes you may wish to capture the HTML content of a mailable without sending
 
     return (new App\Mail\InvoicePaid($invoice))->render();
 
-<a name="previewing-mailables-in-the-browser"></a>
+
 ### Previewing Mailables In The Browser
 
 When designing a mailable's template, it is convenient to quickly preview the rendered mailable in your browser like a typical Blade template. For this reason, Laravel allows you to return any mailable directly from a route Closure or controller. When a mailable is returned, it will be rendered and displayed in the browser, allowing you to quickly preview its design without needing to send it to an actual email address:
@@ -575,19 +575,19 @@ When designing a mailable's template, it is convenient to quickly preview the re
         return new App\Mail\InvoicePaid($invoice);
     });
 
-<a name="queueing-mail"></a>
+
 ### Queueing Mail
 
 #### Queueing A Mail Message
 
-Since sending email messages can drastically lengthen the response time of your application, many developers choose to queue email messages for background sending. Laravel makes this easy using its built-in [unified queue API](/docs/{{version}}/queues). To queue a mail message, use the `queue` method on the `Mail` facade after specifying the message's recipients:
+Since sending email messages can drastically lengthen the response time of your application, many developers choose to queue email messages for background sending. Laravel makes this easy using its built-in [unified queue API](/queues). To queue a mail message, use the `queue` method on the `Mail` facade after specifying the message's recipients:
 
     Mail::to($request->user())
         ->cc($moreUsers)
         ->bcc($evenMoreUsers)
         ->queue(new OrderShipped($order));
 
-This method will automatically take care of pushing a job onto the queue so the message is sent in the background. You will need to [configure your queues](/docs/{{version}}/queues) before using this feature.
+This method will automatically take care of pushing a job onto the queue so the message is sent in the background. You will need to [configure your queues](/queues) before using this feature.
 
 #### Delayed Message Queueing
 
@@ -624,7 +624,7 @@ If you have mailable classes that you want to always be queued, you may implemen
         //
     }
 
-<a name="localizing-mailables"></a>
+
 ## Localizing Mailables
 
 Laravel allows you to send mailables in a locale other than the current language, and will even remember this locale if the mail is queued.
@@ -658,14 +658,14 @@ Once you have implemented the interface, Laravel will automatically use the pref
 
     Mail::to($request->user())->send(new OrderShipped($order));
 
-<a name="mail-and-local-development"></a>
+
 ## Mail & Local Development
 
 When developing an application that sends email, you probably don't want to actually send emails to live email addresses. Laravel provides several ways to "disable" the actual sending of emails during local development.
 
 #### Log Driver
 
-Instead of sending your emails, the `log` mail driver will write all email messages to your log files for inspection. For more information on configuring your application per environment, check out the [configuration documentation](/docs/{{version}}/configuration#environment-configuration).
+Instead of sending your emails, the `log` mail driver will write all email messages to your log files for inspection. For more information on configuring your application per environment, check out the [configuration documentation](/configuration#environment-configuration).
 
 #### Universal To
 
@@ -680,7 +680,7 @@ Another solution provided by Laravel is to set a universal recipient of all emai
 
 Finally, you may use a service like [Mailtrap](https://mailtrap.io) and the `smtp` driver to send your email messages to a "dummy" mailbox where you may view them in a true email client. This approach has the benefit of allowing you to actually inspect the final emails in Mailtrap's message viewer.
 
-<a name="events"></a>
+
 ## Events
 
 Laravel fires two events during the process of sending mail messages. The `MessageSending` event is fired prior to a message being sent, while the `MessageSent` event is fired after a message has been sent. Remember, these events are fired when the mail is being *sent*, not when it is queued. You may register an event listener for this event in your `EventServiceProvider`:

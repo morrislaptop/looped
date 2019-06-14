@@ -4,7 +4,7 @@
 - [Support Policy](#support-policy)
 - [Laravel 5.8](#laravel-5.8)
 
-<a name="versioning-scheme"></a>
+
 ## Versioning Scheme
 
 Laravel's versioning scheme maintains the following convention: `paradigm.major.minor`. Major framework releases are released every six months (February and August), while minor releases may be released as often as every week. Minor releases should **never** contain breaking changes.
@@ -13,7 +13,7 @@ When referencing the Laravel framework or its components from your application o
 
 Paradigm shifting releases are separated by many years and represent fundamental shifts in the framework's architecture and conventions. Currently, there is no paradigm shifting release under development.
 
-<a name="support-policy"></a>
+
 ## Support Policy
 
 For LTS releases, such as Laravel 5.5, bug fixes are provided for 2 years and security fixes are provided for 3 years. These releases provide the longest window of support and maintenance. For general releases, bug fixes are provided for 6 months and security fixes are provided for 1 year. For all additional libraries, including Lumen, only the latest release receives bug fixes.
@@ -30,7 +30,7 @@ For LTS releases, such as Laravel 5.5, bug fixes are provided for 2 years and se
 | 5.7 | September 4th, 2018 | March 4th, 2019 | September 4th, 2019 |
 | 5.8 | February 26th, 2019 | August 26th, 2019 | February 26th, 2020 |
 
-<a name="laravel-5.8"></a>
+
 ## Laravel 5.8
 
 Laravel 5.8 continues the improvements made in Laravel 5.7 by introducing has-one-through Eloquent relationships, improved email validation, convention based automatic registration of authorization policies, DynamoDB cache and session drivers, improved scheduler timezone configuration, support for assigning multiple authentication guards to broadcast channels, PSR-16 cache driver compliance, improvements to the `artisan serve` command, PHPUnit 8.0 support, Carbon 2.0 support, Pheanstalk 4.0 support, and a variety of other bug fixes and usability improvements.
@@ -49,7 +49,7 @@ Eloquent now provides support for the `hasOneThrough` relationship type. For exa
 
 ### Auto-Discovery Of Model Policies
 
-When using Laravel 5.7, each model's corresponding [authorization policy](/docs/{{version}}/authorization#creating-policies) needed to be explicitly registered in your application's `AuthServiceProvider`:
+When using Laravel 5.7, each model's corresponding [authorization policy](/authorization#creating-policies) needed to be explicitly registered in your application's `AuthServiceProvider`:
 
     /**
      * The policy mappings for the application.
@@ -97,9 +97,9 @@ In previous releases of Laravel, private and presence broadcast channels authent
 
 ### Token Guard Token Hashing
 
-Laravel's `token` guard, which provides basic API authentication, now supports storing API tokens as SHA-256 hashes. This provides improved security over storing plain-text tokens. To learn more about hashed tokens, please review the full [API authentication documentation](/docs/{{version}}/api-authentication).
+Laravel's `token` guard, which provides basic API authentication, now supports storing API tokens as SHA-256 hashes. This provides improved security over storing plain-text tokens. To learn more about hashed tokens, please review the full [API authentication documentation](/api-authentication).
 
-> **Note:** While Laravel ships with a simple, token based authentication guard, we strongly recommend you consider using [Laravel Passport](/docs/{{version}}/passport) for robust, production applications that offer API authentication.
+> **Note:** While Laravel ships with a simple, token based authentication guard, we strongly recommend you consider using [Laravel Passport](/passport) for robust, production applications that offer API authentication.
 
 ### Improved Email Validation
 
@@ -127,7 +127,7 @@ However, this can become cumbersome and repetitive if you are specifying the sam
 
 ### Intermediate Table / Pivot Model Events
 
-In previous versions of Laravel, [Eloquent model events](/docs/{{version}}/eloquent#events) were not dispatched when attaching, detaching, or syncing custom intermediate table / "pivot" models of a many-to-many relationship. When using [custom intermediate table models](/docs/{{version}}/eloquent-relationships#defining-custom-intermediate-table-models) in Laravel 5.8, the applicable model events will now be dispatched.
+In previous versions of Laravel, [Eloquent model events](/eloquent#events) were not dispatched when attaching, detaching, or syncing custom intermediate table / "pivot" models of a many-to-many relationship. When using [custom intermediate table models](/eloquent-relationships#defining-custom-intermediate-table-models) in Laravel 5.8, the applicable model events will now be dispatched.
 
 ### Artisan Call Improvements
 
@@ -157,7 +157,7 @@ In order to make mocking objects more convenient, new `mock` and `spy` methods h
 
 ### Eloquent Resource Key Preservation
 
-When returning an [Eloquent resource collection](/docs/{{version}}/eloquent-resources) from a route, Laravel resets the collection's keys so that they are in simple numerical order:
+When returning an [Eloquent resource collection](/eloquent-resources) from a route, Laravel resets the collection's keys so that they are in simple numerical order:
 
     use App\User;
     use App\Http\Resources\User as UserResource;

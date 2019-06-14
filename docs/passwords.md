@@ -7,7 +7,7 @@
 - [After Resetting Passwords](#after-resetting-passwords)
 - [Customization](#password-customization)
 
-<a name="introduction"></a>
+
 ## Introduction
 
 > {tip} **Want to get started fast?** Just run `php artisan make:auth` in a fresh Laravel application and navigate your browser to `http://your-app.test/register` or any other URL that is assigned to your application. This single command will take care of scaffolding your entire authentication system, including resetting passwords!
@@ -16,7 +16,7 @@ Most web applications provide a way for users to reset their forgotten passwords
 
 > {note} Before using the password reset features of Laravel, your user must use the `Illuminate\Notifications\Notifiable` trait.
 
-<a name="resetting-database"></a>
+
 ## Database Considerations
 
 To get started, verify that your `App\User` model implements the `Illuminate\Contracts\Auth\CanResetPassword` contract. The `App\User` model included with the framework already implements this interface, and uses the `Illuminate\Auth\Passwords\CanResetPassword` trait to include the methods needed to implement the interface.
@@ -27,19 +27,19 @@ Next, a table must be created to store the password reset tokens. The migration 
 
     php artisan migrate
 
-<a name="resetting-routing"></a>
+
 ## Routing
 
 Laravel includes `Auth\ForgotPasswordController` and `Auth\ResetPasswordController` classes that contains the logic necessary to e-mail password reset links and reset user passwords. All of the routes needed to perform password resets may be generated using the `make:auth` Artisan command:
 
     php artisan make:auth
 
-<a name="resetting-views"></a>
+
 ## Views
 
 Again, Laravel will generate all of the necessary views for password reset when the `make:auth` command is executed. These views are placed in `resources/views/auth/passwords`. You are free to customize them as needed for your application.
 
-<a name="after-resetting-passwords"></a>
+
 ## After Resetting Passwords
 
 Once you have defined the routes and views to reset your user's passwords, you may access the route in your browser at `/password/reset`. The `ForgotPasswordController` included with the framework already includes the logic to send the password reset link e-mails, while the `ResetPasswordController` includes the logic to reset user passwords.
@@ -50,7 +50,7 @@ After a password is reset, the user will automatically be logged into the applic
 
 > {note} By default, password reset tokens expire after one hour. You may change this via the password reset `expire` option in your `config/auth.php` file.
 
-<a name="password-customization"></a>
+
 ## Customization
 
 #### Authentication Guard Customization

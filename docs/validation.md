@@ -26,17 +26,17 @@
     - [Using Closures](#using-closures)
     - [Using Extensions](#using-extensions)
 
-<a name="introduction"></a>
+
 ## Introduction
 
 Laravel provides several different approaches to validate your application's incoming data. By default, Laravel's base controller class uses a `ValidatesRequests` trait which provides a convenient method to validate incoming HTTP request with a variety of powerful validation rules.
 
-<a name="validation-quickstart"></a>
+
 ## Validation Quickstart
 
 To learn about Laravel's powerful validation features, let's look at a complete example of validating a form and displaying the error messages back to the user.
 
-<a name="quick-defining-the-routes"></a>
+
 ### Defining The Routes
 
 First, let's assume we have the following routes defined in our `routes/web.php` file:
@@ -47,7 +47,7 @@ First, let's assume we have the following routes defined in our `routes/web.php`
 
 The `GET` route will display a form for the user to create a new blog post, while the `POST` route will store the new blog post in the database.
 
-<a name="quick-creating-the-controller"></a>
+
 ### Creating The Controller
 
 Next, let's take a look at a simple controller that handles these routes. We'll leave the `store` method empty for now:
@@ -83,7 +83,7 @@ Next, let's take a look at a simple controller that handles these routes. We'll 
         }
     }
 
-<a name="quick-writing-the-validation-logic"></a>
+
 ### Writing The Validation Logic
 
 Now we are ready to fill in our `store` method with the logic to validate the new blog post. To do this, we will use the `validate` method provided by the `Illuminate\Http\Request` object. If the validation rules pass, your code will keep executing normally; however, if validation fails, an exception will be thrown and the proper error response will automatically be sent back to the user. In the case of a traditional HTTP request, a redirect response will be generated, while a JSON response will be sent for AJAX requests.
@@ -129,10 +129,10 @@ If your HTTP request contains "nested" parameters, you may specify them in your 
         'author.description' => 'required',
     ]);
 
-<a name="quick-displaying-the-validation-errors"></a>
+
 ### Displaying The Validation Errors
 
-So, what if the incoming request parameters do not pass the given validation rules? As mentioned previously, Laravel will automatically redirect the user back to their previous location. In addition, all of the validation errors will automatically be [flashed to the session](/docs/{{version}}/session#flash-data).
+So, what if the incoming request parameters do not pass the given validation rules? As mentioned previously, Laravel will automatically redirect the user back to their previous location. In addition, all of the validation errors will automatically be [flashed to the session](/session#flash-data).
 
 Again, notice that we did not have to explicitly bind the error messages to the view in our `GET` route. This is because Laravel will check for errors in the session data, and automatically bind them to the view if they are available. The `$errors` variable will be an instance of `Illuminate\Support\MessageBag`. For more information on working with this object, [check out its documentation](#working-with-error-messages).
 
@@ -158,7 +158,7 @@ So, in our example, the user will be redirected to our controller's `create` met
 
 #### The `@error` Directive
 
-You may also use the `@error` [Blade](/docs/{{version}}/blade) directive to quickly check if validation error messages exist for a given attribute. Within an `@error` directive, you may echo the `$message` variable to display the error message:
+You may also use the `@error` [Blade](/blade) directive to quickly check if validation error messages exist for a given attribute. Within an `@error` directive, you may echo the `$message` variable to display the error message:
 
     <!-- /resources/views/post/create.blade.php -->
 
@@ -170,7 +170,7 @@ You may also use the `@error` [Blade](/docs/{{version}}/blade) directive to quic
         <div class="alert alert-danger">{{ $message }}</div>
     @enderror
 
-<a name="a-note-on-optional-fields"></a>
+
 ### A Note On Optional Fields
 
 By default, Laravel includes the `TrimStrings` and `ConvertEmptyStringsToNull` middleware in your application's global middleware stack. These middleware are listed in the stack by the `App\Http\Kernel` class. Because of this, you will often need to mark your "optional" request fields as `nullable` if you do not want the validator to consider `null` values as invalid. For example:
@@ -183,15 +183,15 @@ By default, Laravel includes the `TrimStrings` and `ConvertEmptyStringsToNull` m
 
 In this example, we are specifying that the `publish_at` field may be either `null` or a valid date representation. If the `nullable` modifier is not added to the rule definition, the validator would consider `null` an invalid date.
 
-<a name="quick-ajax-requests-and-validation"></a>
+
 #### AJAX Requests & Validation
 
 In this example, we used a traditional form to send data to the application. However, many applications use AJAX requests. When using the `validate` method during an AJAX request, Laravel will not generate a redirect response. Instead, Laravel generates a JSON response containing all of the validation errors. This JSON response will be sent with a 422 HTTP status code.
 
-<a name="form-request-validation"></a>
+
 ## Form Request Validation
 
-<a name="creating-form-requests"></a>
+
 ### Creating Form Requests
 
 For more complex validation scenarios, you may wish to create a "form request". Form requests are custom request classes that contain validation logic. To create a form request class, use the `make:request` Artisan CLI command:
@@ -213,7 +213,7 @@ The generated class will be placed in the `app/Http/Requests` directory. If this
         ];
     }
 
-> {tip} You may type-hint any dependencies you need within the `rules` method's signature. They will automatically be resolved via the Laravel [service container](/docs/{{version}}/container).
+> {tip} You may type-hint any dependencies you need within the `rules` method's signature. They will automatically be resolved via the Laravel [service container](/container).
 
 So, how are the validation rules evaluated? All you need to do is type-hint the request on your controller method. The incoming form request is validated before the controller method is called, meaning you do not need to clutter your controller with any validation logic:
 
@@ -252,7 +252,7 @@ If you would like to add an "after" hook to a form request, you may use the `wit
         });
     }
 
-<a name="authorizing-form-requests"></a>
+
 ### Authorizing Form Requests
 
 The form request class also contains an `authorize` method. Within this method, you may check if the authenticated user actually has the authority to update a given resource. For example, you may determine if a user actually owns a blog comment they are attempting to update:
@@ -287,9 +287,9 @@ If you plan to have authorization logic in another part of your application, ret
         return true;
     }
 
-> {tip} You may type-hint any dependencies you need within the `authorize` method's signature. They will automatically be resolved via the Laravel [service container](/docs/{{version}}/container).
+> {tip} You may type-hint any dependencies you need within the `authorize` method's signature. They will automatically be resolved via the Laravel [service container](/container).
 
-<a name="customizing-the-error-messages"></a>
+
 ### Customizing The Error Messages
 
 You may customize the error messages used by the form request by overriding the `messages` method. This method should return an array of attribute / rule pairs and their corresponding error messages:
@@ -307,7 +307,7 @@ You may customize the error messages used by the form request by overriding the 
         ];
     }
 
-<a name="customizing-the-validation-attributes"></a>
+
 ### Customizing The Validation Attributes
 
 If you would like the `:attribute` portion of your validation message to be replaced with a custom attribute name, you may specify the custom names by overriding the `attributes` method. This method should return an array of attribute / name pairs:
@@ -324,10 +324,10 @@ If you would like the `:attribute` portion of your validation message to be repl
         ];
     }
 
-<a name="manually-creating-validators"></a>
+
 ## Manually Creating Validators
 
-If you do not want to use the `validate` method on the request, you may create a validator instance manually using the `Validator` [facade](/docs/{{version}}/facades). The `make` method on the facade generates a new validator instance:
+If you do not want to use the `validate` method on the request, you may create a validator instance manually using the `Validator` [facade](/facades). The `make` method on the facade generates a new validator instance:
 
     <?php
 
@@ -366,7 +366,7 @@ The first argument passed to the `make` method is the data under validation. The
 
 After checking if the request validation failed, you may use the `withErrors` method to flash the error messages to the session. When using this method, the `$errors` variable will automatically be shared with your views after redirection, allowing you to easily display them back to the user. The `withErrors` method accepts a validator, a `MessageBag`, or a PHP `array`.
 
-<a name="automatic-redirection"></a>
+
 ### Automatic Redirection
 
 If you would like to create a validator instance manually but still take advantage of the automatic redirection offered by the requests's `validate` method, you may call the `validate` method on an existing validator instance. If validation fails, the user will automatically be redirected or, in the case of an AJAX request, a JSON response will be returned:
@@ -376,7 +376,7 @@ If you would like to create a validator instance manually but still take advanta
         'body' => 'required',
     ])->validate();
 
-<a name="named-error-bags"></a>
+
 ### Named Error Bags
 
 If you have multiple forms on a single page, you may wish to name the `MessageBag` of errors, allowing you to retrieve the error messages for a specific form. Pass a name as the second argument to `withErrors`:
@@ -388,7 +388,7 @@ You may then access the named `MessageBag` instance from the `$errors` variable:
 
     {{ $errors->login->first('email') }}
 
-<a name="after-validation-hook"></a>
+
 ### After Validation Hook
 
 The validator also allows you to attach callbacks to be run after validation is completed. This allows you to easily perform further validation and even add more error messages to the message collection. To get started, use the `after` method on a validator instance:
@@ -405,7 +405,7 @@ The validator also allows you to attach callbacks to be run after validation is 
         //
     }
 
-<a name="working-with-error-messages"></a>
+
 ## Working With Error Messages
 
 After calling the `errors` method on a `Validator` instance, you will receive an `Illuminate\Support\MessageBag` instance, which has a variety of convenient methods for working with error messages. The `$errors` variable that is automatically made available to all views is also an instance of the `MessageBag` class.
@@ -448,7 +448,7 @@ The `has` method may be used to determine if any error messages exist for a give
         //
     }
 
-<a name="custom-error-messages"></a>
+
 ### Custom Error Messages
 
 If needed, you may use custom error messages for validation instead of the defaults. There are several ways to specify custom messages. First, you may pass the custom messages as the third argument to the `Validator::make` method:
@@ -476,7 +476,7 @@ Sometimes you may wish to specify a custom error message only for a specific fie
         'email.required' => 'We need to know your e-mail address!',
     ];
 
-<a name="localization"></a>
+
 #### Specifying Custom Messages In Language Files
 
 In most cases, you will probably specify your custom messages in a language file instead of passing them directly to the `Validator`. To do so, add your messages to `custom` array in the `resources/lang/xx/validation.php` language file.
@@ -519,7 +519,7 @@ Now if the validation rule fails it will produce the following message:
 
     The credit card number field is required when payment type is credit card.
 
-<a name="available-validation-rules"></a>
+
 ## Available Validation Rules
 
 Below is a list of all available validation rules and their function:
@@ -603,17 +603,17 @@ Below is a list of all available validation rules and their function:
 
 </div>
 
-<a name="rule-accepted"></a>
+
 #### accepted
 
 The field under validation must be _yes_, _on_, _1_, or _true_. This is useful for validating "Terms of Service" acceptance.
 
-<a name="rule-active-url"></a>
+
 #### active_url
 
 The field under validation must have a valid A or AAAA record according to the `dns_get_record` PHP function.
 
-<a name="rule-after"></a>
+
 #### after:_date_
 
 The field under validation must be a value after a given date. The dates will be passed into the `strtotime` PHP function:
@@ -624,92 +624,92 @@ Instead of passing a date string to be evaluated by `strtotime`, you may specify
 
     'finish_date' => 'required|date|after:start_date'
 
-<a name="rule-after-or-equal"></a>
+
 #### after\_or\_equal:_date_
 
 The field under validation must be a value after or equal to the given date. For more information, see the [after](#rule-after) rule.
 
-<a name="rule-alpha"></a>
+
 #### alpha
 
 The field under validation must be entirely alphabetic characters.
 
-<a name="rule-alpha-dash"></a>
+
 #### alpha_dash
 
 The field under validation may have alpha-numeric characters, as well as dashes and underscores.
 
-<a name="rule-alpha-num"></a>
+
 #### alpha_num
 
 The field under validation must be entirely alpha-numeric characters.
 
-<a name="rule-array"></a>
+
 #### array
 
 The field under validation must be a PHP `array`.
 
-<a name="rule-bail"></a>
+
 #### bail
 
 Stop running validation rules after the first validation failure.
 
-<a name="rule-before"></a>
+
 #### before:_date_
 
 The field under validation must be a value preceding the given date. The dates will be passed into the PHP `strtotime` function. In addition, like the [`after`](#rule-after) rule, the name of another field under validation may be supplied as the value of `date`.
 
-<a name="rule-before-or-equal"></a>
+
 #### before\_or\_equal:_date_
 
 The field under validation must be a value preceding or equal to the given date. The dates will be passed into the PHP `strtotime` function. In addition, like the [`after`](#rule-after) rule, the name of another field under validation may be supplied as the value of `date`.
 
-<a name="rule-between"></a>
+
 #### between:_min_,_max_
 
 The field under validation must have a size between the given _min_ and _max_. Strings, numerics, arrays, and files are evaluated in the same fashion as the [`size`](#rule-size) rule.
 
-<a name="rule-boolean"></a>
+
 #### boolean
 
 The field under validation must be able to be cast as a boolean. Accepted input are `true`, `false`, `1`, `0`, `"1"`, and `"0"`.
 
-<a name="rule-confirmed"></a>
+
 #### confirmed
 
 The field under validation must have a matching field of `foo_confirmation`. For example, if the field under validation is `password`, a matching `password_confirmation` field must be present in the input.
 
-<a name="rule-date"></a>
+
 #### date
 
 The field under validation must be a valid, non-relative date according to the `strtotime` PHP function.
 
-<a name="rule-date-equals"></a>
+
 #### date_equals:_date_
 
 The field under validation must be equal to the given date. The dates will be passed into the PHP `strtotime` function.
 
-<a name="rule-date-format"></a>
+
 #### date_format:_format_
 
 The field under validation must match the given _format_. You should use **either** `date` or `date_format` when validating a field, not both.
 
-<a name="rule-different"></a>
+
 #### different:_field_
 
 The field under validation must have a different value than _field_.
 
-<a name="rule-digits"></a>
+
 #### digits:_value_
 
 The field under validation must be _numeric_ and must have an exact length of _value_.
 
-<a name="rule-digits-between"></a>
+
 #### digits_between:_min_,_max_
 
 The field under validation must have a length between the given _min_ and _max_.
 
-<a name="rule-dimensions"></a>
+
 #### dimensions
 
 The file under validation must be an image meeting the dimension constraints as specified by the rule's parameters:
@@ -733,24 +733,24 @@ Since this rule requires several arguments, you may use the `Rule::dimensions` m
         ],
     ]);
 
-<a name="rule-distinct"></a>
+
 #### distinct
 
 When working with arrays, the field under validation must not have any duplicate values.
 
     'foo.*.id' => 'distinct'
 
-<a name="rule-email"></a>
+
 #### email
 
 The field under validation must be formatted as an e-mail address.
 
-<a name="rule-ends-with"></a>
+
 #### ends_with:_foo_,_bar_,...
 
 The field under validation must end with one of the given values.
 
-<a name="rule-exists"></a>
+
 #### exists:_table_,_column_
 
 The field under validation must exist on a given database table.
@@ -782,32 +782,32 @@ If you would like to customize the query executed by the validation rule, you ma
         ],
     ]);
 
-<a name="rule-file"></a>
+
 #### file
 
 The field under validation must be a successfully uploaded file.
 
-<a name="rule-filled"></a>
+
 #### filled
 
 The field under validation must not be empty when it is present.
 
-<a name="rule-gt"></a>
+
 #### gt:_field_
 
 The field under validation must be greater than the given _field_. The two fields must be of the same type. Strings, numerics, arrays, and files are evaluated using the same conventions as the `size` rule.
 
-<a name="rule-gte"></a>
+
 #### gte:_field_
 
 The field under validation must be greater than or equal to the given _field_. The two fields must be of the same type. Strings, numerics, arrays, and files are evaluated using the same conventions as the `size` rule.
 
-<a name="rule-image"></a>
+
 #### image
 
 The file under validation must be an image (jpeg, png, bmp, gif, or svg)
 
-<a name="rule-in"></a>
+
 #### in:_foo_,_bar_,...
 
 The field under validation must be included in the given list of values. Since this rule often requires you to `implode` an array, the `Rule::in` method may be used to fluently construct the rule:
@@ -821,17 +821,17 @@ The field under validation must be included in the given list of values. Since t
         ],
     ]);
 
-<a name="rule-in-array"></a>
+
 #### in_array:_anotherfield_.*
 
 The field under validation must exist in _anotherfield_'s values.
 
-<a name="rule-integer"></a>
+
 #### integer
 
 The field under validation must be an integer.
 
-<a name="rule-ip"></a>
+
 #### ip
 
 The field under validation must be an IP address.
@@ -844,27 +844,27 @@ The field under validation must be an IPv4 address.
 
 The field under validation must be an IPv6 address.
 
-<a name="rule-json"></a>
+
 #### json
 
 The field under validation must be a valid JSON string.
 
-<a name="rule-lt"></a>
+
 #### lt:_field_
 
 The field under validation must be less than the given _field_. The two fields must be of the same type. Strings, numerics, arrays, and files are evaluated using the same conventions as the `size` rule.
 
-<a name="rule-lte"></a>
+
 #### lte:_field_
 
 The field under validation must be less than or equal to the given _field_. The two fields must be of the same type. Strings, numerics, arrays, and files are evaluated using the same conventions as the `size` rule.
 
-<a name="rule-max"></a>
+
 #### max:_value_
 
 The field under validation must be less than or equal to a maximum _value_. Strings, numerics, arrays, and files are evaluated in the same fashion as the [`size`](#rule-size) rule.
 
-<a name="rule-mimetypes"></a>
+
 #### mimetypes:_text/plain_,...
 
 The file under validation must match one of the given MIME types:
@@ -873,7 +873,7 @@ The file under validation must match one of the given MIME types:
 
 To determine the MIME type of the uploaded file, the file's contents will be read and the framework will attempt to guess the MIME type, which may be different from the client provided MIME type.
 
-<a name="rule-mimes"></a>
+
 #### mimes:_foo_,_bar_,...
 
 The file under validation must have a MIME type corresponding to one of the listed extensions.
@@ -886,12 +886,12 @@ Even though you only need to specify the extensions, this rule actually validate
 
 A full listing of MIME types and their corresponding extensions may be found at the following location: [https://svn.apache.org/repos/asf/httpd/httpd/trunk/docs/conf/mime.types](https://svn.apache.org/repos/asf/httpd/httpd/trunk/docs/conf/mime.types)
 
-<a name="rule-min"></a>
+
 #### min:_value_
 
 The field under validation must have a minimum _value_. Strings, numerics, arrays, and files are evaluated in the same fashion as the [`size`](#rule-size) rule.
 
-<a name="rule-not-in"></a>
+
 #### not_in:_foo_,_bar_,...
 
 The field under validation must not be included in the given list of values. The `Rule::notIn` method may be used to fluently construct the rule:
@@ -905,7 +905,7 @@ The field under validation must not be included in the given list of values. The
         ],
     ]);
 
-<a name="rule-not-regex"></a>
+
 #### not_regex:_pattern_
 
 The field under validation must not match the given regular expression.
@@ -914,22 +914,22 @@ Internally, this rule uses the PHP `preg_match` function. The pattern specified 
 
 **Note:** When using the `regex` / `not_regex` patterns, it may be necessary to specify rules in an array instead of using pipe delimiters, especially if the regular expression contains a pipe character.
 
-<a name="rule-nullable"></a>
+
 #### nullable
 
 The field under validation may be `null`. This is particularly useful when validating primitive such as strings and integers that can contain `null` values.
 
-<a name="rule-numeric"></a>
+
 #### numeric
 
 The field under validation must be numeric.
 
-<a name="rule-present"></a>
+
 #### present
 
 The field under validation must be present in the input data but can be empty.
 
-<a name="rule-regex"></a>
+
 #### regex:_pattern_
 
 The field under validation must match the given regular expression.
@@ -938,7 +938,7 @@ Internally, this rule uses the PHP `preg_match` function. The pattern specified 
 
 **Note:** When using the `regex` / `not_regex` patterns, it may be necessary to specify rules in an array instead of using pipe delimiters, especially if the regular expression contains a pipe character.
 
-<a name="rule-required"></a>
+
 #### required
 
 The field under validation must be present in the input data and not empty. A field is considered "empty" if one of the following conditions are true:
@@ -952,7 +952,7 @@ The field under validation must be present in the input data and not empty. A fi
 
 </div>
 
-<a name="rule-required-if"></a>
+
 #### required_if:_anotherfield_,_value_,...
 
 The field under validation must be present and not empty if the _anotherfield_ field is equal to any _value_.
@@ -971,57 +971,57 @@ If you would like to construct a more complex condition for the `required_if` ru
         }),
     ]);
 
-<a name="rule-required-unless"></a>
+
 #### required_unless:_anotherfield_,_value_,...
 
 The field under validation must be present and not empty unless the _anotherfield_ field is equal to any _value_.
 
-<a name="rule-required-with"></a>
+
 #### required_with:_foo_,_bar_,...
 
 The field under validation must be present and not empty _only if_ any of the other specified fields are present.
 
-<a name="rule-required-with-all"></a>
+
 #### required_with_all:_foo_,_bar_,...
 
 The field under validation must be present and not empty _only if_ all of the other specified fields are present.
 
-<a name="rule-required-without"></a>
+
 #### required_without:_foo_,_bar_,...
 
 The field under validation must be present and not empty _only when_ any of the other specified fields are not present.
 
-<a name="rule-required-without-all"></a>
+
 #### required_without_all:_foo_,_bar_,...
 
 The field under validation must be present and not empty _only when_ all of the other specified fields are not present.
 
-<a name="rule-same"></a>
+
 #### same:_field_
 
 The given _field_ must match the field under validation.
 
-<a name="rule-size"></a>
+
 #### size:_value_
 
 The field under validation must have a size matching the given _value_. For string data, _value_ corresponds to the number of characters. For numeric data, _value_ corresponds to a given integer value. For an array, _size_ corresponds to the `count` of the array. For files, _size_ corresponds to the file size in kilobytes.
 
-<a name="rule-starts-with"></a>
+
 #### starts_with:_foo_,_bar_,...
 
 The field under validation must start with one of the given values.
 
-<a name="rule-string"></a>
+
 #### string
 
 The field under validation must be a string. If you would like to allow the field to also be `null`, you should assign the `nullable` rule to the field.
 
-<a name="rule-timezone"></a>
+
 #### timezone
 
 The field under validation must be a valid timezone identifier according to the `timezone_identifiers_list` PHP function.
 
-<a name="rule-unique"></a>
+
 #### unique:_table_,_column_,_except_,_idColumn_
 
 The field under validation must not exist within the given database table.
@@ -1075,17 +1075,17 @@ You may also specify additional query constraints by customizing the query using
         return $query->where('account_id', 1);
     })
 
-<a name="rule-url"></a>
+
 #### url
 
 The field under validation must be a valid URL.
 
-<a name="rule-uuid"></a>
+
 #### uuid
 
 The field under validation must be a valid RFC 4122 (version 1, 3, 4, or 5) universally unique identifier (UUID).
 
-<a name="conditionally-adding-rules"></a>
+
 ## Conditionally Adding Rules
 
 #### Validating When Present
@@ -1123,7 +1123,7 @@ The first argument passed to the `sometimes` method is the name of the field we 
 
 > {tip} The `$input` parameter passed to your `Closure` will be an instance of `Illuminate\Support\Fluent` and may be used to access your input and files.
 
-<a name="validating-arrays"></a>
+
 ## Validating Arrays
 
 Validating array based form input fields doesn't have to be a pain. You may use "dot notation" to validate attributes within an array. For example, if the incoming HTTP request contains a `photos[profile]` field, you may validate it like so:
@@ -1147,10 +1147,10 @@ Likewise, you may use the `*` character when specifying your validation messages
         ]
     ],
 
-<a name="custom-validation-rules"></a>
+
 ## Custom Validation Rules
 
-<a name="using-rule-objects"></a>
+
 ### Using Rule Objects
 
 Laravel provides a variety of helpful validation rules; however, you may wish to specify some of your own. One method of registering custom validation rules is using rule objects. To generate a new rule object, you may use the `make:rule` Artisan command. Let's use this command to generate a rule that verifies a string is uppercase. Laravel will place the new rule in the `app/Rules` directory:
@@ -1210,7 +1210,7 @@ Once the rule has been defined, you may attach it to a validator by passing an i
         'name' => ['required', 'string', new Uppercase],
     ]);
 
-<a name="using-closures"></a>
+
 ### Using Closures
 
 If you only need the functionality of a custom rule once throughout your application, you may use a Closure instead of a rule object. The Closure receives the attribute's name, the attribute's value, and a `$fail` callback that should be called if validation fails:
@@ -1227,10 +1227,10 @@ If you only need the functionality of a custom rule once throughout your applica
         ],
     ]);
 
-<a name="using-extensions"></a>
+
 ### Using Extensions
 
-Another method of registering custom validation rules is using the `extend` method on the `Validator` [facade](/docs/{{version}}/facades). Let's use this method within a [service provider](/docs/{{version}}/providers) to register a custom validation rule:
+Another method of registering custom validation rules is using the `extend` method on the `Validator` [facade](/facades). Let's use this method within a [service provider](/providers) to register a custom validation rule:
 
     <?php
 
@@ -1280,7 +1280,7 @@ You will also need to define an error message for your custom rule. You can do s
 
     // The rest of the validation error messages...
 
-When creating a custom validation rule, you may sometimes need to define custom placeholder replacements for error messages. You may do so by creating a custom Validator as described above then making a call to the `replacer` method on the `Validator` facade. You may do this within the `boot` method of a [service provider](/docs/{{version}}/providers):
+When creating a custom validation rule, you may sometimes need to define custom placeholder replacements for error messages. You may do so by creating a custom Validator as described above then making a call to the `replacer` method on the `Validator` facade. You may do this within the `boot` method of a [service provider](/providers):
 
     /**
      * Bootstrap any application services.

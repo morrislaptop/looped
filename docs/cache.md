@@ -18,14 +18,14 @@
     - [Registering The Driver](#registering-the-driver)
 - [Events](#events)
 
-<a name="configuration"></a>
+
 ## Configuration
 
 Laravel provides an expressive, unified API for various caching backends. The cache configuration is located at `config/cache.php`. In this file you may specify which cache driver you would like to be used by default throughout your application. Laravel supports popular caching backends like [Memcached](https://memcached.org) and [Redis](https://redis.io) out of the box.
 
 The cache configuration file also contains various other options, which are documented within the file, so make sure to read over these options. By default, Laravel is configured to use the `file` cache driver, which stores the serialized, cached objects in the filesystem. For larger applications, it is recommended that you use a more robust driver such as Memcached or Redis. You may even configure multiple cache configurations for the same driver.
 
-<a name="driver-prerequisites"></a>
+
 ### Driver Prerequisites
 
 #### Database
@@ -66,15 +66,15 @@ You may also set the `host` option to a UNIX socket path. If you do this, the `p
 
 Before using a Redis cache with Laravel, you will need to either install the `predis/predis` package (~1.0) via Composer or install the PhpRedis PHP extension via PECL.
 
-For more information on configuring Redis, consult its [Laravel documentation page](/docs/{{version}}/redis#configuration).
+For more information on configuring Redis, consult its [Laravel documentation page](/redis#configuration).
 
-<a name="cache-usage"></a>
+
 ## Cache Usage
 
-<a name="obtaining-a-cache-instance"></a>
+
 ### Obtaining A Cache Instance
 
-The `Illuminate\Contracts\Cache\Factory` and `Illuminate\Contracts\Cache\Repository` [contracts](/docs/{{version}}/contracts) provide access to Laravel's cache services. The `Factory` contract provides access to all cache drivers defined for your application. The `Repository` contract is typically an implementation of the default cache driver for your application as specified by your `cache` configuration file.
+The `Illuminate\Contracts\Cache\Factory` and `Illuminate\Contracts\Cache\Repository` [contracts](/contracts) provide access to Laravel's cache services. The `Factory` contract provides access to all cache drivers defined for your application. The `Repository` contract is typically an implementation of the default cache driver for your application as specified by your `cache` configuration file.
 
 However, you may also use the `Cache` facade, which is what we will use throughout this documentation. The `Cache` facade provides convenient, terse access to the underlying implementations of the Laravel cache contracts:
 
@@ -107,7 +107,7 @@ Using the `Cache` facade, you may access various cache stores via the `store` me
 
     Cache::store('redis')->put('bar', 'baz', 600); // 10 Minutes
 
-<a name="retrieving-items-from-the-cache"></a>
+
 ### Retrieving Items From The Cache
 
 The `get` method on the `Cache` facade is used to retrieve items from the cache. If the item does not exist in the cache, `null` will be returned. If you wish, you may pass a second argument to the `get` method specifying the default value you wish to be returned if the item doesn't exist:
@@ -161,7 +161,7 @@ If you need to retrieve an item from the cache and then delete the item, you may
 
     $value = Cache::pull('key');
 
-<a name="storing-items-in-the-cache"></a>
+
 ### Storing Items In The Cache
 
 You may use the `put` method on the `Cache` facade to store items in the cache:
@@ -190,7 +190,7 @@ The `forever` method may be used to store an item in the cache permanently. Sinc
 
 > {tip} If you are using the Memcached driver, items that are stored "forever" may be removed when the cache reaches its size limit.
 
-<a name="removing-items-from-the-cache"></a>
+
 ### Removing Items From The Cache
 
 You may remove items from the cache using the `forget` method:
@@ -209,7 +209,7 @@ You may clear the entire cache using the `flush` method:
 
 > {note} Flushing the cache does not respect the cache prefix and will remove all entries from the cache. Consider this carefully when clearing a cache which is shared by other applications.
 
-<a name="atomic-locks"></a>
+
 ### Atomic Locks
 
 > {note} To utilize this feature, your application must be using the `memcached`, `dynamodb`, or `redis` cache driver as your application's default cache driver. In addition, all servers must be communicating with the same central cache server.
@@ -272,10 +272,10 @@ If you would like to release a lock without respecting its current owner, you ma
 
     Cache::lock('foo')->forceRelease();
 
-<a name="the-cache-helper"></a>
+
 ### The Cache Helper
 
-In addition to using the `Cache` facade or [cache contract](/docs/{{version}}/contracts), you may also use the global `cache` function to retrieve and store data via the cache. When the `cache` function is called with a single, string argument, it will return the value of the given key:
+In addition to using the `Cache` facade or [cache contract](/contracts), you may also use the global `cache` function to retrieve and store data via the cache. When the `cache` function is called with a single, string argument, it will return the value of the given key:
 
     $value = cache('key');
 
@@ -291,14 +291,14 @@ When the `cache` function is called without any arguments, it returns an instanc
         return DB::table('users')->get();
     });
 
-> {tip} When testing call to the global `cache` function, you may use the `Cache::shouldReceive` method just as if you were [testing a facade](/docs/{{version}}/mocking#mocking-facades).
+> {tip} When testing call to the global `cache` function, you may use the `Cache::shouldReceive` method just as if you were [testing a facade](/mocking#mocking-facades).
 
-<a name="cache-tags"></a>
+
 ## Cache Tags
 
 > {note} Cache tags are not supported when using the `file` or `database` cache drivers. Furthermore, when using multiple tags with caches that are stored "forever", performance will be best with a driver such as `memcached`, which automatically purges stale records.
 
-<a name="storing-tagged-cache-items"></a>
+
 ### Storing Tagged Cache Items
 
 Cache tags allow you to tag related items in the cache and then flush all cached values that have been assigned a given tag. You may access a tagged cache by passing in an ordered array of tag names. For example, let's access a tagged cache and `put` value in the cache:
@@ -307,7 +307,7 @@ Cache tags allow you to tag related items in the cache and then flush all cached
 
     Cache::tags(['people', 'authors'])->put('Anne', $anne, $seconds);
 
-<a name="accessing-tagged-cache-items"></a>
+
 ### Accessing Tagged Cache Items
 
 To retrieve a tagged cache item, pass the same ordered list of tags to the `tags` method and then call the `get` method with the key you wish to retrieve:
@@ -316,7 +316,7 @@ To retrieve a tagged cache item, pass the same ordered list of tags to the `tags
 
     $anne = Cache::tags(['people', 'authors'])->get('Anne');
 
-<a name="removing-tagged-cache-items"></a>
+
 ### Removing Tagged Cache Items
 
 You may flush all items that are assigned a tag or list of tags. For example, this statement would remove all caches tagged with either `people`, `authors`, or both. So, both `Anne` and `John` would be removed from the cache:
@@ -327,13 +327,13 @@ In contrast, this statement would remove only caches tagged with `authors`, so `
 
     Cache::tags('authors')->flush();
 
-<a name="adding-custom-cache-drivers"></a>
+
 ## Adding Custom Cache Drivers
 
-<a name="writing-the-driver"></a>
+
 ### Writing The Driver
 
-To create our custom cache driver, we first need to implement the `Illuminate\Contracts\Cache\Store` [contract](/docs/{{version}}/contracts). So, a MongoDB cache implementation would look something like this:
+To create our custom cache driver, we first need to implement the `Illuminate\Contracts\Cache\Store` [contract](/contracts). So, a MongoDB cache implementation would look something like this:
 
     <?php
 
@@ -363,7 +363,7 @@ We just need to implement each of these methods using a MongoDB connection. For 
 
 > {tip} If you're wondering where to put your custom cache driver code, you could create an `Extensions` namespace within your `app` directory. However, keep in mind that Laravel does not have a rigid application structure and you are free to organize your application according to your preferences.
 
-<a name="registering-the-driver"></a>
+
 ### Registering The Driver
 
 To register the custom cache driver with Laravel, we will use the `extend` method on the `Cache` facade. The call to `Cache::extend` could be done in the `boot` method of the default `App\Providers\AppServiceProvider` that ships with fresh Laravel applications, or you may create your own service provider to house the extension - just don't forget to register the provider in the `config/app.php` provider array:
@@ -401,14 +401,14 @@ To register the custom cache driver with Laravel, we will use the `extend` metho
         }
     }
 
-The first argument passed to the `extend` method is the name of the driver. This will correspond to your `driver` option in the `config/cache.php` configuration file. The second argument is a Closure that should return an `Illuminate\Cache\Repository` instance. The Closure will be passed an `$app` instance, which is an instance of the [service container](/docs/{{version}}/container).
+The first argument passed to the `extend` method is the name of the driver. This will correspond to your `driver` option in the `config/cache.php` configuration file. The second argument is a Closure that should return an `Illuminate\Cache\Repository` instance. The Closure will be passed an `$app` instance, which is an instance of the [service container](/container).
 
 Once your extension is registered, update your `config/cache.php` configuration file's `driver` option to the name of your extension.
 
-<a name="events"></a>
+
 ## Events
 
-To execute code on every cache operation, you may listen for the [events](/docs/{{version}}/events) fired by the cache. Typically, you should place these event listeners within your `EventServiceProvider`:
+To execute code on every cache operation, you may listen for the [events](/events) fired by the cache. Typically, you should place these event listeners within your `EventServiceProvider`:
 
     /**
      * The event listener mappings for the application.

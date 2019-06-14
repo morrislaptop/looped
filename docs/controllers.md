@@ -15,15 +15,15 @@
 - [Dependency Injection & Controllers](#dependency-injection-and-controllers)
 - [Route Caching](#route-caching)
 
-<a name="introduction"></a>
+
 ## Introduction
 
 Instead of defining all of your request handling logic as Closures in route files, you may wish to organize this behavior using Controller classes. Controllers can group related request handling logic into a single class. Controllers are stored in the `app/Http/Controllers` directory.
 
-<a name="basic-controllers"></a>
+
 ## Basic Controllers
 
-<a name="defining-controllers"></a>
+
 ### Defining Controllers
 
 Below is an example of a basic controller class. Note that the controller extends the base controller class included with Laravel. The base class provides a few convenience methods such as the `middleware` method, which may be used to attach middleware to controller actions:
@@ -57,7 +57,7 @@ Now, when a request matches the specified route URI, the `show` method on the `U
 
 > {tip} Controllers are not **required** to extend a base class. However, you will not have access to convenience features such as the `middleware`, `validate`, and `dispatch` methods.
 
-<a name="controllers-and-namespaces"></a>
+
 ### Controllers & Namespaces
 
 It is very important to note that we did not need to specify the full controller namespace when defining the controller route. Since the `RouteServiceProvider` loads your route files within a route group that contains the namespace, we only specified the portion of the class name that comes after the `App\Http\Controllers` portion of the namespace.
@@ -66,7 +66,7 @@ If you choose to nest your controllers deeper into the `App\Http\Controllers` di
 
     Route::get('foo', 'Photos\AdminController@method');
 
-<a name="single-action-controllers"></a>
+
 ### Single Action Controllers
 
 If you would like to define a controller that only handles a single action, you may place a single `__invoke` method on the controller:
@@ -100,10 +100,10 @@ You may generate an invokable controller by using the `--invokable` option of th
 
     php artisan make:controller ShowProfile --invokable
 
-<a name="controller-middleware"></a>
+
 ## Controller Middleware
 
-[Middleware](/docs/{{version}}/middleware) may be assigned to the controller's routes in your route files:
+[Middleware](/middleware) may be assigned to the controller's routes in your route files:
 
     Route::get('profile', 'UserController@show')->middleware('auth');
 
@@ -136,7 +136,7 @@ Controllers also allow you to register middleware using a Closure. This provides
 
 > {tip} You may assign middleware to a subset of controller actions; however, it may indicate your controller is growing too large. Instead, consider breaking your controller into multiple, smaller controllers.
 
-<a name="resource-controllers"></a>
+
 ## Resource Controllers
 
 Laravel resource routing assigns the typical "CRUD" routes to a controller with a single line of code. For example, you may wish to create a controller that handles all HTTP requests for "photos" stored by your application. Using the `make:controller` Artisan command, we can quickly create such a controller:
@@ -184,7 +184,7 @@ Since HTML forms can't make `PUT`, `PATCH`, or `DELETE` requests, you will need 
         @method('PUT')
     </form>
 
-<a name="restful-partial-resource-routes"></a>
+
 ### Partial Resource Routes
 
 When declaring a resource route, you may specify a subset of actions the controller should handle instead of the full set of default actions:
@@ -214,7 +214,7 @@ To quickly generate an API resource controller that does not include the `create
 
     php artisan make:controller API/PhotoController --api
 
-<a name="restful-naming-resource-routes"></a>
+
 ### Naming Resource Routes
 
 By default, all resource controller actions have a route name; however, you can override these names by passing a `names` array with your options:
@@ -223,7 +223,7 @@ By default, all resource controller actions have a route name; however, you can 
         'create' => 'photos.build'
     ]);
 
-<a name="restful-naming-resource-route-parameters"></a>
+
 ### Naming Resource Route Parameters
 
 By default, `Route::resource` will create the route parameters for your resource routes based on the "singularized" version of the resource name. You can easily override this on a per resource basis by using the `parameters` method. The array passed into the `parameters` method should be an associative array of resource names and parameter names:
@@ -236,7 +236,7 @@ By default, `Route::resource` will create the route parameters for your resource
 
     /users/{admin_user}
 
-<a name="restful-localizing-resource-uris"></a>
+
 ### Localizing Resource URIs
 
 By default, `Route::resource` will create resource URIs using English verbs. If you need to localize the `create` and `edit` action verbs, you may use the `Route::resourceVerbs` method. This may be done in the `boot` method of your `AppServiceProvider`:
@@ -262,7 +262,7 @@ Once the verbs have been customized, a resource route registration such as `Rout
 
     /fotos/{foto}/editar
 
-<a name="restful-supplementing-resource-controllers"></a>
+
 ### Supplementing Resource Controllers
 
 If you need to add additional routes to a resource controller beyond the default set of resource routes, you should define those routes before your call to `Route::resource`; otherwise, the routes defined by the `resource` method may unintentionally take precedence over your supplemental routes:
@@ -273,12 +273,12 @@ If you need to add additional routes to a resource controller beyond the default
 
 > {tip} Remember to keep your controllers focused. If you find yourself routinely needing methods outside of the typical set of resource actions, consider splitting your controller into two, smaller controllers.
 
-<a name="dependency-injection-and-controllers"></a>
+
 ## Dependency Injection & Controllers
 
 #### Constructor Injection
 
-The Laravel [service container](/docs/{{version}}/container) is used to resolve all Laravel controllers. As a result, you are able to type-hint any dependencies your controller may need in its constructor. The declared dependencies will automatically be resolved and injected into the controller instance:
+The Laravel [service container](/container) is used to resolve all Laravel controllers. As a result, you are able to type-hint any dependencies your controller may need in its constructor. The declared dependencies will automatically be resolved and injected into the controller instance:
 
     <?php
 
@@ -305,7 +305,7 @@ The Laravel [service container](/docs/{{version}}/container) is used to resolve 
         }
     }
 
-You may also type-hint any [Laravel contract](/docs/{{version}}/contracts). If the container can resolve it, you can type-hint it. Depending on your application, injecting your dependencies into your controller may provide better testability.
+You may also type-hint any [Laravel contract](/contracts). If the container can resolve it, you can type-hint it. Depending on your application, injecting your dependencies into your controller may provide better testability.
 
 #### Method Injection
 
@@ -360,7 +360,7 @@ You may still type-hint the `Illuminate\Http\Request` and access your `id` param
         }
     }
 
-<a name="route-caching"></a>
+
 ## Route Caching
 
 > {note} Closure based routes cannot be cached. To use route caching, you must convert any Closure routes to controller classes.

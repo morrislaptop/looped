@@ -12,10 +12,10 @@
     - [Storing Uploaded Files](#storing-uploaded-files)
 - [Configuring Trusted Proxies](#configuring-trusted-proxies)
 
-<a name="accessing-the-request"></a>
+
 ## Accessing The Request
 
-To obtain an instance of the current HTTP request via dependency injection, you should type-hint the `Illuminate\Http\Request` class on your controller method. The incoming request instance will automatically be injected by the [service container](/docs/{{version}}/container):
+To obtain an instance of the current HTTP request via dependency injection, you should type-hint the `Illuminate\Http\Request` class on your controller method. The incoming request instance will automatically be injected by the [service container](/container):
 
     <?php
 
@@ -78,7 +78,7 @@ You may also type-hint the `Illuminate\Http\Request` class on a route Closure. T
         //
     });
 
-<a name="request-path-and-method"></a>
+
 ### Request Path & Method
 
 The `Illuminate\Http\Request` instance provides a variety of methods for examining the HTTP request for your application and extends the `Symfony\Component\HttpFoundation\Request` class. We will discuss a few of the most important methods below.
@@ -115,7 +115,7 @@ The `method` method will return the HTTP verb for the request. You may use the `
         //
     }
 
-<a name="psr7-requests"></a>
+
 ### PSR-7 Requests
 
 The [PSR-7 standard](https://www.php-fig.org/psr/psr-7/) specifies interfaces for HTTP messages, including requests and responses. If you would like to obtain an instance of a PSR-7 request instead of a Laravel request, you will first need to install a few libraries. Laravel uses the *Symfony HTTP Message Bridge* component to convert typical Laravel requests and responses into PSR-7 compatible implementations:
@@ -133,14 +133,14 @@ Once you have installed these libraries, you may obtain a PSR-7 request by type-
 
 > {tip} If you return a PSR-7 response instance from a route or controller, it will automatically be converted back to a Laravel response instance and be displayed by the framework.
 
-<a name="input-trimming-and-normalization"></a>
+
 ## Input Trimming & Normalization
 
 By default, Laravel includes the `TrimStrings` and `ConvertEmptyStringsToNull` middleware in your application's global middleware stack. These middleware are listed in the stack by the `App\Http\Kernel` class. These middleware will automatically trim all incoming string fields on the request, as well as convert any empty string fields to `null`. This allows you to not have to worry about these normalization concerns in your routes and controllers.
 
 If you would like to disable this behavior, you may remove the two middleware from your application's middleware stack by removing them from the `$middleware` property of your `App\Http\Kernel` class.
 
-<a name="retrieving-input"></a>
+
 ## Retrieving Input
 
 #### Retrieving All Input Data
@@ -231,14 +231,14 @@ If you would like to determine if a value is present on the request and is not e
         //
     }
 
-<a name="old-input"></a>
+
 ### Old Input
 
-Laravel allows you to keep input from one request during the next request. This feature is particularly useful for re-populating forms after detecting validation errors. However, if you are using Laravel's included [validation features](/docs/{{version}}/validation), it is unlikely you will need to manually use these methods, as some of Laravel's built-in validation facilities will call them automatically.
+Laravel allows you to keep input from one request during the next request. This feature is particularly useful for re-populating forms after detecting validation errors. However, if you are using Laravel's included [validation features](/validation), it is unlikely you will need to manually use these methods, as some of Laravel's built-in validation facilities will call them automatically.
 
 #### Flashing Input To The Session
 
-The `flash` method on the `Illuminate\Http\Request` class will flash the current input to the [session](/docs/{{version}}/session) so that it is available during the user's next request to the application:
+The `flash` method on the `Illuminate\Http\Request` class will flash the current input to the [session](/session) so that it is available during the user's next request to the application:
 
     $request->flash();
 
@@ -260,15 +260,15 @@ Since you often will want to flash input to the session and then redirect to the
 
 #### Retrieving Old Input
 
-To retrieve flashed input from the previous request, use the `old` method on the `Request` instance. The `old` method will pull the previously flashed input data from the [session](/docs/{{version}}/session):
+To retrieve flashed input from the previous request, use the `old` method on the `Request` instance. The `old` method will pull the previously flashed input data from the [session](/session):
 
     $username = $request->old('username');
 
-Laravel also provides a global `old` helper. If you are displaying old input within a [Blade template](/docs/{{version}}/blade), it is more convenient to use the `old` helper. If no old input exists for the given field, `null` will be returned:
+Laravel also provides a global `old` helper. If you are displaying old input within a [Blade template](/blade), it is more convenient to use the `old` helper. If no old input exists for the given field, `null` will be returned:
 
     <input type="text" name="username" value="{{ old('username') }}">
 
-<a name="cookies"></a>
+
 ### Cookies
 
 #### Retrieving Cookies From Requests
@@ -309,10 +309,10 @@ If you would like to generate a `Symfony\Component\HttpFoundation\Cookie` instan
 
     return response('Hello World')->cookie($cookie);
 
-<a name="files"></a>
+
 ## Files
 
-<a name="retrieving-uploaded-files"></a>
+
 ### Retrieving Uploaded Files
 
 You may access uploaded files from a `Illuminate\Http\Request` instance using the `file` method or using dynamic properties. The `file` method returns an instance of the `Illuminate\Http\UploadedFile` class, which extends the PHP `SplFileInfo` class and provides a variety of methods for interacting with the file:
@@ -347,10 +347,10 @@ The `UploadedFile` class also contains methods for accessing the file's fully-qu
 
 There are a variety of other methods available on `UploadedFile` instances. Check out the [API documentation for the class](https://api.symfony.com/3.0/Symfony/Component/HttpFoundation/File/UploadedFile.html) for more information regarding these methods.
 
-<a name="storing-uploaded-files"></a>
+
 ### Storing Uploaded Files
 
-To store an uploaded file, you will typically use one of your configured [filesystems](/docs/{{version}}/filesystem). The `UploadedFile` class has a `store` method which will move an uploaded file to one of your disks, which may be a location on your local filesystem or even a cloud storage location like Amazon S3.
+To store an uploaded file, you will typically use one of your configured [filesystems](/filesystem). The `UploadedFile` class has a `store` method which will move an uploaded file to one of your disks, which may be a location on your local filesystem or even a cloud storage location like Amazon S3.
 
 The `store` method accepts the path where the file should be stored relative to the filesystem's configured root directory. This path should not contain a file name, since a unique ID will automatically be generated to serve as the file name.
 
@@ -366,7 +366,7 @@ If you do not want a file name to be automatically generated, you may use the `s
 
     $path = $request->photo->storeAs('images', 'filename.jpg', 's3');
 
-<a name="configuring-trusted-proxies"></a>
+
 ## Configuring Trusted Proxies
 
 When running your applications behind a load balancer that terminates TLS / SSL certificates, you may notice your application sometimes does not generate HTTPS links. Typically this is because your application is being forwarded traffic from your load balancer on port 80 and does not know it should generate secure links.

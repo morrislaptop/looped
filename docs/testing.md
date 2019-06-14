@@ -4,7 +4,7 @@
 - [Environment](#environment)
 - [Creating & Running Tests](#creating-and-running-tests)
 
-<a name="introduction"></a>
+
 ## Introduction
 
 Laravel is built with testing in mind. In fact, support for testing with PHPUnit is included out of the box and a `phpunit.xml` file is already set up for your application. The framework also ships with convenient helper methods that allow you to expressively test your applications.
@@ -13,7 +13,7 @@ By default, your application's `tests` directory contains two directories: `Feat
 
 An `ExampleTest.php` file is provided in both the `Feature` and `Unit` test directories. After installing a new Laravel application, run `phpunit` on the command line to run your tests.
 
-<a name="environment"></a>
+
 ## Environment
 
 When running tests via `phpunit`, Laravel will automatically set the configuration environment to `testing` because of the environment variables defined in the `phpunit.xml` file. Laravel also automatically configures the session and cache to the `array` driver while testing, meaning no session or cache data will be persisted while testing.
@@ -22,7 +22,7 @@ You are free to define other testing environment configuration values as necessa
 
 In addition, you may create a `.env.testing` file in the root of your project. This file will override the `.env` file when running PHPUnit tests or executing Artisan commands with the `--env=testing` option.
 
-<a name="creating-and-running-tests"></a>
+
 ## Creating & Running Tests
 
 To create a new test case, use the `make:test` Artisan command:

@@ -9,7 +9,7 @@
     - [PHPDoc](#phpdoc)
     - [StyleCI](#styleci)
 
-<a name="bug-reports"></a>
+
 ## Bug Reports
 
 To encourage active collaboration, Laravel strongly encourages pull requests, not just bug reports. "Bug reports" may also be sent in the form of a pull request containing a failing test.
@@ -38,17 +38,17 @@ The Laravel source code is managed on GitHub, and there are repositories for eac
 - [Laravel Website](https://github.com/laravel/laravel.com)
 </div>
 
-<a name="core-development-discussion"></a>
+
 ## Core Development Discussion
 
 You may propose new features or improvements of existing Laravel behavior in the Laravel Ideas [issue board](https://github.com/laravel/ideas/issues). If you propose a new feature, please be willing to implement at least some of the code that would be needed to complete the feature.
 
 Informal discussion regarding bugs, new features, and implementation of existing features takes place in the `#internals` channel of the [Laravel Discord server](https://discordapp.com/invite/mPZNm7A). Taylor Otwell, the maintainer of Laravel, is typically present in the channel on weekdays from 8am-5pm (UTC-06:00 or America/Chicago), and sporadically present in the channel at other times.
 
-<a name="which-branch"></a>
+
 ## Which Branch?
 
-**All** bug fixes should be sent to the latest stable branch or to the [current LTS branch](/docs/{{version}}/releases#support-policy). Bug fixes should **never** be sent to the `master` branch unless they fix features that exist only in the upcoming release.
+**All** bug fixes should be sent to the latest stable branch or to the [current LTS branch](/releases#support-policy). Bug fixes should **never** be sent to the `master` branch unless they fix features that exist only in the upcoming release.
 
 **Minor** features that are **fully backwards compatible** with the current release may be sent to the latest stable branch.
 
@@ -56,22 +56,22 @@ Informal discussion regarding bugs, new features, and implementation of existing
 
 If you are unsure if your feature qualifies as a major or minor, please ask Taylor Otwell in the `#internals` channel of the [Laravel Discord server](https://discordapp.com/invite/mPZNm7A).
 
-<a name="compiled-assets"></a>
+
 ## Compiled Assets
 
 If you are submitting a change that will affect a compiled file, such as most of the files in `resources/sass` or `resources/js` of the `laravel/laravel` repository, do not commit the compiled files. Due to their large size, they cannot realistically be reviewed by a maintainer. This could be exploited as a way to inject malicious code into Laravel. In order to defensively prevent this, all compiled files will be generated and committed by Laravel maintainers.
 
-<a name="security-vulnerabilities"></a>
+
 ## Security Vulnerabilities
 
 If you discover a security vulnerability within Laravel, please send an email to Taylor Otwell at <a href="mailto:taylor@laravel.com">taylor@laravel.com</a>. All security vulnerabilities will be promptly addressed.
 
-<a name="coding-style"></a>
+
 ## Coding Style
 
 Laravel follows the [PSR-2](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-2-coding-style-guide.md) coding standard and the [PSR-4](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-4-autoloader.md) autoloading standard.
 
-<a name="phpdoc"></a>
+
 ### PHPDoc
 
 Below is an example of a valid Laravel documentation block. Note that the `@param` attribute is followed by two spaces, the argument type, two more spaces, and finally the variable name:
@@ -90,7 +90,7 @@ Below is an example of a valid Laravel documentation block. Note that the `@para
         //
     }
 
-<a name="styleci"></a>
+
 ### StyleCI
 
 Don't worry if your code styling isn't perfect! [StyleCI](https://styleci.io/) will automatically merge any style fixes into the Laravel repository after pull requests are merged. This allows us to focus on the content of the contribution and not the code style.

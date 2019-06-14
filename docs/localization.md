@@ -10,7 +10,7 @@
     - [Pluralization](#pluralization)
 - [Overriding Package Language Files](#overriding-package-language-files)
 
-<a name="introduction"></a>
+
 ## Introduction
 
 Laravel's localization features provide a convenient way to retrieve strings in various languages, allowing you to easily support multiple languages within your application. Language strings are stored in files within the `resources/lang` directory. Within this directory there should be a subdirectory for each language supported by the application:
@@ -30,7 +30,7 @@ All language files return an array of keyed strings. For example:
         'welcome' => 'Welcome to our application'
     ];
 
-<a name="configuring-the-locale"></a>
+
 ### Configuring The Locale
 
 The default language for your application is stored in the `config/app.php` configuration file. You may modify this value to suit the needs of your application. You may also change the active language at runtime using the `setLocale` method on the `App` facade:
@@ -55,10 +55,10 @@ You may use the `getLocale` and `isLocale` methods on the `App` facade to determ
         //
     }
 
-<a name="defining-translation-strings"></a>
+
 ## Defining Translation Strings
 
-<a name="using-short-keys"></a>
+
 ### Using Short Keys
 
 Typically, translation strings are stored in files within the `resources/lang` directory. Within this directory there should be a subdirectory for each language supported by the application:
@@ -80,7 +80,7 @@ All language files return an array of keyed strings. For example:
         'welcome' => 'Welcome to our application'
     ];
 
-<a name="using-translation-strings-as-keys"></a>
+
 ### Using Translation Strings As Keys
 
 For applications with heavy translation requirements, defining every string with a "short key" can become quickly confusing when referencing them in your views. For this reason, Laravel also provides support for defining translation strings using the "default" translation of the string as the key.
@@ -91,7 +91,7 @@ Translation files that use translation strings as keys are stored as JSON files 
         "I love programming.": "Me encanta programar."
     }
 
-<a name="retrieving-translation-strings"></a>
+
 ## Retrieving Translation Strings
 
 You may retrieve lines from language files using the `__` helper function. The `__` method accepts the file and key of the translation string as its first argument. For example, let's retrieve the `welcome` translation string from the `resources/lang/messages.php` language file:
@@ -100,7 +100,7 @@ You may retrieve lines from language files using the `__` helper function. The `
 
     echo __('I love programming.');
 
-If you are using the [Blade templating engine](/docs/{{version}}/blade), you may use the `{{ }}` syntax to echo the translation string or use the `@lang` directive:
+If you are using the [Blade templating engine](/blade), you may use the `{{ }}` syntax to echo the translation string or use the `@lang` directive:
 
     {{ __('messages.welcome') }}
 
@@ -110,7 +110,7 @@ If the specified translation string does not exist, the `__` function will retur
 
 > {note} The `@lang` directive does not escape any output. You are **fully responsible** for escaping your own output when using this directive.
 
-<a name="replacing-parameters-in-translation-strings"></a>
+
 ### Replacing Parameters In Translation Strings
 
 If you wish, you may define placeholders in your translation strings. All placeholders are prefixed with a `:`. For example, you may define a welcome message with a placeholder name:
@@ -126,7 +126,7 @@ If your placeholder contains all capital letters, or only has its first letter c
     'welcome' => 'Welcome, :NAME', // Welcome, DAYLE
     'goodbye' => 'Goodbye, :Name', // Goodbye, Dayle
 
-<a name="pluralization"></a>
+
 ### Pluralization
 
 Pluralization is a complex problem, as different languages have a variety of complex rules for pluralization. By using a "pipe" character, you may distinguish singular and plural forms of a string:
@@ -151,7 +151,7 @@ If you would like to display the integer value that was passed to the `trans_cho
 
     'apples' => '{0} There are none|{1} There is one|[2,*] There are :count',
 
-<a name="overriding-package-language-files"></a>
+
 ## Overriding Package Language Files
 
 Some packages may ship with their own language files. Instead of changing the package's core files to tweak these lines, you may override them by placing files in the `resources/lang/vendor/{package}/{locale}` directory.

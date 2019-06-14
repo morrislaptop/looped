@@ -19,17 +19,17 @@
     - [Dropping Indexes](#dropping-indexes)
     - [Foreign Key Constraints](#foreign-key-constraints)
 
-<a name="introduction"></a>
+
 ## Introduction
 
 Migrations are like version control for your database, allowing your team to easily modify and share the application's database schema. Migrations are typically paired with Laravel's schema builder to easily build your application's database schema. If you have ever had to tell a teammate to manually add a column to their local database schema, you've faced the problem that database migrations solve.
 
-The Laravel `Schema` [facade](/docs/{{version}}/facades) provides database agnostic support for creating and manipulating tables across all of Laravel's supported database systems.
+The Laravel `Schema` [facade](/facades) provides database agnostic support for creating and manipulating tables across all of Laravel's supported database systems.
 
-<a name="generating-migrations"></a>
+
 ## Generating Migrations
 
-To create a migration, use the `make:migration` [Artisan command](/docs/{{version}}/artisan):
+To create a migration, use the `make:migration` [Artisan command](/artisan):
 
     php artisan make:migration create_users_table
 
@@ -43,7 +43,7 @@ The `--table` and `--create` options may also be used to indicate the name of th
 
 If you would like to specify a custom output path for the generated migration, you may use the `--path` option when executing the `make:migration` command. The given path should be relative to your application's base path.
 
-<a name="migration-structure"></a>
+
 ## Migration Structure
 
 A migration class contains two methods: `up` and `down`. The `up` method is used to add new tables, columns, or indexes to your database, while the `down` method should reverse the operations performed by the `up` method.
@@ -84,14 +84,14 @@ Within both of these methods you may use the Laravel schema builder to expressiv
         }
     }
 
-<a name="running-migrations"></a>
+
 ## Running Migrations
 
 To run all of your outstanding migrations, execute the `migrate` Artisan command:
 
     php artisan migrate
 
-> {note} If you are using the [Homestead virtual machine](/docs/{{version}}/homestead), you should run this command from within your virtual machine.
+> {note} If you are using the [Homestead virtual machine](/homestead), you should run this command from within your virtual machine.
 
 #### Forcing Migrations To Run In Production
 
@@ -99,7 +99,7 @@ Some migration operations are destructive, which means they may cause you to los
 
     php artisan migrate --force
 
-<a name="rolling-back-migrations"></a>
+
 ### Rolling Back Migrations
 
 To rollback the latest migration operation, you may use the `rollback` command. This command rolls back the last "batch" of migrations, which may include multiple migration files:
@@ -135,10 +135,10 @@ The `migrate:fresh` command will drop all tables from the database and then exec
 
     php artisan migrate:fresh --seed
 
-<a name="tables"></a>
+
 ## Tables
 
-<a name="creating-tables"></a>
+
 ### Creating Tables
 
 To create a new database table, use the `create` method on the `Schema` facade. The `create` method accepts two arguments. The first is the name of the table, while the second is a `Closure` which receives a `Blueprint` object that may be used to define the new table:
@@ -178,7 +178,7 @@ Command  |  Description
 `$table->collation = 'utf8_unicode_ci';`  |  Specify a default collation for the table (MySQL).
 `$table->temporary();`  |  Create a temporary table (except SQL Server).
 
-<a name="renaming-and-dropping-tables"></a>
+
 ### Renaming / Dropping Tables
 
 To rename an existing database table, use the `rename` method:
@@ -195,10 +195,10 @@ To drop an existing table, you may use the `drop` or `dropIfExists` methods:
 
 Before renaming a table, you should verify that any foreign key constraints on the table have an explicit name in your migration files instead of letting Laravel assign a convention based name. Otherwise, the foreign key constraint name will refer to the old table name.
 
-<a name="columns"></a>
+
 ## Columns
 
-<a name="creating-columns"></a>
+
 ### Creating Columns
 
 The `table` method on the `Schema` facade may be used to update existing tables. Like the `create` method, the `table` method accepts two arguments: the name of the table and a `Closure` that receives a `Blueprint` instance you may use to add columns to the table:
@@ -271,7 +271,7 @@ Command  |  Description
 `$table->uuid('id');`  |  UUID equivalent column.
 `$table->year('birth_year');`  |  YEAR equivalent column.
 
-<a name="column-modifiers"></a>
+
 ### Column Modifiers
 
 In addition to the column types listed above, there are several column "modifiers" you may use while adding a column to a database table. For example, to make the column "nullable", you may use the `nullable` method:
@@ -299,7 +299,7 @@ Modifier  |  Description
 `->generatedAs($expression)`  |  Create an identity column with specified sequence options (PostgreSQL)
 `->always()`  |  Defines the precedence of sequence values over input for an identity column (PostgreSQL)
 
-<a name="modifying-columns"></a>
+
 ### Modifying Columns
 
 #### Prerequisites
@@ -334,7 +334,7 @@ To rename a column, you may use the `renameColumn` method on the Schema builder.
 
 > {note} Renaming any column in a table that also has a column of type `enum` is not currently supported.
 
-<a name="dropping-columns"></a>
+
 ### Dropping Columns
 
 To drop a column, use the `dropColumn` method on the Schema builder. Before dropping columns from a SQLite database, you will need to add the `doctrine/dbal` dependency to your `composer.json` file and run the `composer update` command in your terminal to install the library:
@@ -362,10 +362,10 @@ Command  |  Description
 `$table->dropTimestamps();`  |  Drop the `created_at` and `updated_at` columns.
 `$table->dropTimestampsTz();` |  Alias of `dropTimestamps()` method.
 
-<a name="indexes"></a>
+
 ## Indexes
 
-<a name="creating-indexes"></a>
+
 ### Creating Indexes
 
 The schema builder supports several types of indexes. First, let's look at an example that specifies a column's values should be unique. To create the index, we can chain the `unique` method onto the column definition:
@@ -414,14 +414,14 @@ Laravel uses the `utf8mb4` character set by default, which includes support for 
 
 Alternatively, you may enable the `innodb_large_prefix` option for your database. Refer to your database's documentation for instructions on how to properly enable this option.
 
-<a name="renaming-indexes"></a>
+
 ### Renaming Indexes
 
 To rename an index, you may use the `renameIndex` method. This method accepts the current index name as its first argument and the desired name as its second argument:
 
     $table->renameIndex('from', 'to')
 
-<a name="dropping-indexes"></a>
+
 ### Dropping Indexes
 
 To drop an index, you must specify the index's name. By default, Laravel automatically assigns a reasonable name to the indexes. Concatenate the table name, the name of the indexed column, and the index type. Here are some examples:
@@ -439,7 +439,7 @@ If you pass an array of columns into a method that drops indexes, the convention
         $table->dropIndex(['state']); // Drops index 'geo_state_index'
     });
 
-<a name="foreign-key-constraints"></a>
+
 ### Foreign Key Constraints
 
 Laravel also provides support for creating foreign key constraints, which are used to force referential integrity at the database level. For example, let's define a `user_id` column on the `posts` table that references the `id` column on a `users` table:
@@ -470,4 +470,4 @@ You may enable or disable foreign key constraints within your migrations by usin
 
     Schema::disableForeignKeyConstraints();
 
-> {note} SQLite disables foreign key constraints by default. When using SQLite, make sure to [enable foreign key support](/docs/{{version}}/database#configuration) in your database configuration before attempting to create them in your migrations.
+> {note} SQLite disables foreign key constraints by default. When using SQLite, make sure to [enable foreign key support](/database#configuration) in your database configuration before attempting to create them in your migrations.

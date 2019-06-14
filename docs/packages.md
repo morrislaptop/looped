@@ -14,7 +14,7 @@
 - [Public Assets](#public-assets)
 - [Publishing File Groups](#publishing-file-groups)
 
-<a name="introduction"></a>
+
 ## Introduction
 
 Packages are the primary way of adding functionality to Laravel. Packages might be anything from a great way to work with dates like [Carbon](https://github.com/briannesbitt/Carbon), or an entire BDD testing framework like [Behat](https://github.com/Behat/Behat).
@@ -23,15 +23,15 @@ There are different types of packages. Some packages are stand-alone, meaning th
 
 On the other hand, other packages are specifically intended for use with Laravel. These packages may have routes, controllers, views, and configuration specifically intended to enhance a Laravel application. This guide primarily covers the development of those packages that are Laravel specific.
 
-<a name="a-note-on-facades"></a>
+
 ### A Note On Facades
 
 When writing a Laravel application, it generally does not matter if you use contracts or facades since both provide essentially equal levels of testability. However, when writing packages, your package will not typically have access to all of Laravel's testing helpers. If you would like to be able to write your package tests as if they existed inside a typical Laravel application, you may use the [Orchestral Testbench](https://github.com/orchestral/testbench) package.
 
-<a name="package-discovery"></a>
+
 ## Package Discovery
 
-In a Laravel application's `config/app.php` configuration file, the `providers` option defines a list of service providers that should be loaded by Laravel. When someone installs your package, you will typically want your service provider to be included in this list. Instead of requiring users to manually add your service provider to the list, you may define the provider in the `extra` section of your package's `composer.json` file. In addition to service providers, you may also list any [facades](/docs/{{version}}/facades) you would like to be registered:
+In a Laravel application's `config/app.php` configuration file, the `providers` option defines a list of service providers that should be loaded by Laravel. When someone installs your package, you will typically want your service provider to be included in this list. Instead of requiring users to manually add your service provider to the list, you may define the provider in the `extra` section of your package's `composer.json` file. In addition to service providers, you may also list any [facades](/facades) you would like to be registered:
 
     "extra": {
         "laravel": {
@@ -68,17 +68,17 @@ You may disable package discovery for all packages using the `*` character insid
         }
     },
 
-<a name="service-providers"></a>
+
 ## Service Providers
 
-[Service providers](/docs/{{version}}/providers) are the connection points between your package and Laravel. A service provider is responsible for binding things into Laravel's [service container](/docs/{{version}}/container) and informing Laravel where to load package resources such as views, configuration, and localization files.
+[Service providers](/providers) are the connection points between your package and Laravel. A service provider is responsible for binding things into Laravel's [service container](/container) and informing Laravel where to load package resources such as views, configuration, and localization files.
 
-A service provider extends the `Illuminate\Support\ServiceProvider` class and contains two methods: `register` and `boot`. The base `ServiceProvider` class is located in the `illuminate/support` Composer package, which you should add to your own package's dependencies. To learn more about the structure and purpose of service providers, check out [their documentation](/docs/{{version}}/providers).
+A service provider extends the `Illuminate\Support\ServiceProvider` class and contains two methods: `register` and `boot`. The base `ServiceProvider` class is located in the `illuminate/support` Composer package, which you should add to your own package's dependencies. To learn more about the structure and purpose of service providers, check out [their documentation](/providers).
 
-<a name="resources"></a>
+
 ## Resources
 
-<a name="configuration"></a>
+
 ### Configuration
 
 Typically, you will need to publish your package's configuration file to the application's own `config` directory. This will allow users of your package to easily override your default configuration options. To allow your configuration files to be published, call the `publishes` method from the `boot` method of your service provider:
@@ -119,7 +119,7 @@ You may also merge your own package configuration file with the application's pu
 
 > {note} This method only merges the first level of the configuration array. If your users partially define a multi-dimensional configuration array, the missing options will not be merged.
 
-<a name="routes"></a>
+
 ### Routes
 
 If your package contains routes, you may load them using the `loadRoutesFrom` method. This method will automatically determine if the application's routes are cached and will not load your routes file if the routes have already been cached:
@@ -134,10 +134,10 @@ If your package contains routes, you may load them using the `loadRoutesFrom` me
         $this->loadRoutesFrom(__DIR__.'/routes.php');
     }
 
-<a name="migrations"></a>
+
 ### Migrations
 
-If your package contains [database migrations](/docs/{{version}}/migrations), you may use the `loadMigrationsFrom` method to inform Laravel how to load them. The `loadMigrationsFrom` method accepts the path to your package's migrations as its only argument:
+If your package contains [database migrations](/migrations), you may use the `loadMigrationsFrom` method to inform Laravel how to load them. The `loadMigrationsFrom` method accepts the path to your package's migrations as its only argument:
 
     /**
      * Bootstrap any application services.
@@ -151,10 +151,10 @@ If your package contains [database migrations](/docs/{{version}}/migrations), yo
 
 Once your package's migrations have been registered, they will automatically be run when the `php artisan migrate` command is executed. You do not need to export them to the application's main `database/migrations` directory.
 
-<a name="translations"></a>
+
 ### Translations
 
-If your package contains [translation files](/docs/{{version}}/localization), you may use the `loadTranslationsFrom` method to inform Laravel how to load them. For example, if your package is named `courier`, you should add the following to your service provider's `boot` method:
+If your package contains [translation files](/localization), you may use the `loadTranslationsFrom` method to inform Laravel how to load them. For example, if your package is named `courier`, you should add the following to your service provider's `boot` method:
 
     /**
      * Bootstrap any application services.
@@ -190,10 +190,10 @@ If you would like to publish your package's translations to the application's `r
 
 Now, when users of your package execute Laravel's `vendor:publish` Artisan command, your package's translations will be published to the specified publish location.
 
-<a name="views"></a>
+
 ### Views
 
-To register your package's [views](/docs/{{version}}/views) with Laravel, you need to tell Laravel where the views are located. You may do this using the service provider's `loadViewsFrom` method. The `loadViewsFrom` method accepts two arguments: the path to your view templates and your package's name. For example, if your package's name is `courier`, you would add the following to your service provider's `boot` method:
+To register your package's [views](/views) with Laravel, you need to tell Laravel where the views are located. You may do this using the service provider's `loadViewsFrom` method. The `loadViewsFrom` method accepts two arguments: the path to your view templates and your package's name. For example, if your package's name is `courier`, you would add the following to your service provider's `boot` method:
 
     /**
      * Bootstrap any application services.
@@ -235,10 +235,10 @@ If you would like to make your views available for publishing to the application
 
 Now, when users of your package execute Laravel's `vendor:publish` Artisan command, your package's views will be copied to the specified publish location.
 
-<a name="commands"></a>
+
 ## Commands
 
-To register your package's Artisan commands with Laravel, you may use the `commands` method. This method expects an array of command class names. Once the commands have been registered, you may execute them using the [Artisan CLI](/docs/{{version}}/artisan):
+To register your package's Artisan commands with Laravel, you may use the `commands` method. This method expects an array of command class names. Once the commands have been registered, you may execute them using the [Artisan CLI](/artisan):
 
     /**
      * Bootstrap the application services.
@@ -255,7 +255,7 @@ To register your package's Artisan commands with Laravel, you may use the `comma
         }
     }
 
-<a name="public-assets"></a>
+
 ## Public Assets
 
 Your package may have assets such as JavaScript, CSS, and images. To publish these assets to the application's `public` directory, use the service provider's `publishes` method. In this example, we will also add a `public` asset group tag, which may be used to publish groups of related assets:
@@ -276,7 +276,7 @@ Now, when your package's users execute the `vendor:publish` command, your assets
 
     php artisan vendor:publish --tag=public --force
 
-<a name="publishing-file-groups"></a>
+
 ## Publishing File Groups
 
 You may want to publish groups of package assets and resources separately. For instance, you might want to allow your users to publish your package's configuration files without being forced to publish your package's assets. You may do this by "tagging" them when calling the `publishes` method from a package's service provider. For example, let's use tags to define two publish groups in the `boot` method of a package service provider:

@@ -8,18 +8,18 @@
 - [Appending Values To JSON](#appending-values-to-json)
 - [Date Serialization](#date-serialization)
 
-<a name="introduction"></a>
+
 ## Introduction
 
 When building JSON APIs, you will often need to convert your models and relationships to arrays or JSON. Eloquent includes convenient methods for making these conversions, as well as controlling which attributes are included in your serializations.
 
-<a name="serializing-models-and-collections"></a>
+
 ## Serializing Models & Collections
 
-<a name="serializing-to-arrays"></a>
+
 ### Serializing To Arrays
 
-To convert a model and its loaded [relationships](/docs/{{version}}/eloquent-relationships) to an array, you should use the `toArray` method. This method is recursive, so all attributes and all relations (including the relations of relations) will be converted to arrays:
+To convert a model and its loaded [relationships](/eloquent-relationships) to an array, you should use the `toArray` method. This method is recursive, so all attributes and all relations (including the relations of relations) will be converted to arrays:
 
     $user = App\User::with('roles')->first();
 
@@ -31,13 +31,13 @@ To convert only a model's attributes to an array, use the `attributesToArray` me
 
     return $user->attributesToArray();
 
-You may also convert entire [collections](/docs/{{version}}/eloquent-collections) of models to arrays:
+You may also convert entire [collections](/eloquent-collections) of models to arrays:
 
     $users = App\User::all();
 
     return $users->toArray();
 
-<a name="serializing-to-json"></a>
+
 ### Serializing To JSON
 
 To convert a model to JSON, you should use the `toJson` method. Like `toArray`, the `toJson` method is recursive, so all attributes and relations will be converted to JSON. You may also specify JSON encoding options [supported by PHP](https://secure.php.net/manual/en/function.json-encode.php):
@@ -64,7 +64,7 @@ Since models and collections are converted to JSON when cast to a string, you ca
 
 When an Eloquent model is converted to JSON, its loaded relationships will automatically be included as attributes on the JSON object. Also, though Eloquent relationship methods are defined using "camel case", a relationship's JSON attribute will be "snake case".
 
-<a name="hiding-attributes-from-json"></a>
+
 ## Hiding Attributes From JSON
 
 Sometimes you may wish to limit the attributes, such as passwords, that are included in your model's array or JSON representation. To do so, add a `$hidden` property to your model:
@@ -115,10 +115,10 @@ Likewise, if you would like to make some typically visible attributes hidden on 
 
     return $user->makeHidden('attribute')->toArray();
 
-<a name="appending-values-to-json"></a>
+
 ## Appending Values To JSON
 
-Occasionally, when casting models to an array or JSON, you may wish to add attributes that do not have a corresponding column in your database. To do so, first define an [accessor](/docs/{{version}}/eloquent-mutators) for the value:
+Occasionally, when casting models to an array or JSON, you may wish to add attributes that do not have a corresponding column in your database. To do so, first define an [accessor](/eloquent-mutators) for the value:
 
     <?php
 
@@ -167,12 +167,12 @@ You may instruct a single model instance to append attributes using the `append`
 
     return $user->setAppends(['is_admin'])->toArray();
 
-<a name="date-serialization"></a>
+
 ## Date Serialization
 
 #### Customizing The Date Format Per Attribute
 
-You may customize the serialization format of individual Eloquent date attributes by specifying the date format in the [cast declaration](/docs/{{version}}/eloquent-mutators#attribute-casting):
+You may customize the serialization format of individual Eloquent date attributes by specifying the date format in the [cast declaration](/eloquent-mutators#attribute-casting):
 
     protected $casts = [
         'birthday' => 'date:Y-m-d',

@@ -12,12 +12,12 @@
     - [Adding Meta Data](#adding-meta-data)
 - [Resource Responses](#resource-responses)
 
-<a name="introduction"></a>
+
 ## Introduction
 
 When building an API, you may need a transformation layer that sits between your Eloquent models and the JSON responses that are actually returned to your application's users. Laravel's resource classes allow you to expressively and easily transform your models and model collections into JSON.
 
-<a name="generating-resources"></a>
+
 ## Generating Resources
 
 To generate a resource class, you may use the `make:resource` Artisan command. By default, resources will be placed in the `app/Http/Resources` directory of your application. Resources extend the `Illuminate\Http\Resources\Json\JsonResource` class:
@@ -34,7 +34,7 @@ To create a resource collection, you should use the `--collection` flag when cre
 
     php artisan make:resource UserCollection
 
-<a name="concept-overview"></a>
+
 ## Concept Overview
 
 > {tip} This is a high-level overview of resources and resource collections. You are highly encouraged to read the other sections of this documentation to gain a deeper understanding of the customization and power offered to you by resources.
@@ -76,7 +76,7 @@ Every resource class defines a `toArray` method which returns the array of attri
         return new UserResource(User::find(1));
     });
 
-<a name="resource-collections"></a>
+
 ### Resource Collections
 
 If you are returning a collection of resources or a paginated response, you may use the `collection` method when creating the resource instance in your route or controller:
@@ -179,7 +179,7 @@ For example, `UserCollection` will attempt to map the given user instances into 
         public $collects = 'App\Http\Resources\Member';
     }
 
-<a name="writing-resources"></a>
+
 ## Writing Resources
 
 > {tip} If you have not read the [concept overview](#concept-overview), you are highly encouraged to do so before proceeding with this documentation.
@@ -292,7 +292,7 @@ Like singular resources, resource collections may be returned directly from rout
         return new UserCollection(User::all());
     });
 
-<a name="data-wrapping"></a>
+
 ### Data Wrapping
 
 By default, your outer-most resource is wrapped in a `data` key when the resource response is converted to JSON. So, for example, a typical resource collection response looks like the following:
@@ -312,7 +312,7 @@ By default, your outer-most resource is wrapped in a `data` key when the resourc
         ]
     }
 
-If you would like to disable the wrapping of the outer-most resource, you may use the `withoutWrapping` method on the base resource class. Typically, you should call this method from your `AppServiceProvider` or another [service provider](/docs/{{version}}/providers) that is loaded on every request to your application:
+If you would like to disable the wrapping of the outer-most resource, you may use the `withoutWrapping` method on the base resource class. Typically, you should call this method from your `AppServiceProvider` or another [service provider](/providers) that is loaded on every request to your application:
 
     <?php
 
@@ -406,7 +406,7 @@ When returning paginated collections in a resource response, Laravel will wrap y
         }
     }
 
-<a name="pagination"></a>
+
 ### Pagination
 
 You may always pass a paginator instance to the `collection` method of a resource or to a custom resource collection:
@@ -450,7 +450,7 @@ Paginated responses always contain `meta` and `links` keys with information abou
         }
     }
 
-<a name="conditional-attributes"></a>
+
 ### Conditional Attributes
 
 Sometimes you may wish to only include an attribute in a resource response if a given condition is met. For example, you may wish to only include a value if the current user is an "administrator". Laravel provides a variety of helper methods to assist you in this situation. The `when` method may be used to conditionally add an attribute to a resource response:
@@ -510,7 +510,7 @@ Again, if the given condition is `false`, these attributes will be removed from 
 
 > {note} The `mergeWhen` method should not be used within arrays that mix string and numeric keys. Furthermore, it should not be used within arrays with numeric keys that are not ordered sequentially.
 
-<a name="conditional-relationships"></a>
+
 ### Conditional Relationships
 
 In addition to conditionally loading attributes, you may conditionally include relationships on your resource responses based on if the relationship has already been loaded on the model. This allows your controller to decide which relationships should be loaded on the model and your resource can easily include them only when they have actually been loaded.
@@ -577,7 +577,7 @@ If your intermediate table is using an accessor other than `pivot`, you may use 
         ];
     }
 
-<a name="adding-meta-data"></a>
+
 ### Adding Meta Data
 
 Some JSON API standards require the addition of meta data to your resource and resource collections responses. This often includes things like `links` to the resource or related resources, or meta data about the resource itself. If you need to return additional meta data about a resource, include it in your `toArray` method. For example, you might include `link` information when transforming a resource collection:
@@ -648,7 +648,7 @@ You may also add top-level data when constructing resource instances in your rou
                         'key' => 'value',
                     ]]);
 
-<a name="resource-responses"></a>
+
 ## Resource Responses
 
 As you have already read, resources may be returned directly from routes and controllers:

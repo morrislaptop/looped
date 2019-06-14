@@ -22,7 +22,7 @@
 - [Form Method Spoofing](#form-method-spoofing)
 - [Accessing The Current Route](#accessing-the-current-route)
 
-<a name="basic-routing"></a>
+
 ## Basic Routing
 
 The most basic Laravel routes accept a URI and a `Closure`, providing a very simple and expressive method of defining routes:
@@ -64,14 +64,14 @@ Sometimes you may need to register a route that responds to multiple HTTP verbs.
 
 #### CSRF Protection
 
-Any HTML forms pointing to `POST`, `PUT`, or `DELETE` routes that are defined in the `web` routes file should include a CSRF token field. Otherwise, the request will be rejected. You can read more about CSRF protection in the [CSRF documentation](/docs/{{version}}/csrf):
+Any HTML forms pointing to `POST`, `PUT`, or `DELETE` routes that are defined in the `web` routes file should include a CSRF token field. Otherwise, the request will be rejected. You can read more about CSRF protection in the [CSRF documentation](/csrf):
 
     <form method="POST" action="/profile">
         @csrf
         ...
     </form>
 
-<a name="redirect-routes"></a>
+
 ### Redirect Routes
 
 If you are defining a route that redirects to another URI, you may use the `Route::redirect` method. This method provides a convenient shortcut so that you do not have to define a full route or controller for performing a simple redirect:
@@ -86,7 +86,7 @@ You may use the `Route::permanentRedirect` method to return a `301` status code:
 
     Route::permanentRedirect('/here', '/there');
 
-<a name="view-routes"></a>
+
 ### View Routes
 
 If your route only needs to return a view, you may use the `Route::view` method. Like the `redirect` method, this method provides a simple shortcut so that you do not have to define a full route or controller. The `view` method accepts a URI as its first argument and a view name as its second argument. In addition, you may provide an array of data to pass to the view as an optional third argument:
@@ -95,10 +95,10 @@ If your route only needs to return a view, you may use the `Route::view` method.
 
     Route::view('/welcome', 'welcome', ['name' => 'Taylor']);
 
-<a name="route-parameters"></a>
+
 ## Route Parameters
 
-<a name="required-parameters"></a>
+
 ### Required Parameters
 
 Sometimes you will need to capture segments of the URI within your route. For example, you may need to capture a user's ID from the URL. You may do so by defining route parameters:
@@ -115,7 +115,7 @@ You may define as many route parameters as required by your route:
 
 Route parameters are always encased within `{}` braces and should consist of alphabetic characters, and may not contain a `-` character. Instead of using the `-` character, use an underscore (`_`). Route parameters are injected into route callbacks / controllers based on their order - the names of the callback / controller arguments do not matter.
 
-<a name="parameters-optional-parameters"></a>
+
 ### Optional Parameters
 
 Occasionally you may need to specify a route parameter, but make the presence of that route parameter optional. You may do so by placing a `?` mark after the parameter name. Make sure to give the route's corresponding variable a default value:
@@ -128,7 +128,7 @@ Occasionally you may need to specify a route parameter, but make the presence of
         return $name;
     });
 
-<a name="parameters-regular-expression-constraints"></a>
+
 ### Regular Expression Constraints
 
 You may constrain the format of your route parameters using the `where` method on a route instance. The `where` method accepts the name of the parameter and a regular expression defining how the parameter should be constrained:
@@ -145,7 +145,7 @@ You may constrain the format of your route parameters using the `where` method o
         //
     })->where(['id' => '[0-9]+', 'name' => '[a-z]+']);
 
-<a name="parameters-global-constraints"></a>
+
 #### Global Constraints
 
 If you would like a route parameter to always be constrained by a given regular expression, you may use the `pattern` method. You should define these patterns in the `boot` method of your `RouteServiceProvider`:
@@ -168,7 +168,7 @@ Once the pattern has been defined, it is automatically applied to all routes usi
         // Only executed if {id} is numeric...
     });
 
-<a name="parameters-encoded-forward-slashes"></a>
+
 #### Encoded Forward Slashes
 
 The Laravel routing component allows all characters except `/`. You must explicitly allow `/` to be part of your placeholder using a `where` condition regular expression:
@@ -179,7 +179,7 @@ The Laravel routing component allows all characters except `/`. You must explici
 
 > {note} Encoded forward slashes are only supported within the last route segment.
 
-<a name="named-routes"></a>
+
 ## Named Routes
 
 Named routes allow the convenient generation of URLs or redirects for specific routes. You may specify a name for a route by chaining the `name` method onto the route definition:
@@ -230,14 +230,14 @@ If you would like to determine if the current request was routed to a given name
         return $next($request);
     }
 
-<a name="route-groups"></a>
+
 ## Route Groups
 
 Route groups allow you to share route attributes, such as middleware or namespaces, across a large number of routes without needing to define those attributes on each individual route. Shared attributes are specified in an array format as the first parameter to the `Route::group` method.
 
 Nested groups attempt to intelligently "merge" attributes with their parent group. Middleware and `where` conditions are merged while names, namespaces, and prefixes are appended. Namespace delimiters and slashes in URI prefixes are automatically added where appropriate.
 
-<a name="route-group-middleware"></a>
+
 ### Middleware
 
 To assign middleware to all routes within a group, you may use the `middleware` method before defining the group. Middleware are executed in the order they are listed in the array:
@@ -252,7 +252,7 @@ To assign middleware to all routes within a group, you may use the `middleware` 
         });
     });
 
-<a name="route-group-namespaces"></a>
+
 ### Namespaces
 
 Another common use-case for route groups is assigning the same PHP namespace to a group of controllers using the `namespace` method:
@@ -263,7 +263,7 @@ Another common use-case for route groups is assigning the same PHP namespace to 
 
 Remember, by default, the `RouteServiceProvider` includes your route files within a namespace group, allowing you to register controller routes without specifying the full `App\Http\Controllers` namespace prefix. So, you only need to specify the portion of the namespace that comes after the base `App\Http\Controllers` namespace.
 
-<a name="route-group-sub-domain-routing"></a>
+
 ### Sub-Domain Routing
 
 Route groups may also be used to handle sub-domain routing. Sub-domains may be assigned route parameters just like route URIs, allowing you to capture a portion of the sub-domain for usage in your route or controller. The sub-domain may be specified by calling the `domain` method before defining the group:
@@ -276,7 +276,7 @@ Route groups may also be used to handle sub-domain routing. Sub-domains may be a
 
 > {note} In order to ensure your sub-domain routes are reachable, you should register sub-domain routes before registering root domain routes. This will prevent root domain routes from overwriting sub-domain routes which have the same URI path.
 
-<a name="route-group-prefixes"></a>
+
 ### Route Prefixes
 
 The `prefix` method may be used to prefix each route in the group with a given URI. For example, you may want to prefix all route URIs within the group with `admin`:
@@ -287,7 +287,7 @@ The `prefix` method may be used to prefix each route in the group with a given U
         });
     });
 
-<a name="route-group-name-prefixes"></a>
+
 ### Route Name Prefixes
 
 The `name` method may be used to prefix each route name in the group with a given string. For example, you may want to prefix all of the grouped route's names with `admin`. The given string is prefixed to the route name exactly as it is specified, so we will be sure to provide the trailing `.` character in the prefix:
@@ -298,12 +298,12 @@ The `name` method may be used to prefix each route name in the group with a give
         })->name('users');
     });
 
-<a name="route-model-binding"></a>
+
 ## Route Model Binding
 
 When injecting a model ID to a route or controller action, you will often query to retrieve the model that corresponds to that ID. Laravel route model binding provides a convenient way to automatically inject the model instances directly into your routes. For example, instead of injecting a user's ID, you can inject the entire `User` model instance that matches the given ID.
 
-<a name="implicit-binding"></a>
+
 ### Implicit Binding
 
 Laravel automatically resolves Eloquent models defined in routes or controller actions whose type-hinted variable names match a route segment name. For example:
@@ -328,7 +328,7 @@ If you would like model binding to use a database column other than `id` when re
         return 'slug';
     }
 
-<a name="explicit-binding"></a>
+
 ### Explicit Binding
 
 To register an explicit binding, use the router's `model` method to specify the class for a given parameter. You should define your explicit model bindings in the `boot` method of the `RouteServiceProvider` class:
@@ -381,7 +381,7 @@ Alternatively, you may override the `resolveRouteBinding` method on your Eloquen
         return $this->where('name', $value)->first() ?? abort(404);
     }
 
-<a name="fallback-routes"></a>
+
 ## Fallback Routes
 
 Using the `Route::fallback` method, you may define a route that will be executed when no other route matches the incoming request. Typically, unhandled requests will automatically render a "404" page via your application's exception handler. However, since you may define the `fallback` route within your `routes/web.php` file, all middleware in the `web` middleware group will apply to the route. You are free to add additional middleware to this route as needed:
@@ -392,10 +392,10 @@ Using the `Route::fallback` method, you may define a route that will be executed
 
 > {note} The fallback route should always be the last route registered by your application.
 
-<a name="rate-limiting"></a>
+
 ## Rate Limiting
 
-Laravel includes a [middleware](/docs/{{version}}/middleware) to rate limit access to routes within your application. To get started, assign the `throttle` middleware to a route or a group of routes. The `throttle` middleware accepts two parameters that determine the maximum number of requests that can be made in a given number of minutes. For example, let's specify that an authenticated user may access the following group of routes 60 times per minute:
+Laravel includes a [middleware](/middleware) to rate limit access to routes within your application. To get started, assign the `throttle` middleware to a route or a group of routes. The `throttle` middleware accepts two parameters that determine the maximum number of requests that can be made in a given number of minutes. For example, let's specify that an authenticated user may access the following group of routes 60 times per minute:
 
     Route::middleware('auth:api', 'throttle:60,1')->group(function () {
         Route::get('/user', function () {
@@ -413,7 +413,7 @@ You may specify a dynamic request maximum based on an attribute of the authentic
         });
     });
 
-<a name="form-method-spoofing"></a>
+
 ## Form Method Spoofing
 
 HTML forms do not support `PUT`, `PATCH` or `DELETE` actions. So, when defining `PUT`, `PATCH` or `DELETE` routes that are called from an HTML form, you will need to add a hidden `_method` field to the form. The value sent with the `_method` field will be used as the HTTP request method:
@@ -430,7 +430,7 @@ You may use the `@method` Blade directive to generate the `_method` input:
         @csrf
     </form>
 
-<a name="accessing-the-current-route"></a>
+
 ## Accessing The Current Route
 
 You may use the `current`, `currentRouteName`, and `currentRouteAction` methods on the `Route` facade to access information about the route handling the incoming request:

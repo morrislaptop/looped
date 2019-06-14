@@ -14,7 +14,7 @@
     - [Local Drivers](#local-drivers)
 - [Other Valet Commands](#other-valet-commands)
 
-<a name="introduction"></a>
+
 ## Introduction
 
 Valet is a Laravel development environment for Mac minimalists. No Vagrant, no `/etc/hosts` file. You can even share your sites publicly using local tunnels. _Yeah, we like it too._
@@ -58,16 +58,16 @@ Out of the box, Valet support includes, but is not limited to:
 
 However, you may extend Valet with your own [custom drivers](#custom-valet-drivers).
 
-<a name="valet-or-homestead"></a>
+
 ### Valet Or Homestead
 
-As you may know, Laravel offers [Homestead](/docs/{{version}}/homestead), another local Laravel development environment. Homestead and Valet differ in regards to their intended audience and their approach to local development. Homestead offers an entire Ubuntu virtual machine with automated Nginx configuration. Homestead is a wonderful choice if you want a fully virtualized Linux development environment or are on Windows / Linux.
+As you may know, Laravel offers [Homestead](/homestead), another local Laravel development environment. Homestead and Valet differ in regards to their intended audience and their approach to local development. Homestead offers an entire Ubuntu virtual machine with automated Nginx configuration. Homestead is a wonderful choice if you want a fully virtualized Linux development environment or are on Windows / Linux.
 
 Valet only supports Mac, and requires you to install PHP and a database server directly onto your local machine. This is easily achieved by using [Homebrew](https://brew.sh/) with commands like `brew install php` and `brew install mysql`. Valet provides a blazing fast local development environment with minimal resource consumption, so it's great for developers who only require PHP / MySQL and do not need a fully virtualized development environment.
 
 Both Valet and Homestead are great choices for configuring your Laravel development environment. Which one you choose will depend on your personal taste and your team's needs.
 
-<a name="installation"></a>
+
 ## Installation
 
 **Valet requires macOS and [Homebrew](https://brew.sh/). Before installation, you should make sure that no other programs such as Apache or Nginx are binding to your local machine's port 80.**
@@ -102,7 +102,7 @@ Valet allows you to switch PHP versions using the `valet use php@version` comman
 
     valet use php
 
-<a name="upgrading"></a>
+
 ### Upgrading
 
 You may update your Valet installation using the `composer global update` command in your terminal. After upgrading, it is good practice to run the `valet install` command so Valet can make additional upgrades to your configuration files if necessary.
@@ -125,12 +125,12 @@ Once the fresh Valet source code has been downloaded, you should run the `instal
 
 After upgrading, it may be necessary to re-park or re-link your sites.
 
-<a name="serving-sites"></a>
+
 ## Serving Sites
 
 Once Valet is installed, you're ready to start serving sites. Valet provides two commands to help you serve your Laravel sites: `park` and `link`.
 
-<a name="the-park-command"></a>
+
 **The `park` Command**
 
 <div class="content-list" markdown="1">
@@ -141,7 +141,7 @@ Once Valet is installed, you're ready to start serving sites. Valet provides two
 
 **That's all there is to it.** Now, any Laravel project you create within your "parked" directory will automatically be served using the `http://folder-name.test` convention.
 
-<a name="the-link-command"></a>
+
 **The `link` Command**
 
 The `link` command may also be used to serve your Laravel sites. This command is useful if you want to serve a single site in a directory and not the entire directory.
@@ -155,7 +155,7 @@ To see a listing of all of your linked directories, run the `valet links` comman
 
 > {tip} You can use `valet link` to serve the same project from multiple (sub)domains. To add a subdomain or another domain to your project run `valet link subdomain.app-name` from the project folder.
 
-<a name="securing-sites"></a>
+
 **Securing Sites With TLS**
 
 By default, Valet serves sites over plain HTTP. However, if you would like to serve a site over encrypted TLS using HTTP/2, use the `secure` command. For example, if your site is being served by Valet on the `laravel.test` domain, you should run the following command to secure it:
@@ -166,7 +166,7 @@ To "unsecure" a site and revert back to serving its traffic over plain HTTP, use
 
     valet unsecure laravel
 
-<a name="sharing-sites"></a>
+
 ## Sharing Sites
 
 Valet even includes a command to share your local sites with the world. No additional software installation is required once Valet is installed.
@@ -175,7 +175,7 @@ To share a site, navigate to the site's directory in your terminal and run the `
 
 To stop sharing your site, hit `Control + C` to cancel the process.
 
-<a name="site-specific-environment-variables"></a>
+
 ## Site Specific Environment Variables
 
 Some applications using other frameworks may depend on server environment variables but do not provide a way for those variables to be configured within your project. Valet allows you to configure site specific environment variables by adding a `.valet-env.php` file within the root of your project. These variables will be added to the `$_SERVER` global array:
@@ -186,7 +186,7 @@ Some applications using other frameworks may depend on server environment variab
         'WEBSITE_NAME' => 'My Blog',
     ];
 
-<a name="custom-valet-drivers"></a>
+
 ## Custom Valet Drivers
 
 You can write your own Valet "driver" to serve PHP applications running on another framework or CMS that is not natively supported by Valet. When you install Valet, a `~/.config/valet/Drivers` directory is created which contains a `SampleValetDriver.php` file. This file contains a sample driver implementation to demonstrate how to write a custom driver. Writing a driver only requires you to implement three methods: `serves`, `isStaticFile`, and `frontControllerPath`.
@@ -256,7 +256,7 @@ The `frontControllerPath` method should return the fully qualified path to your 
         return $sitePath.'/public/index.php';
     }
 
-<a name="local-drivers"></a>
+
 ### Local Drivers
 
 If you would like to define a custom Valet driver for a single application, create a `LocalValetDriver.php` in the application's root directory. Your custom driver may extend the base `ValetDriver` class or extend an existing application specific driver such as the `LaravelValetDriver`:
@@ -290,7 +290,7 @@ If you would like to define a custom Valet driver for a single application, crea
         }
     }
 
-<a name="other-valet-commands"></a>
+
 ## Other Valet Commands
 
 Command  | Description

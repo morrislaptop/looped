@@ -4,10 +4,10 @@
 - [Available Methods](#available-methods)
 - [Custom Collections](#custom-collections)
 
-<a name="introduction"></a>
+
 ## Introduction
 
-All multi-result sets returned by Eloquent are instances of the `Illuminate\Database\Eloquent\Collection` object, including results retrieved via the `get` method or accessed via a relationship. The Eloquent collection object extends the Laravel [base collection](/docs/{{version}}/collections), so it naturally inherits dozens of methods used to fluently work with the underlying array of Eloquent models.
+All multi-result sets returned by Eloquent are instances of the `Illuminate\Database\Eloquent\Collection` object, including results retrieved via the `get` method or accessed via a relationship. The Eloquent collection object extends the Laravel [base collection](/collections), so it naturally inherits dozens of methods used to fluently work with the underlying array of Eloquent models.
 
 All collections also serve as iterators, allowing you to loop over them as if they were simple PHP arrays:
 
@@ -28,12 +28,12 @@ However, collections are much more powerful than arrays and expose a variety of 
         return $user->name;
     });
 
-> {note} While most Eloquent collection methods return a new instance of an Eloquent collection, the `pluck`, `keys`, `zip`, `collapse`, `flatten` and `flip` methods return a [base collection](/docs/{{version}}/collections) instance. Likewise, if a `map` operation returns a collection that does not contain any Eloquent models, it will be automatically cast to a base collection.
+> {note} While most Eloquent collection methods return a new instance of an Eloquent collection, the `pluck`, `keys`, `zip`, `collapse`, `flatten` and `flip` methods return a [base collection](/collections) instance. Likewise, if a `map` operation returns a collection that does not contain any Eloquent models, it will be automatically cast to a base collection.
 
-<a name="available-methods"></a>
+
 ## Available Methods
 
-All Eloquent collections extend the base [Laravel collection](/docs/{{version}}/collections#available-methods) object; therefore, they inherit all of the powerful methods provided by the base collection class.
+All Eloquent collections extend the base [Laravel collection](/collections#available-methods) object; therefore, they inherit all of the powerful methods provided by the base collection class.
 
 In addition, the `Illuminate\Database\Eloquent\Collection` class provides a superset of methods to aid with managing your model collections. Most methods return `Illuminate\Database\Eloquent\Collection` instances; however, some methods return a base `Illuminate\Support\Collection` instance.
 
@@ -131,7 +131,7 @@ The `unique` method returns all of the unique models in the collection. Any mode
 
     $users = $users->unique();
 
-<a name="custom-collections"></a>
+
 ## Custom Collections
 
 If you need to use a custom `Collection` object with your own extension methods, you may override the `newCollection` method on your model:

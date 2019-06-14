@@ -10,14 +10,14 @@
     - [Creating Monolog Handler Channels](#creating-monolog-handler-channels)
     - [Creating Channels Via Factories](#creating-channels-via-factories)
 
-<a name="introduction"></a>
+
 ## Introduction
 
 To help you learn more about what's happening within your application, Laravel provides robust logging services that allow you to log messages to files, the system error log, and even to Slack to notify your entire team.
 
 Under the hood, Laravel utilizes the [Monolog](https://github.com/Seldaek/monolog) library, which provides support for a variety of powerful log handlers. Laravel makes it a cinch to configure these handlers, allowing you to mix and match them to customize your application's log handling.
 
-<a name="configuration"></a>
+
 ## Configuration
 
 All of the configuration for your application's logging system is housed in the `config/logging.php` configuration file. This file allows you to configure your application's log channels, so be sure to review each of the available channels and their options. We'll review a few common options below.
@@ -68,7 +68,7 @@ The `papertrail` channel requires the `url` and `port` configuration options. Yo
 
 The `slack` channel requires a `url` configuration option. This URL should match a URL for an [incoming webhook](https://slack.com/apps/A0F7XDUAZ-incoming-webhooks) that you have configured for your Slack team.
 
-<a name="building-log-stacks"></a>
+
 ### Building Log Stacks
 
 As previously mentioned, the `stack` driver allows you to combine multiple channels into a single log channel. To illustrate how to use log stacks, let's take a look at an example configuration that you might see in a production application:
@@ -107,10 +107,10 @@ Given our configuration, the `syslog` channel will write the message to the syst
 
     Log::emergency('The system is down!');
 
-<a name="writing-log-messages"></a>
+
 ## Writing Log Messages
 
-You may write information to the logs using the `Log` [facade](/docs/{{version}}/facades). As previously mentioned, the logger provides the eight logging levels defined in the [RFC 5424 specification](https://tools.ietf.org/html/rfc5424): **emergency**, **alert**, **critical**, **error**, **warning**, **notice**, **info** and **debug**:
+You may write information to the logs using the `Log` [facade](/facades). As previously mentioned, the logger provides the eight logging levels defined in the [RFC 5424 specification](https://tools.ietf.org/html/rfc5424): **emergency**, **alert**, **critical**, **error**, **warning**, **notice**, **info** and **debug**:
 
     Log::emergency($message);
     Log::alert($message);
@@ -153,7 +153,7 @@ An array of contextual data may also be passed to the log methods. This contextu
 
     Log::info('User failed to login.', ['id' => $user->id]);
 
-<a name="writing-to-specific-channels"></a>
+
 ### Writing To Specific Channels
 
 Sometimes you may wish to log a message to a channel other than your application's default channel. You may use the `channel` method on the `Log` facade to retrieve and log to any channel defined in your configuration file:
@@ -165,10 +165,10 @@ If you would like to create an on-demand logging stack consisting of multiple ch
     Log::stack(['single', 'slack'])->info('Something happened!');
 
 
-<a name="advanced-monolog-channel-customization"></a>
+
 ## Advanced Monolog Channel Customization
 
-<a name="customizing-monolog-for-channels"></a>
+
 ### Customizing Monolog For Channels
 
 Sometimes you may need complete control over how Monolog is configured for an existing channel. For example, you may want to configure a custom Monolog `FormatterInterface` implementation for a given channel's handlers.
@@ -204,9 +204,9 @@ Once you have configured the `tap` option on your channel, you're ready to defin
         }
     }
 
-> {tip} All of your "tap" classes are resolved by the [service container](/docs/{{version}}/container), so any constructor dependencies they require will automatically be injected.
+> {tip} All of your "tap" classes are resolved by the [service container](/container), so any constructor dependencies they require will automatically be injected.
 
-<a name="creating-monolog-handler-channels"></a>
+
 ### Creating Monolog Handler Channels
 
 Monolog has a variety of [available handlers](https://github.com/Seldaek/monolog/tree/master/src/Monolog/Handler). In some cases, the type of logger you wish to create is merely a Monolog driver with an instance of a specific handler.  These channels can be created using the `monolog` driver.
@@ -243,7 +243,7 @@ If you are using a Monolog handler that is capable of providing its own formatte
         'formatter' => 'default',
     ],
 
-<a name="creating-channels-via-factories"></a>
+
 ### Creating Channels Via Factories
 
 If you would like to define an entirely custom channel in which you have full control over Monolog's instantiation and configuration, you may specify a `custom` driver type in your `config/logging.php` configuration file. Your configuration should include a `via` option to point to the factory class which will be invoked to create the Monolog instance:

@@ -8,20 +8,20 @@
 - [Protecting Routes](#protecting-routes)
 - [Passing Tokens In Requests](#passing-tokens-in-requests)
 
-<a name="introduction"></a>
+
 ## Introduction
 
 By default, Laravel ships with a simple solution to API authentication via a random token assigned to each user of your application. In your `config/auth.php` configuration file, an `api` guard is already defined and utilizes a `token` driver. This driver is responsible for inspecting the API token on the incoming request and verifying that it matches the user's assigned token in the database.
 
-> **Note:** While Laravel ships with a simple, token based authentication guard, we strongly recommend you consider using [Laravel Passport](/docs/{{version}}/passport) for robust, production applications that offer API authentication.
+> **Note:** While Laravel ships with a simple, token based authentication guard, we strongly recommend you consider using [Laravel Passport](/passport) for robust, production applications that offer API authentication.
 
-<a name="configuration"></a>
+
 ## Configuration
 
-<a name="database-preparation"></a>
+
 ### Database Preparation
 
-Before using the `token` driver, you will need to [create a migration](/docs/{{version}}/migrations) which adds an `api_token` column to your `users` table:
+Before using the `token` driver, you will need to [create a migration](/migrations) which adds an `api_token` column to your `users` table:
 
     Schema::table('users', function ($table) {
         $table->string('api_token', 80)->after('password')
@@ -32,10 +32,10 @@ Before using the `token` driver, you will need to [create a migration](/docs/{{v
 
 Once the migration has been created, run the `migrate` Artisan command.
 
-<a name="generating-tokens"></a>
+
 ## Generating Tokens
 
-Once the `api_token` column has been added to your `users` table, you are ready to assign random API tokens to each user that registers with your application. You should assign these tokens when a `User` model is created for the user during registration. When using the [authentication scaffolding](/docs/{{version}}/authentication#authentication-quickstart) provided by the `make:auth` Artisan command, this may be done in the `create` method of the `RegisterController`:
+Once the `api_token` column has been added to your `users` table, you are ready to assign random API tokens to each user that registers with your application. You should assign these tokens when a `User` model is created for the user during registration. When using the [authentication scaffolding](/authentication#authentication-quickstart) provided by the `make:auth` Artisan command, this may be done in the `create` method of the `RegisterController`:
 
     use Illuminate\Support\Str;
     use Illuminate\Support\Facades\Hash;
@@ -56,7 +56,7 @@ Once the `api_token` column has been added to your `users` table, you are ready 
         ]);
     }
 
-<a name="hashing-tokens"></a>
+
 ### Hashing Tokens
 
 In the examples above, API tokens are stored in your database as plain-text. If you would like to hash your API tokens using SHA-256 hashing, you may set the `hash` option of your `api` guard configuration to `true`. The `api` guard is defined in your `config/auth.php` configuration file:
@@ -102,10 +102,10 @@ For example, a controller method that initializes / refreshes the token for a gi
 
 > {tip} Since the API tokens in the example above have sufficient entropy, it is impractical to create "rainbow tables" to lookup the original value of the hashed token. Therefore, slow hashing methods such as `bcrypt` are unnecessary.
 
-<a name="protecting-routes"></a>
+
 ## Protecting Routes
 
-Laravel includes an [authentication guard](/docs/{{version}}/authentication#adding-custom-guards) that will automatically validate API tokens on incoming requests. You only need to specify the `auth:api` middleware on any route that requires a valid access token:
+Laravel includes an [authentication guard](/authentication#adding-custom-guards) that will automatically validate API tokens on incoming requests. You only need to specify the `auth:api` middleware on any route that requires a valid access token:
 
     use Illuminate\Http\Request;
 
@@ -113,7 +113,7 @@ Laravel includes an [authentication guard](/docs/{{version}}/authentication#addi
         return $request->user();
     });
 
-<a name="passing-tokens-in-requests"></a>
+
 ## Passing Tokens In Requests
 
 There are several ways of passing the API token to your application. We'll discuss each of these approaches while using the Guzzle HTTP library to demonstrate their usage. You may choose any of these approaches based on the needs of your application.

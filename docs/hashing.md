@@ -4,21 +4,21 @@
 - [Configuration](#configuration)
 - [Basic Usage](#basic-usage)
 
-<a name="introduction"></a>
+
 ## Introduction
 
-The Laravel `Hash` [facade](/docs/{{version}}/facades) provides secure Bcrypt and Argon2 hashing for storing user passwords. If you are using the built-in `LoginController` and `RegisterController` classes that are included with your Laravel application, they will use Bcrypt for registration and authentication by default.
+The Laravel `Hash` [facade](/facades) provides secure Bcrypt and Argon2 hashing for storing user passwords. If you are using the built-in `LoginController` and `RegisterController` classes that are included with your Laravel application, they will use Bcrypt for registration and authentication by default.
 
 > {tip} Bcrypt is a great choice for hashing passwords because its "work factor" is adjustable, which means that the time it takes to generate a hash can be increased as hardware power increases.
 
-<a name="configuration"></a>
+
 ## Configuration
 
 The default hashing driver for your application is configured in the `config/hashing.php` configuration file. There are currently three supported drivers: [Bcrypt](https://en.wikipedia.org/wiki/Bcrypt) and [Argon2](https://en.wikipedia.org/wiki/Argon2) (Argon2i and Argon2id variants).
 
 > {note} The Argon2i driver requires PHP 7.2.0 or greater and the Argon2id driver requires PHP 7.3.0 or greater.
 
-<a name="basic-usage"></a>
+
 ## Basic Usage
 
 You may hash a password by calling the `make` method on the `Hash` facade:
@@ -71,7 +71,7 @@ If you are using the Argon2 algorithm, the `make` method allows you to manage th
 
 #### Verifying A Password Against A Hash
 
-The `check` method allows you to verify that a given plain-text string corresponds to a given hash. However, if you are using the `LoginController` [included with Laravel](/docs/{{version}}/authentication), you will probably not need to use this directly, as this controller automatically calls this method:
+The `check` method allows you to verify that a given plain-text string corresponds to a given hash. However, if you are using the `LoginController` [included with Laravel](/authentication), you will probably not need to use this directly, as this controller automatically calls this method:
 
     if (Hash::check('plain-text', $hashedPassword)) {
         // The passwords match...

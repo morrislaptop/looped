@@ -14,7 +14,7 @@
 - [Task Output](#task-output)
 - [Task Hooks](#task-hooks)
 
-<a name="introduction"></a>
+
 ## Introduction
 
 In the past, you may have generated a Cron entry for each task you needed to schedule on your server. However, this can quickly become a pain, because your task schedule is no longer in source control and you must SSH into your server to add additional Cron entries.
@@ -29,7 +29,7 @@ When using the scheduler, you only need to add the following Cron entry to your 
 
 This Cron will call the Laravel command scheduler every minute. When the `schedule:run` command is executed, Laravel will evaluate your scheduled tasks and runs the tasks that are due.
 
-<a name="defining-schedules"></a>
+
 ## Defining Schedules
 
 You may define all of your scheduled tasks in the `schedule` method of the `App\Console\Kernel` class. To get started, let's look at an example of scheduling a task. In this example, we will schedule a `Closure` to be called every day at midnight. Within the `Closure` we will execute a database query to clear a table:
@@ -71,33 +71,33 @@ In addition to scheduling using Closures, you may also use [invokable objects](h
 
     $schedule->call(new DeleteRecentUsers)->daily();
 
-<a name="scheduling-artisan-commands"></a>
+
 ### Scheduling Artisan Commands
 
-In addition to scheduling Closure calls, you may also schedule [Artisan commands](/docs/{{version}}/artisan) and operating system commands. For example, you may use the `command` method to schedule an Artisan command using either the command's name or class:
+In addition to scheduling Closure calls, you may also schedule [Artisan commands](/artisan) and operating system commands. For example, you may use the `command` method to schedule an Artisan command using either the command's name or class:
 
     $schedule->command('emails:send Taylor --force')->daily();
 
     $schedule->command(EmailsCommand::class, ['Taylor', '--force'])->daily();
 
-<a name="scheduling-queued-jobs"></a>
+
 ### Scheduling Queued Jobs
 
-The `job` method may be used to schedule a [queued job](/docs/{{version}}/queues). This method provides a convenient way to schedule jobs without using the `call` method to manually create Closures to queue the job:
+The `job` method may be used to schedule a [queued job](/queues). This method provides a convenient way to schedule jobs without using the `call` method to manually create Closures to queue the job:
 
     $schedule->job(new Heartbeat)->everyFiveMinutes();
 
     // Dispatch the job to the "heartbeats" queue...
     $schedule->job(new Heartbeat, 'heartbeats')->everyFiveMinutes();
 
-<a name="scheduling-shell-commands"></a>
+
 ### Scheduling Shell Commands
 
 The `exec` method may be used to issue a command to the operating system:
 
     $schedule->exec('node /home/forge/script.js')->daily();
 
-<a name="schedule-frequency-options"></a>
+
 ### Schedule Frequency Options
 
 There are a variety of schedules you may assign to your task:
@@ -192,7 +192,7 @@ The `environments` method may be used to execute tasks only on the given environ
                 ->daily()
                 ->environments(['staging', 'production']);
 
-<a name="timezones"></a>
+
 ### Timezones
 
 Using the `timezone` method, you may specify that a scheduled task's time should be interpreted within a given timezone:
@@ -215,20 +215,20 @@ If you are assigning the same timezone to all of your scheduled tasks, you may w
 
 > {note} Remember that some timezones utilize daylight savings time. When daylight saving time changes occur, your scheduled task may run twice or even not run at all. For this reason, we recommend avoiding timezone scheduling when possible.
 
-<a name="preventing-task-overlaps"></a>
+
 ### Preventing Task Overlaps
 
 By default, scheduled tasks will be run even if the previous instance of the task is still running. To prevent this, you may use the `withoutOverlapping` method:
 
     $schedule->command('emails:send')->withoutOverlapping();
 
-In this example, the `emails:send` [Artisan command](/docs/{{version}}/artisan) will be run every minute if it is not already running. The `withoutOverlapping` method is especially useful if you have tasks that vary drastically in their execution time, preventing you from predicting exactly how long a given task will take.
+In this example, the `emails:send` [Artisan command](/artisan) will be run every minute if it is not already running. The `withoutOverlapping` method is especially useful if you have tasks that vary drastically in their execution time, preventing you from predicting exactly how long a given task will take.
 
 If needed, you may specify how many minutes must pass before the "without overlapping" lock expires. By default, the lock will expire after 24 hours:
 
     $schedule->command('emails:send')->withoutOverlapping(10);
 
-<a name="running-tasks-on-one-server"></a>
+
 ### Running Tasks On One Server
 
 > {note} To utilize this feature, your application must be using the `memcached` or `redis` cache driver as your application's default cache driver. In addition, all servers must be communicating with the same central cache server.
@@ -242,7 +242,7 @@ To indicate that the task should run on only one server, use the `onOneServer` m
                     ->at('17:00')
                     ->onOneServer();
 
-<a name="background-tasks"></a>
+
 ### Background Tasks
 
 By default, multiple commands scheduled at the same time will execute sequentially. If you have long-running commands, this may cause subsequent commands to start much later than anticipated. If you would like to run commands in the background so that they may all run simultaneously, you may use the `runInBackground` method:
@@ -253,14 +253,14 @@ By default, multiple commands scheduled at the same time will execute sequential
 
 > {note} The `runInBackground` method may only be used when scheduling tasks via the `command` and `exec` methods.
 
-<a name="maintenance-mode"></a>
+
 ### Maintenance Mode
 
-Laravel's scheduled tasks will not run when Laravel is in [maintenance mode](/docs/{{version}}/configuration#maintenance-mode), since we don't want your tasks to interfere with any unfinished maintenance you may be performing on your server. However, if you would like to force a task to run even in maintenance mode, you may use the `evenInMaintenanceMode` method:
+Laravel's scheduled tasks will not run when Laravel is in [maintenance mode](/configuration#maintenance-mode), since we don't want your tasks to interfere with any unfinished maintenance you may be performing on your server. However, if you would like to force a task to run even in maintenance mode, you may use the `evenInMaintenanceMode` method:
 
     $schedule->command('emails:send')->evenInMaintenanceMode();
 
-<a name="task-output"></a>
+
 ## Task Output
 
 The Laravel scheduler provides several convenient methods for working with the output generated by scheduled tasks. First, using the `sendOutputTo` method, you may send the output to a file for later inspection:
@@ -275,7 +275,7 @@ If you would like to append the output to a given file, you may use the `appendO
              ->daily()
              ->appendOutputTo($filePath);
 
-Using the `emailOutputTo` method, you may e-mail the output to an e-mail address of your choice. Before e-mailing the output of a task, you should configure Laravel's [e-mail services](/docs/{{version}}/mail):
+Using the `emailOutputTo` method, you may e-mail the output to an e-mail address of your choice. Before e-mailing the output of a task, you should configure Laravel's [e-mail services](/mail):
 
     $schedule->command('foo')
              ->daily()
@@ -290,7 +290,7 @@ If you only want to e-mail the output if the command fails, use the `emailOnFail
 
 > {note} The `emailOutputTo`, `emailOnFailure`, `sendOutputTo`, and `appendOutputTo` methods are exclusive to the `command` and `exec` methods.
 
-<a name="task-hooks"></a>
+
 ## Task Hooks
 
 Using the `before` and `after` methods, you may specify code to be executed before and after the scheduled task is complete:

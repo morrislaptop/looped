@@ -8,7 +8,7 @@
     - [Pipelining Commands](#pipelining-commands)
 - [Pub / Sub](#pubsub)
 
-<a name="introduction"></a>
+
 ## Introduction
 
 [Redis](https://redis.io) is an open source, advanced key-value store. It is often referred to as a data structure server since keys can contain [strings](https://redis.io/topics/data-types#strings), [hashes](https://redis.io/topics/data-types#hashes), [lists](https://redis.io/topics/data-types#lists), [sets](https://redis.io/topics/data-types#sets), and [sorted sets](https://redis.io/topics/data-types#sorted-sets).
@@ -19,7 +19,7 @@ Before using Redis with Laravel, you will need to install the `predis/predis` pa
 
 Alternatively, you may install the [PhpRedis](https://github.com/phpredis/phpredis) PHP extension via PECL. The extension is more complex to install but may yield better performance for applications that make heavy use of Redis.
 
-<a name="configuration"></a>
+
 ### Configuration
 
 The Redis configuration for your application is located in the `config/database.php` configuration file. Within this file, you will see a `redis` array containing the Redis servers utilized by your application:
@@ -83,7 +83,7 @@ By default, clusters will perform client-side sharding across your nodes, allowi
 
     ],
 
-<a name="predis"></a>
+
 ### Predis
 
 In addition to the default `host`, `port`, `database`, and `password` server configuration options, Predis supports additional [connection parameters](https://github.com/nrk/predis/wiki/Connection-Parameters) that may be defined for each of your Redis servers. To utilize these additional configuration options, add them to your Redis server configuration in the `config/database.php` configuration file:
@@ -96,7 +96,7 @@ In addition to the default `host`, `port`, `database`, and `password` server con
         'read_write_timeout' => 60,
     ],
 
-<a name="phpredis"></a>
+
 ### PhpRedis
 
 To utilize the PhpRedis extension, you should change the `client` option of your Redis configuration to `phpredis`. This option is found in your `config/database.php` configuration file:
@@ -118,10 +118,10 @@ In addition to the default `host`, `port`, `database`, and `password` server con
         'read_timeout' => 60,
     ],
 
-<a name="interacting-with-redis"></a>
+
 ## Interacting With Redis
 
-You may interact with Redis by calling various methods on the `Redis` [facade](/docs/{{version}}/facades). The `Redis` facade supports dynamic methods, meaning you may call any [Redis command](https://redis.io/commands) on the facade and the command will be passed directly to Redis. In this example, we will call the Redis `GET` command by calling the `get` method on the `Redis` facade:
+You may interact with Redis by calling various methods on the `Redis` [facade](/facades). The `Redis` facade supports dynamic methods, meaning you may call any [Redis command](https://redis.io/commands) on the facade and the command will be passed directly to Redis. In this example, we will call the Redis `GET` command by calling the `get` method on the `Redis` facade:
 
     <?php
 
@@ -166,7 +166,7 @@ This will give you an instance of the default Redis server. You may also pass th
 
     $redis = Redis::connection('my-connection');
 
-<a name="pipelining-commands"></a>
+
 ### Pipelining Commands
 
 Pipelining should be used when you need to send many commands to the server in one operation. The `pipeline` method accepts one argument: a `Closure` that receives a Redis instance. You may issue all of your commands to this Redis instance and they will all be executed within a single operation:
@@ -177,12 +177,12 @@ Pipelining should be used when you need to send many commands to the server in o
         }
     });
 
-<a name="pubsub"></a>
+
 ## Pub / Sub
 
 Laravel provides a convenient interface to the Redis `publish` and `subscribe` commands. These Redis commands allow you to listen for messages on a given "channel". You may publish messages to the channel from another application, or even using another programming language, allowing easy communication between applications and processes.
 
-First, let's setup a channel listener using the `subscribe` method. We'll place this method call within an [Artisan command](/docs/{{version}}/artisan) since calling the `subscribe` method begins a long-running process:
+First, let's setup a channel listener using the `subscribe` method. We'll place this method call within an [Artisan command](/artisan) since calling the `subscribe` method begins a long-running process:
 
     <?php
 

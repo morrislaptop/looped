@@ -8,10 +8,10 @@
     - [Listening For Query Events](#listening-for-query-events)
 - [Database Transactions](#database-transactions)
 
-<a name="introduction"></a>
+
 ## Introduction
 
-Laravel makes interacting with databases extremely simple across a variety of database backends using either raw SQL, the [fluent query builder](/docs/{{version}}/queries), and the [Eloquent ORM](/docs/{{version}}/eloquent). Currently, Laravel supports four databases:
+Laravel makes interacting with databases extremely simple across a variety of database backends using either raw SQL, the [fluent query builder](/queries), and the [Eloquent ORM](/eloquent). Currently, Laravel supports four databases:
 
 <div class="content-list" markdown="1">
 - MySQL
@@ -20,12 +20,12 @@ Laravel makes interacting with databases extremely simple across a variety of da
 - SQL Server
 </div>
 
-<a name="configuration"></a>
+
 ### Configuration
 
 The database configuration for your application is located at `config/database.php`. In this file you may define all of your database connections, as well as specify which connection should be used by default. Examples for most of the supported database systems are provided in this file.
 
-By default, Laravel's sample [environment configuration](/docs/{{version}}/configuration#environment-configuration) is ready to use with [Laravel Homestead](/docs/{{version}}/homestead), which is a convenient virtual machine for doing Laravel development on your local machine. You are free to modify this configuration as needed for your local database.
+By default, Laravel's sample [environment configuration](/configuration#environment-configuration) is ready to use with [Laravel Homestead](/homestead), which is a convenient virtual machine for doing Laravel development on your local machine. You are free to modify this configuration as needed for your local database.
 
 #### SQLite Configuration
 
@@ -55,7 +55,7 @@ These URLs typically follow a standard schema convention:
 
 For convenience, Laravel supports these URLs as an alternative to configuring your database with multiple configuration options. If the `url` (or corresponding `DATABASE_URL` environment variable) configuration option is present, it will be used to extract the database connection and credential information.
 
-<a name="read-and-write-connections"></a>
+
 ### Read & Write Connections
 
 Sometimes you may wish to use one database connection for SELECT statements, and another for INSERT, UPDATE, and DELETE statements. Laravel makes this a breeze, and the proper connections will always be used whether you are using raw queries, the query builder, or the Eloquent ORM.
@@ -92,7 +92,7 @@ You only need to place items in the `read` and `write` arrays if you wish to ove
 
 The `sticky` option is an *optional* value that can be used to allow the immediate reading of records that have been written to the database during the current request cycle. If the `sticky` option is enabled and a "write" operation has been performed against the database during the current request cycle, any further "read" operations will use the "write" connection. This ensures that any data written during the request cycle can be immediately read back from the database during that same request. It is up to you to decide if this is the desired behavior for your application.
 
-<a name="using-multiple-database-connections"></a>
+
 ### Using Multiple Database Connections
 
 When using multiple connections, you may access each connection via the `connection` method on the `DB` facade. The `name` passed to the `connection` method should correspond to one of the connections listed in your `config/database.php` configuration file:
@@ -103,7 +103,7 @@ You may also access the raw, underlying PDO instance using the `getPdo` method o
 
     $pdo = DB::connection()->getPdo();
 
-<a name="running-queries"></a>
+
 ## Running Raw SQL Queries
 
 Once you have configured your database connection, you may run queries using the `DB` facade. The `DB` facade provides methods for each type of query: `select`, `update`, `insert`, `delete`, and `statement`.
@@ -172,10 +172,10 @@ Some database statements do not return any value. For these types of operations,
 
     DB::statement('drop table users');
 
-<a name="listening-for-query-events"></a>
+
 ### Listening For Query Events
 
-If you would like to receive each SQL query executed by your application, you may use the `listen` method. This method is useful for logging queries or debugging. You may register your query listener in a [service provider](/docs/{{version}}/providers):
+If you would like to receive each SQL query executed by your application, you may use the `listen` method. This method is useful for logging queries or debugging. You may register your query listener in a [service provider](/providers):
 
     <?php
 
@@ -211,7 +211,7 @@ If you would like to receive each SQL query executed by your application, you ma
         }
     }
 
-<a name="database-transactions"></a>
+
 ## Database Transactions
 
 You may use the `transaction` method on the `DB` facade to run a set of operations within a database transaction. If an exception is thrown within the transaction `Closure`, the transaction will automatically be rolled back. If the `Closure` executes successfully, the transaction will automatically be committed. You don't need to worry about manually rolling back or committing while using the `transaction` method:
@@ -246,4 +246,4 @@ Lastly, you can commit a transaction via the `commit` method:
 
     DB::commit();
 
-> {tip} The `DB` facade's transaction methods control the transactions for both the [query builder](/docs/{{version}}/queries) and [Eloquent ORM](/docs/{{version}}/eloquent).
+> {tip} The `DB` facade's transaction methods control the transactions for both the [query builder](/queries) and [Eloquent ORM](/eloquent).

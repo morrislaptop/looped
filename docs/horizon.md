@@ -11,7 +11,7 @@
 - [Notifications](#notifications)
 - [Metrics](#metrics)
 
-<a name="introduction"></a>
+
 ## Introduction
 
 Horizon provides a beautiful dashboard and code-driven configuration for your Laravel powered Redis queues. Horizon allows you to easily monitor key metrics of your queue system such as job throughput, runtime, and job failures.
@@ -22,7 +22,7 @@ All of your worker configuration is stored in a single, simple configuration fil
 <img src="https://res.cloudinary.com/dtfbvvkyp/image/upload/v1537195039/photos/Test.png" width="600" height="481">
 </p>
 
-<a name="installation"></a>
+
 ## Installation
 
 > {note} You should ensure that your queue driver is set to `redis` in your `queue` configuration file.
@@ -35,13 +35,13 @@ After installing Horizon, publish its assets using the `horizon:install` Artisan
 
     php artisan horizon:install
 
-You should also create the `failed_jobs` table which Laravel will use to store any [failed queue jobs](/docs/{{version}}/queues#dealing-with-failed-jobs):
+You should also create the `failed_jobs` table which Laravel will use to store any [failed queue jobs](/queues#dealing-with-failed-jobs):
 
     php artisan queue:failed-table
 
     php artisan migrate
 
-<a name="upgrading"></a>
+
 #### Upgrading Horizon
 
 When upgrading to a new major version of Horizon, it's important that you carefully review [the upgrade guide](https://github.com/laravel/horizon/blob/master/UPGRADE.md).
@@ -50,7 +50,7 @@ In addition, you should re-publish Horizon's assets:
 
     php artisan horizon:assets
 
-<a name="configuration"></a>
+
 ### Configuration
 
 After publishing Horizon's assets, its primary configuration file will be located at `config/horizon.php`. This configuration file allows you to configure your worker options and each configuration option includes a description of its purpose, so be sure to thoroughly explore this file.
@@ -74,7 +74,7 @@ The `horizon` configuration file allows you to configure how long recent and fai
         'failed' => 10080,
     ],
 
-<a name="dashboard-authorization"></a>
+
 ### Dashboard Authorization
 
 Horizon exposes a dashboard at `/horizon`. By default, you will only be able to access this dashboard in the `local` environment. Within your `app/Providers/HorizonServiceProvider.php` file, there is a `gate` method. This authorization gate controls access to Horizon in **non-local** environments. You are free to modify this gate as needed to restrict access to your Horizon installation:
@@ -95,7 +95,7 @@ Horizon exposes a dashboard at `/horizon`. By default, you will only be able to 
         });
     }
 
-<a name="running-horizon"></a>
+
 ## Running Horizon
 
 Once you have configured your workers in the `config/horizon.php` configuration file, you may start Horizon using the `horizon` Artisan command. This single command will start all of your configured workers:
@@ -112,7 +112,7 @@ You may gracefully terminate the master Horizon process on your machine using th
 
     php artisan horizon:terminate
 
-<a name="deploying-horizon"></a>
+
 ### Deploying Horizon
 
 If you are deploying Horizon to a live server, you should configure a process monitor to monitor the `php artisan horizon` command and restart it if it quits unexpectedly. When deploying fresh code to your server, you will need to instruct the master Horizon process to terminate so it can be restarted by your process monitor and receive your code changes.
@@ -132,7 +132,7 @@ If you are using the Supervisor process monitor to manage your `horizon` process
 
 > {tip} If you are uncomfortable managing your own servers, consider using [Laravel Forge](https://forge.laravel.com). Forge provisions PHP 7+ servers with everything you need to run modern, robust Laravel applications with Horizon.
 
-<a name="tags"></a>
+
 ## Tags
 
 Horizon allows you to assign “tags” to jobs, including mailables, event broadcasts, notifications, and queued event listeners. In fact, Horizon will intelligently and automatically tag most jobs depending on the Eloquent models that are attached to the job. For example, take a look at the following job:
@@ -204,10 +204,10 @@ If you would like to manually define the tags for one of your queueable objects,
         }
     }
 
-<a name="notifications"></a>
+
 ## Notifications
 
-> **Note:** When configuring Horizon to send Slack or SMS notifications, you should review the [prerequisites for the relevant notification driver](/docs/{{version}}/notifications).
+> **Note:** When configuring Horizon to send Slack or SMS notifications, you should review the [prerequisites for the relevant notification driver](/notifications).
 
 If you would like to be notified when one of your queues has a long wait time, you may use the `Horizon::routeMailNotificationsTo`, `Horizon::routeSlackNotificationsTo`, and `Horizon::routeSmsNotificationsTo` methods. You may call these methods from your application's `HorizonServiceProvider`:
 
@@ -223,10 +223,10 @@ You may configure how many seconds are considered a "long wait" within your `con
         'redis:default' => 60,
     ],
 
-<a name="metrics"></a>
+
 ## Metrics
 
-Horizon includes a metrics dashboard which provides information on your job and queue wait times and throughput. In order to populate this dashboard, you should configure Horizon's `snapshot` Artisan command to run every five minutes via your application's [scheduler](/docs/{{version}}/scheduling):
+Horizon includes a metrics dashboard which provides information on your job and queue wait times and throughput. In order to populate this dashboard, you should configure Horizon's `snapshot` Artisan command to run every five minutes via your application's [scheduler](/scheduling):
 
     /**
      * Define the application's command schedule.
