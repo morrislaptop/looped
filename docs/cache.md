@@ -1,7 +1,5 @@
 # Cache
 
-::: v-pre 
-
 - [Configuration](#configuration)
     - [Driver Prerequisites](#driver-prerequisites)
 - [Cache Usage](#cache-usage)

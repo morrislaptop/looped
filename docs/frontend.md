@@ -1,7 +1,5 @@
 # JavaScript & CSS Scaffolding
 
-::: v-pre 
-
 - [Introduction](#introduction)
 - [Writing CSS](#writing-css)
 - [Writing JavaScript](#writing-javascript)

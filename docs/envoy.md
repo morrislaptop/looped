@@ -1,7 +1,5 @@
 # Laravel Envoy
 
-::: v-pre 
-
 - [Introduction](#introduction)
     - [Installation](#installation)
 - [Writing Tasks](#writing-tasks)

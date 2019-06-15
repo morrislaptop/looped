@@ -1,7 +1,5 @@
 # Redis
 
-::: v-pre 
-
 - [Introduction](#introduction)
     - [Configuration](#configuration)
     - [Predis](#predis)

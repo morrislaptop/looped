@@ -1,7 +1,5 @@
 # Eloquent: API Resources
 
-::: v-pre 
-
 - [Introduction](#introduction)
 - [Generating Resources](#generating-resources)
 - [Concept Overview](#concept-overview)

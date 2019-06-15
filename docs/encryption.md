@@ -1,7 +1,5 @@
 # Encryption
 
-::: v-pre 
-
 - [Introduction](#introduction)
 - [Configuration](#configuration)
 - [Using The Encrypter](#using-the-encrypter)

@@ -1,7 +1,5 @@
 # Laravel Dusk
 
-::: v-pre 
-
 - [Introduction](#introduction)
 - [Installation](#installation)
     - [Managing ChromeDriver Installations](#managing-chromedriver-installations)

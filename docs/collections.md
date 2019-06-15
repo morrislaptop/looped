@@ -1,7 +1,5 @@
 # Collections
 
-::: v-pre 
-
 - [Introduction](#introduction)
     - [Creating Collections](#creating-collections)
     - [Extending Collections](#extending-collections)

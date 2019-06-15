@@ -1,7 +1,5 @@
 # URL Generation
 
-::: v-pre 
-
 - [Introduction](#introduction)
 - [The Basics](#the-basics)
     - [Generating Basic URLs](#generating-basic-urls)

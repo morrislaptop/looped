@@ -1,7 +1,5 @@
 # Laravel Homestead
 
-::: v-pre 
-
 - [Introduction](#introduction)
 - [Installation & Setup](#installation-and-setup)
     - [First Steps](#first-steps)

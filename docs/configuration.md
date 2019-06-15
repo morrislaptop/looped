@@ -1,7 +1,5 @@
 # Configuration
 
-::: v-pre 
-
 - [Introduction](#introduction)
 - [Environment Configuration](#environment-configuration)
     - [Environment Variable Types](#environment-variable-types)

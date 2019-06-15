@@ -1,7 +1,5 @@
 # Controllers
 
-::: v-pre 
-
 - [Introduction](#introduction)
 - [Basic Controllers](#basic-controllers)
     - [Defining Controllers](#defining-controllers)

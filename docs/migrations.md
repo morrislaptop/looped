@@ -1,7 +1,5 @@
 # Database: Migrations
 
-::: v-pre 
-
 - [Introduction](#introduction)
 - [Generating Migrations](#generating-migrations)
 - [Migration Structure](#migration-structure)

@@ -1,7 +1,5 @@
 # Notifications
 
-::: v-pre 
-
 - [Introduction](#introduction)
 - [Creating Notifications](#creating-notifications)
 - [Sending Notifications](#sending-notifications)

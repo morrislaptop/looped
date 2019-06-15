@@ -1,7 +1,5 @@
 # Laravel Valet
 
-::: v-pre 
-
 - [Introduction](#introduction)
     - [Valet Or Homestead](#valet-or-homestead)
 - [Installation](#installation)

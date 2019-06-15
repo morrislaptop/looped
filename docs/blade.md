@@ -1,7 +1,5 @@
 # Blade Templates
 
-::: v-pre 
-
 - [Introduction](#introduction)
 - [Template Inheritance](#template-inheritance)
     - [Defining A Layout](#defining-a-layout)

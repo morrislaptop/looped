@@ -1,7 +1,5 @@
 # Laravel Horizon
 
-::: v-pre 
-
 - [Introduction](#introduction)
 - [Upgrading Horizon](#upgrading)
 - [Installation](#installation)

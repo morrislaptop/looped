@@ -1,7 +1,5 @@
 # Helpers
 
-::: v-pre 
-
 - [Introduction](#introduction)
 - [Available Methods](#available-methods)
 

@@ -1,7 +1,5 @@
 # Authentication
 
-::: v-pre 
-
 - [Introduction](#introduction)
     - [Database Considerations](#introduction-database-considerations)
 - [Authentication Quickstart](#authentication-quickstart)

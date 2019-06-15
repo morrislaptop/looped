@@ -1,7 +1,5 @@
 # Eloquent: Relationships
 
-::: v-pre 
-
 - [Introduction](#introduction)
 - [Defining Relationships](#defining-relationships)
     - [One To One](#one-to-one)

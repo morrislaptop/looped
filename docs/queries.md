@@ -1,7 +1,5 @@
 # Database: Query Builder
 
-::: v-pre 
-
 - [Introduction](#introduction)
 - [Retrieving Results](#retrieving-results)
     - [Chunking Results](#chunking-results)

@@ -1,7 +1,5 @@
 # Broadcasting
 
-::: v-pre 
-
 - [Introduction](#introduction)
     - [Configuration](#configuration)
     - [Driver Prerequisites](#driver-prerequisites)

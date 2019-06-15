@@ -1,7 +1,5 @@
 # Package Development
 
-::: v-pre 
-
 - [Introduction](#introduction)
     - [A Note On Facades](#a-note-on-facades)
 - [Package Discovery](#package-discovery)

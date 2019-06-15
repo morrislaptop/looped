@@ -1,7 +1,5 @@
 # Directory Structure
 
-::: v-pre 
-
 - [Introduction](#introduction)
 - [The Root Directory](#the-root-directory)
     - [The `app` Directory](#the-root-app-directory)

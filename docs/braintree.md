@@ -1,7 +1,5 @@
 # Laravel Cashier (Braintree)
 
-::: v-pre 
-
 - [Introduction](#introduction)
     - [Caveats](#caveats)
 - [Installation](#installation)

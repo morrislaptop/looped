@@ -1,7 +1,5 @@
 # Error Handling
 
-::: v-pre 
-
 - [Introduction](#introduction)
 - [Configuration](#configuration)
 - [The Exception Handler](#the-exception-handler)

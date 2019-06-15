@@ -1,7 +1,5 @@
 # Service Container
 
-::: v-pre 
-
 - [Introduction](#introduction)
 - [Binding](#binding)
     - [Binding Basics](#binding-basics)

@@ -1,7 +1,5 @@
 # HTTP Tests
 
-::: v-pre 
-
 - [Introduction](#introduction)
     - [Customizing Request Headers](#customizing-request-headers)
     - [Debugging Responses](#debugging-responses)

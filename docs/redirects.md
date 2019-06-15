@@ -1,7 +1,5 @@
 # HTTP Redirects
 
-::: v-pre 
-
 - [Creating Redirects](#creating-redirects)
 - [Redirecting To Named Routes](#redirecting-named-routes)
 - [Redirecting To Controller Actions](#redirecting-controller-actions)

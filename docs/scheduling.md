@@ -1,7 +1,5 @@
 # Task Scheduling
 
-::: v-pre 
-
 - [Introduction](#introduction)
 - [Defining Schedules](#defining-schedules)
     - [Scheduling Artisan Commands](#scheduling-artisan-commands)

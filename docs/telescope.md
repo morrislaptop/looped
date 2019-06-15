@@ -1,7 +1,5 @@
 # Laravel Telescope
 
-::: v-pre 
-
 - [Introduction](#introduction)
 - [Installation](#installation)
     - [Configuration](#configuration)

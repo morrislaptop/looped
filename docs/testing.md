@@ -1,7 +1,5 @@
 # Testing: Getting Started
 
-::: v-pre 
-
 - [Introduction](#introduction)
 - [Environment](#environment)
 - [Creating & Running Tests](#creating-and-running-tests)

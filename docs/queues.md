@@ -1,7 +1,5 @@
 # Queues
 
-::: v-pre 
-
 - [Introduction](#introduction)
     - [Connections Vs. Queues](#connections-vs-queues)
     - [Driver Notes & Prerequisites](#driver-prerequisites)

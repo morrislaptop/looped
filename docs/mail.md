@@ -1,7 +1,5 @@
 # Mail
 
-::: v-pre 
-
 - [Introduction](#introduction)
     - [Driver Prerequisites](#driver-prerequisites)
 - [Generating Mailables](#generating-mailables)

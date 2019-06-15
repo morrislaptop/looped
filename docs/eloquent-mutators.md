@@ -1,7 +1,5 @@
 # Eloquent: Mutators
 
-::: v-pre 
-
 - [Introduction](#introduction)
 - [Accessors & Mutators](#accessors-and-mutators)
     - [Defining An Accessor](#defining-an-accessor)

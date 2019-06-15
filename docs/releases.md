@@ -1,7 +1,5 @@
 # Release Notes
 
-::: v-pre 
-
 - [Versioning Scheme](#versioning-scheme)
 - [Support Policy](#support-policy)
 - [Laravel 5.8](#laravel-5.8)

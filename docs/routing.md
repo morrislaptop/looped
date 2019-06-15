@@ -1,7 +1,5 @@
 # Routing
 
-::: v-pre 
-
 - [Basic Routing](#basic-routing)
     - [Redirect Routes](#redirect-routes)
     - [View Routes](#view-routes)

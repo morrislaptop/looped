@@ -1,7 +1,5 @@
 # Database: Pagination
 
-::: v-pre 
-
 - [Introduction](#introduction)
 - [Basic Usage](#basic-usage)
     - [Paginating Query Builder Results](#paginating-query-builder-results)

@@ -1,7 +1,5 @@
 # Mocking
 
-::: v-pre 
-
 - [Introduction](#introduction)
 - [Mocking Objects](#mocking-objects)
 - [Bus Fake](#bus-fake)

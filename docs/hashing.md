@@ -1,7 +1,5 @@
 # Hashing
 
-::: v-pre 
-
 - [Introduction](#introduction)
 - [Configuration](#configuration)
 - [Basic Usage](#basic-usage)

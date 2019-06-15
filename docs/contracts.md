@@ -1,7 +1,5 @@
 # Contracts
 
-::: v-pre 
-
 - [Introduction](#introduction)
     - [Contracts Vs. Facades](#contracts-vs-facades)
 - [When To Use Contracts](#when-to-use-contracts)

@@ -1,7 +1,5 @@
 # Contribution Guide
 
-::: v-pre 
-
 - [Bug Reports](#bug-reports)
 - [Core Development Discussion](#core-development-discussion)
 - [Which Branch?](#which-branch)

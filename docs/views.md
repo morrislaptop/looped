@@ -1,7 +1,5 @@
 # Views
 
-::: v-pre 
-
 - [Creating Views](#creating-views)
 - [Passing Data To Views](#passing-data-to-views)
     - [Sharing Data With All Views](#sharing-data-with-all-views)
