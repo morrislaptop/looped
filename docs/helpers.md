@@ -1186,8 +1186,9 @@ The `cookie` function creates a new [cookie](/requests#cookies) instance:
 
 The `csrf_field` function generates an HTML `hidden` input field containing the value of the CSRF token. For example, using [Blade syntax](/blade):
 
+::: v-pre
     {{ csrf_field() }}
-
+:::
 
 #### `csrf_token()`
 
@@ -1324,10 +1325,11 @@ A [logger](/errors#logging) instance will be returned if no value is passed to t
 
 The `method_field` function generates an HTML `hidden` input field containing the spoofed value of the form's HTTP verb. For example, using [Blade syntax](/blade):
 
+::: v-pre
     <form method="POST">
         {{ method_field('DELETE') }}
     </form>
-
+:::
 
 #### `now()`
 
