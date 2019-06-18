@@ -2,7 +2,7 @@ module.exports = {
     title: 'Looped',
     description: 'The TypeScript starter kit inspired by the DX of Laravel',
     themeConfig: {
-        // displayAllHeaders: true,
+        logo: '/hero.png',
         sidebar: [
             {
                 title: 'Prologue',
