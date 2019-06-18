@@ -9,7 +9,7 @@ module.exports = {
                 collapsable: false,
                 children: [
                     '/releases.html',
-                    '/upgrade.html',
+                    // '/upgrade.html',
                     '/contributions.html',
                     // '/api-documentation.html',
                 ]
