@@ -6,11 +6,11 @@ tagline: The TypeScript starter kit inspired by the DX of Laravel.
 actionText: Get Started →
 actionLink: /installation/
 features:
-- title: Typed
-  details: The power of typescript to help you develop faster.
-- title: Laravel Inspired
-  details: Enjoy the dev experience of Larafvel .
+- title: TypeScript
+  details: Share types across your codebase and make app development as quick and easy as possible
 - title: Performant
-  details: VuePress generates pre-rendered static HTML for each page, and runs as an SPA once a page is loaded.
+  details: The whole application isn't loaded for each request and JavaScript is asyncrhonous.
+- title: Laravel Inspired
+  details: Enjoy all the features like an ORM, Routing, Validation with the developer experience of Laravel.
 footer: MIT Licensed | Copyright © 2019-present Craig Morris
 ---
