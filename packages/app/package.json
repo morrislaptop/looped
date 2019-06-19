@@ -1,11 +1,10 @@
 {
     "name": "@looped-ts/app",
-    "version": "0.0.0",
+    "private": true,
     "description": "A Laravel inspired TypeScript starter",
     "repository": "git@github.com:morrislaptop/looped.git",
     "author": "Craig Morris <craig.michael.morris@gmail.com>",
     "license": "MIT",
-    "private": false,
     "dependencies": {
         "@atlassian/jira": "^0.1.0",
         "@octokit/rest": "^16.27.3",
