@@ -1,12 +1,8 @@
 import { Command, flags } from '@oclif/command'
 import * as request from 'request-promise';
-import * as AdmZip from 'adm-zip'
 import * as fs from 'fs'
 import * as path from 'path'
 import * as decompress from 'decompress'
-import { tap } from 'lodash'
-import * as mv from 'mv'
-import { promisify } from 'util'
 import { tmpdir } from 'os'
 import { spawnSync } from 'child_process';
 
