@@ -41,6 +41,9 @@
   "oclif": {
     "bin": "create"
   },
+  "publishConfig": {
+    "access": "public"
+  },
   "repository": "morrislaptop/looped-ts",
   "scripts": {
     "posttest": "tslint -p . -t stylish",
