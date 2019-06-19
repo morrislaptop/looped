@@ -43,6 +43,9 @@
       "@oclif/plugin-help"
     ]
   },
+  "publishConfig": {
+    "access": "public"
+  },
   "repository": "morrislaptop/looped-ts",
   "scripts": {
     "postpack": "rm -f oclif.manifest.json",
