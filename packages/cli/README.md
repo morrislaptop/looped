@@ -30,6 +30,8 @@ USAGE
 <!-- commands -->
 * [`looped hello [FILE]`](#looped-hello-file)
 * [`looped help [COMMAND]`](#looped-help-command)
+* [`looped key:generate [FILE]`](#looped-keygenerate-file)
+* [`looped key:what [FILE]`](#looped-keywhat-file)
 
 ## `looped hello [FILE]`
 
@@ -67,4 +69,36 @@ OPTIONS
 ```
 
 _See code: [@oclif/plugin-help](https://github.com/oclif/plugin-help/blob/v2.2.0/src/commands/help.ts)_
+
+## `looped key:generate [FILE]`
+
+generate a key and write to your .env file
+
+```
+USAGE
+  $ looped key:generate [FILE]
+
+OPTIONS
+  -f, --force
+  -h, --help       show CLI help
+  -n, --name=name  name to print
+```
+
+_See code: [src/commands/key/generate.ts](https://github.com/morrislaptop/looped-ts/blob/v0.0.0/src/commands/key/generate.ts)_
+
+## `looped key:what [FILE]`
+
+describe the command here
+
+```
+USAGE
+  $ looped key:what [FILE]
+
+OPTIONS
+  -f, --force
+  -h, --help       show CLI help
+  -n, --name=name  name to print
+```
+
+_See code: [src/commands/key/what.ts](https://github.com/morrislaptop/looped-ts/blob/v0.0.0/src/commands/key/what.ts)_
 <!-- commandsstop -->
