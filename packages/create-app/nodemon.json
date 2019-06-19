@@ -1,0 +1,5 @@
+{
+  "watch": ["app"],
+  "ext": "ts",
+  "exec": "DEBUG=app ts-node bootstrap/server.ts"
+}
