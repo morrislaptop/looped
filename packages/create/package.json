@@ -1,0 +1,9 @@
+{
+  "name": "@looped-ts/create",
+  "version": "0.0.0",
+  "description": "yarn create @looped-ts",
+  "main": "index.js",
+  "repository": "https://github.com/morrislaptop/looped-ts",
+  "author": "Craig Morris",
+  "license": "MIT"
+}
