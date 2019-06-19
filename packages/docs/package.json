@@ -1,0 +1,14 @@
+{
+  "name": "@looped-ts/docs",
+  "version": "0.0.0",
+  "description": "Docs for Looped Starter Kit",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "docs:dev": "vuepress dev",
+    "docs:build": "vuepress build"
+  },
+  "dependencies": {
+    "vuepress": "^1.0.1"
+  }
+}
