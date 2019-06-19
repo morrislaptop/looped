@@ -1,5 +1,6 @@
 {
   "name": "@looped-ts/docs",
+  "version": "0.0.1-alpha.0",
   "private": true,
   "description": "Docs for Looped Starter Kit",
   "main": "index.js",
