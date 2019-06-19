@@ -6,8 +6,8 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "docs:dev": "vuepress dev",
-    "docs:build": "vuepress build"
+    "dev": "vuepress dev",
+    "build": "vuepress build"
   },
   "dependencies": {
     "vuepress": "^1.0.1"

@@ -11,8 +11,6 @@ class LoopedTsCreate extends Command {
 
     static args = [{ name: 'dir' }]
 
-    path = 'looped-master/packages/app'
-
     async run() {
         const { args } = this.parse(LoopedTsCreate)
 
@@ -25,19 +23,24 @@ class LoopedTsCreate extends Command {
         this.log(`Looped!`)
     }
 
-    async copyIntoDirectory(dir: string) {
+    async copyIntoDirectory(dir: string)
+    {
+        // Get version
+        const version = require('../package.json').version
+        const prefix = `looped-${version}/packages/app`
+
         // Download
-        const url = 'https://github.com/morrislaptop/looped/archive/master.zip'
+        const url = `https://github.com/morrislaptop/looped/archive/v${version}.zip`
         const buffer = await request({ url, encoding: null })
         const tmp = tmpdir()
 
         // Extract only the app directory
         await decompress(buffer, tmp, {
-            filter: file => file.path.startsWith(this.path),
+            filter: file => file.path.startsWith(prefix),
         })
 
         // Move to the root
-        fs.renameSync(path.join(tmp, this.path), dir)
+        fs.renameSync(path.join(tmp, prefix), dir)
     }
 
     async copyEnvExample(dir: string)
