@@ -1,12 +1,12 @@
 backend:
   name: github
   repo: morrislaptop/looped
-media_folder: "docs/.vuepress/public/images"
-public_folder: "docs/.vuepress/dist/"
+media_folder: "packages/docs/.vuepress/public/images"
+public_folder: "packages/docs/.vuepress/dist/"
 collections:
   - name: "doc"
     label: "Doc"
-    folder: "docs"
+    folder: "packages/docs"
     create: true
     slug: "{{slug}}"
     fields: # The fields for each document, usually in front matter
