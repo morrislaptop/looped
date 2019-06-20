@@ -8,7 +8,7 @@ module.exports = {
                 title: 'Prologue',
                 collapsable: false,
                 children: [
-                    '/releases.html',
+                    '/introduction.html',
                     // '/upgrade.html',
                     '/contributions.html',
                     // '/api-documentation.html',
@@ -21,9 +21,9 @@ module.exports = {
                     '/installation.html',
                     '/configuration.html',
                     '/structure.html',
-                    '/homestead.html',
-                    '/valet.html',
-                    '/deployment.html',
+                    // '/homestead.html',
+                    // '/valet.html',
+                    // '/deployment.html',
                 ]
             },
             {
