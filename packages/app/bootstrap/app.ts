@@ -1,16 +1,14 @@
 import "reflect-metadata"
+import * as config from '../config'
 import { createKoaServer, useContainer, createExpressServer } from 'routing-controllers'
-import { SelectTicketController } from '../app/Http/Controllers/SelectTicketController'
-import { EnvironmentsController } from '../app/Http/Controllers/EnvironmentsController'
+import { ExampleController } from '../app/Http/Controllers/ExampleController'
 import { AppServiceProvider } from '../app/Providers/AppServiceProvider'
-import { CacheServiceProvider } from '../app/Providers/CacheServiceProvider'
 import { Container } from 'typedi'
 import express from 'express';
 
 // service providers
 const providers = [
     new AppServiceProvider(),
-    new CacheServiceProvider(),
 ]
 providers.map(p => p.register())
 
@@ -18,8 +16,7 @@ providers.map(p => p.register())
 useContainer(Container)
 const app = createExpressServer({
    controllers: [
-       SelectTicketController,
-       EnvironmentsController,
+       ExampleController,
     ]
 })
 app.set('views', __dirname + '/../resources/views');
