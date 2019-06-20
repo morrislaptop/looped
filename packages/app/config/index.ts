@@ -1,5 +1,6 @@
 import { config } from "dotenv"
 
+config({ path: __dirname + `/../.env.${process.env.NODE_ENV}` })
 config()
 
 const backend = process.env.BACKEND_REPOS!.split(',')
@@ -17,14 +18,6 @@ const app = {
 const services = {
     github: {
         token: process.env.GITHUB_ACCESS_TOKEN,
-    },
-    jira: {
-        base: process.env.JIRA_BASE_URL,
-        auth: {
-            type: process.env.JIRA_AUTH_TYPE || 'basic' as 'basic' || 'apppassword' || 'token',
-            username: process.env.JIRA_USERNAME || '',
-            password: process.env.JIRA_ACCESS_TOKEN || '',
-        } as JIRA.Auth
     },
     netlify: {
         token: process.env.NETLIFY_ACCESS_TOKEN,
