@@ -16,11 +16,14 @@ I believe that Laravel provides the ultimate DX of any framework I've used. Unfo
     * Asynchronous
     * The app is a running process in memory (no need to reload all files on every request!)
 
-That being said, a number of features have not been ported over to Laravel, this is to keep the starter kit lighter and to keep with trends of having stateless, API driven services. The features that won't be ported over are:
+That being said, a number of features have not been ported over to Laravel, this is to keep the starter kit lighter and to keep with trends of a [Twelve-Factor App](https://12factor.net/) with a stateless, API driven services. 
+
+The features that won't be ported over are:
 
 * Templating engine like Blade
 * Sessions (and all things powered by Sessions)
 * Cookies
+* Local filesytem (and all things powered by the local filesystem)
 * Queues (not needed as functionality like sending an email can be done asynnchronously)
 
 Yarn is also preferred over NPM.
