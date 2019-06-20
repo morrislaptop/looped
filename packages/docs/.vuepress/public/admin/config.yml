@@ -1,8 +1,16 @@
 backend:
   name: github
   repo: morrislaptop/looped
+  commit_messages:
+    create: "docs: create {{slug}}"
+    update: "docs: update {{slug}}"
+    delete: "docs: delete {{slug}}"
+    uploadMedia: "docs: upload media {{path}}"
+    deleteMedia: "docs: delete media {{path}}"
+
 media_folder: "packages/docs/.vuepress/public/images"
 public_folder: "packages/docs/.vuepress/dist/"
+
 collections:
   - name: "doc"
     label: "Doc"
