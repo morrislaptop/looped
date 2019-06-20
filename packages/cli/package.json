@@ -1,7 +1,7 @@
 {
   "name": "@looped-ts/cli",
   "description": "CLI utilities for the Looped Starter Kit",
-  "version": "0.0.1-alpha.1",
+  "version": "0.0.1-alpha.3",
   "author": "Craig Morris @morrislaptop",
   "bin": {
     "looped": "./bin/run"

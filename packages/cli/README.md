@@ -19,7 +19,7 @@ $ npm install -g @looped-ts/cli
 $ looped COMMAND
 running command...
 $ looped (-v|--version|version)
-@looped-ts/cli/0.0.1-alpha.3+d0eb51b darwin-x64 node-v12.4.0
+@looped-ts/cli/0.0.1-alpha.3 darwin-x64 node-v12.4.0
 $ looped --help [COMMAND]
 USAGE
   $ looped COMMAND
@@ -61,5 +61,5 @@ OPTIONS
   --show
 ```
 
-_See code: [src/commands/key/generate.ts](https://github.com/morrislaptop/looped-ts/blob/v0.0.1-alpha.3+d0eb51b/src/commands/key/generate.ts)_
+_See code: [src/commands/key/generate.ts](https://github.com/morrislaptop/looped-ts/blob/v0.0.1-alpha.3/src/commands/key/generate.ts)_
 <!-- commandsstop -->
