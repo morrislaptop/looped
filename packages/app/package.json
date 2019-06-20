@@ -1,6 +1,5 @@
 {
     "name": "@looped-ts/app",
-    "version": "0.0.1-alpha.3",
     "private": true,
     "description": "A Laravel inspired TypeScript starter",
     "repository": "git@github.com:morrislaptop/looped.git",
