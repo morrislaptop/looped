@@ -30,6 +30,7 @@ USAGE
 <!-- commands -->
 * [`looped help [COMMAND]`](#looped-help-command)
 * [`looped key:generate`](#looped-keygenerate)
+* [`looped make:controller [FILE]`](#looped-makecontroller-file)
 
 ## `looped help [COMMAND]`
 
@@ -62,4 +63,20 @@ OPTIONS
 ```
 
 _See code: [src/commands/key/generate.ts](https://github.com/morrislaptop/looped-ts/blob/v0.0.1-alpha.3/src/commands/key/generate.ts)_
+
+## `looped make:controller [FILE]`
+
+describe the command here
+
+```
+USAGE
+  $ looped make:controller [FILE]
+
+OPTIONS
+  -f, --force
+  -h, --help       show CLI help
+  -n, --name=name  name to print
+```
+
+_See code: [src/commands/make/controller.ts](https://github.com/morrislaptop/looped-ts/blob/v0.0.1-alpha.3/src/commands/make/controller.ts)_
 <!-- commandsstop -->
