@@ -27,7 +27,7 @@ class LoopedTsCreate extends Command {
     {
         // Get version
         const version = require('../package.json').version
-        const prefix = `looped-${version}/packages/app`
+        const prefix = `looped-${version}/packages/starter`
 
         // Download
         const url = `https://github.com/morrislaptop/looped/archive/v${version}.zip`
