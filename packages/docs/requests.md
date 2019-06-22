@@ -1,137 +1,86 @@
 # HTTP Requests
 
-- [Accessing The Request](#accessing-the-request)
-    - [Request Path & Method](#request-path-and-method)
-    - [PSR-7 Requests](#psr7-requests)
-- [Input Trimming & Normalization](#input-trimming-and-normalization)
-- [Retrieving Input](#retrieving-input)
-    - [Old Input](#old-input)
-    - [Cookies](#cookies)
-- [Files](#files)
-    - [Retrieving Uploaded Files](#retrieving-uploaded-files)
-    - [Storing Uploaded Files](#storing-uploaded-files)
-- [Configuring Trusted Proxies](#configuring-trusted-proxies)
-
-
 ## Accessing The Request
 
-To obtain an instance of the current HTTP request via dependency injection, you should type-hint the `Illuminate\Http\Request` class on your controller method. The incoming request instance will automatically be injected by the [service container](/container):
+To obtain an instance of the current [HTTP request](https://expressjs.com/en/api.html#req) via dependency injection, you should use the  `@Req()` decorator on your controller method. The incoming request instance will automatically be injected by the [service container](/container):
 
-    <?php
+```typescript
+import {Controller, Req, Res, Get} from 'routing-controllers'
+import { Request } from 'express'
 
-    namespace App\Http\Controllers;
+@Controller()
+export class UserController {
 
-    use Illuminate\Http\Request;
-
-    class UserController extends Controller
-    {
-        /**
-         * Store a new user.
-         *
-         * @param  Request  $request
-         * @return Response
-         */
-        public function store(Request $request)
-        {
-            $name = $request->input('name');
-
-            //
-        }
+    @Get("/users")
+    getAll(@Req() request: Request) {
+        return request.query.hello
     }
+
+}
+```
 
 #### Dependency Injection & Route Parameters
 
 If your controller method is also expecting input from a route parameter you should list your route parameters after your other dependencies. For example, if your route is defined like so:
 
-    Route::put('user/{id}', 'UserController@update');
+    @Get("/users/:id")
 
-You may still type-hint the `Illuminate\Http\Request` and access your route parameter `id` by defining your controller method as follows:
+You may still type-hint the [HTTP request](https://expressjs.com/en/api.html#req) and access your route parameter `id` by defining your controller method as follows:
 
-    <?php
+```typescript
+import {Controller, Req, Res, Get} from 'routing-controllers'
+import { Request } from 'express'
 
-    namespace App\Http\Controllers;
+@Controller()
+export class UserController {
 
-    use Illuminate\Http\Request;
-
-    class UserController extends Controller
-    {
-        /**
-         * Update the specified user.
-         *
-         * @param  Request  $request
-         * @param  string  $id
-         * @return Response
-         */
-        public function update(Request $request, $id)
-        {
-            //
-        }
+    @Get("/users/:id")
+    show(@Req() request: Request, @Param("id") id: number) {
+        return `User #${id}`
     }
 
-#### Accessing The Request Via Route Closures
-
-You may also type-hint the `Illuminate\Http\Request` class on a route Closure. The service container will automatically inject the incoming request into the Closure when it is executed:
-
-    use Illuminate\Http\Request;
-
-    Route::get('/', function (Request $request) {
-        //
-    });
-
+}
+```
 
 ### Request Path & Method
 
-The `Illuminate\Http\Request` instance provides a variety of methods for examining the HTTP request for your application and extends the `Symfony\Component\HttpFoundation\Request` class. We will discuss a few of the most important methods below.
+The [HTTP request](https://expressjs.com/en/api.html#req) instance provides a variety of methods for examining the HTTP request for your application. We will discuss a few of the most important methods below.
 
 #### Retrieving The Request Path
 
 The `path` method returns the request's path information. So, if the incoming request is targeted at `http://domain.com/foo/bar`, the `path` method will return `foo/bar`:
 
-    $uri = $request->path();
-
-The `is` method allows you to verify that the incoming request path matches a given pattern. You may use the `*` character as a wildcard when utilizing this method:
-
-    if ($request->is('admin/*')) {
-        //
-    }
+```typescript
+const uri = request.path
+```
 
 #### Retrieving The Request URL
 
-To retrieve the full URL for the incoming request you may use the `url` or `fullUrl` methods. The `url` method will return the URL without the query string, while the `fullUrl` method includes the query string:
+To retrieve the full URL for the incoming request you may import the request helper and use the `url` or `fullUrl` methods. The `url` method will return the URL without the query string, while the `fullUrl` method includes the query string:
 
-    // Without Query String...
-    $url = $request->url();
+```typescript
+import * as support from '@looped-ts/support'
 
-    // With Query String...
-    $url = $request->fullUrl();
+// Without Query String...
+const url = support.request.url(request);
+
+// With Query String...
+const url = support.request.fullUrl(request);
+```
+
+> This doesn't include the port number by default (usually the port number will be set by whatever process runner you are using). If you need the port you can use `request.socket.localPort`
 
 #### Retrieving The Request Method
 
 The `method` method will return the HTTP verb for the request. You may use the `isMethod` method to verify that the HTTP verb matches a given string:
 
-    $method = $request->method();
+```typescript
+const method = request.method
 
-    if ($request->isMethod('post')) {
-        //
-    }
-
-
-### PSR-7 Requests
-
-The [PSR-7 standard](https://www.php-fig.org/psr/psr-7/) specifies interfaces for HTTP messages, including requests and responses. If you would like to obtain an instance of a PSR-7 request instead of a Laravel request, you will first need to install a few libraries. Laravel uses the *Symfony HTTP Message Bridge* component to convert typical Laravel requests and responses into PSR-7 compatible implementations:
-
-    composer require symfony/psr-http-message-bridge
-    composer require zendframework/zend-diactoros
-
-Once you have installed these libraries, you may obtain a PSR-7 request by type-hinting the request interface on your route Closure or controller method:
-
-    use Psr\Http\Message\ServerRequestInterface;
-
-    Route::get('/', function (ServerRequestInterface $request) {
-        //
-    });
-
-> {tip} If you return a PSR-7 response instance from a route or controller, it will automatically be converted back to a Laravel response instance and be displayed by the framework.
+if (['POST', 'PUT'].includes(request.method)) {
+    //
+}
+```
 
 
 ## Input Trimming & Normalization
@@ -162,7 +111,7 @@ You may pass a default value as the second argument to the `input` method. This 
 When working with forms that contain array inputs, use "dot" notation to access the arrays:
 
     $name = $request->input('products.0.name');
-
+    
     $names = $request->input('products.*.name');
 
 You may call the `input` method without any arguments in order to retrieve all of the input values as an associative array:
@@ -202,11 +151,11 @@ When sending JSON requests to your application, you may access the JSON data via
 If you need to retrieve a subset of the input data, you may use the `only` and `except` methods. Both of these methods accept a single `array` or a dynamic list of arguments:
 
     $input = $request->only(['username', 'password']);
-
+    
     $input = $request->only('username', 'password');
-
+    
     $input = $request->except(['credit_card']);
-
+    
     $input = $request->except('credit_card');
 
 > {tip} The `only` method returns all of the key / value pairs that you request; however, it will not return key / value pairs that are not present on the request.
@@ -238,7 +187,7 @@ If you would like to determine if a value is present on the request and is not e
 You may access uploaded files from a `Illuminate\Http\Request` instance using the `file` method or using dynamic properties. The `file` method returns an instance of the `Illuminate\Http\UploadedFile` class, which extends the PHP `SplFileInfo` class and provides a variety of methods for interacting with the file:
 
     $file = $request->file('photo');
-
+    
     $file = $request->photo;
 
 You may determine if a file is present on the request using the `hasFile` method:
@@ -260,7 +209,7 @@ In addition to checking if the file is present, you may verify that there were n
 The `UploadedFile` class also contains methods for accessing the file's fully-qualified path and its extension. The `extension` method will attempt to guess the file's extension based on its contents. This extension may be different from the extension that was supplied by the client:
 
     $path = $request->photo->path();
-
+    
     $extension = $request->photo->extension();
 
 #### Other File Methods
@@ -277,13 +226,13 @@ The `store` method accepts the path where the file should be stored relative to 
 The `store` method also accepts an optional second argument for the name of the disk that should be used to store the file. The method will return the path of the file relative to the disk's root:
 
     $path = $request->photo->store('images');
-
+    
     $path = $request->photo->store('images', 's3');
 
 If you do not want a file name to be automatically generated, you may use the `storeAs` method, which accepts the path, file name, and disk name as its arguments:
 
     $path = $request->photo->storeAs('images', 'filename.jpg');
-
+    
     $path = $request->photo->storeAs('images', 'filename.jpg', 's3');
 
 
@@ -294,12 +243,12 @@ When running your applications behind a load balancer that terminates TLS / SSL 
 To solve this, you may use the `App\Http\Middleware\TrustProxies` middleware that is included in your Laravel application, which allows you to quickly customize the load balancers or proxies that should be trusted by your application. Your trusted proxies should be listed as an array on the `$proxies` property of this middleware. In addition to configuring the trusted proxies, you may configure the proxy `$headers` that should be trusted:
 
     <?php
-
+    
     namespace App\Http\Middleware;
-
+    
     use Illuminate\Http\Request;
     use Fideloper\Proxy\TrustProxies as Middleware;
-
+    
     class TrustProxies extends Middleware
     {
         /**
@@ -311,7 +260,7 @@ To solve this, you may use the `App\Http\Middleware\TrustProxies` middleware tha
             '192.168.1.1',
             '192.168.1.2',
         ];
-
+    
         /**
          * The headers that should be used to detect proxies.
          *

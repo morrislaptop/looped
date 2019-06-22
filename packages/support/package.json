@@ -1,0 +1,9 @@
+{
+  "name": "@looped-ts/support",
+  "version": "0.0.1-alpha.3",
+  "description": "Helpers for application development",
+  "repository": "https://github.com/morrislaptop/looped-ts",
+  "author": "morrislaptop",
+  "license": "MIT",
+  "main": "src/index"
+}
