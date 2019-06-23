@@ -6,8 +6,8 @@ import { isString, isArray, isObject } from 'lodash';
 import { TransformsRequests } from './TransformsRequests';
 
 @Middleware({ type: "before" })
-export class TrimStringsMiddleware extends TransformsRequests {
+export class ConvertEmptyStringsToNull extends TransformsRequests {
     transform(value: any, key: any) {
-        return isString(value) ? value.trim() : value
+        return value === '' ? null : value
     }
 }

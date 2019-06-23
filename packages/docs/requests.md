@@ -6,7 +6,7 @@ To obtain an instance of the current [HTTP request](https://expressjs.com/en/api
 
 ```typescript
 import {Controller, Req, Res, Get} from 'routing-controllers'
-import { Request } from 'express'
+import { Request } from 'koa'
 
 @Controller()
 export class UserController {
@@ -25,7 +25,7 @@ If your controller method is also expecting input from a route parameter you sho
 
     @Get("/users/:id")
 
-You may still type-hint the [HTTP request](https://expressjs.com/en/api.html#req) and access your route parameter `id` by defining your controller method as follows:
+You may still type-hint the [HTTP request](https://koajs.com/#request) and access your route parameter `id` by defining your controller method as follows:
 
 ```typescript
 import {Controller, Req, Res, Get} from 'routing-controllers'
@@ -44,7 +44,7 @@ export class UserController {
 
 ### Request Path & Method
 
-The [HTTP request](https://expressjs.com/en/api.html#req) instance provides a variety of methods for examining the HTTP request for your application. We will discuss a few of the most important methods below.
+The [HTTP request](https://koajs.com/#request) instance provides a variety of methods for examining the HTTP request for your application. We will discuss a few of the most important methods below.
 
 #### Retrieving The Request Path
 
@@ -56,16 +56,14 @@ const uri = request.path
 
 #### Retrieving The Request URL
 
-To retrieve the full URL for the incoming request you may import the request helper and use the `url` or `fullUrl` methods. The `url` method will return the URL without the query string, while the `fullUrl` method includes the query string:
+To retrieve the full URL for the incoming request you may import the request helper and use the `url` or `fullUrl` methods. The `href` property will return the URL with the query string, removing the query string is a simple find and replace:
 
 ```typescript
-import * as support from '@looped-ts/support'
+// With Query String...
+const href = request.href
 
 // Without Query String...
-const url = support.request.url(request);
-
-// With Query String...
-const url = support.request.fullUrl(request);
+const url = request.href.replace(`?${req.querystring}`, '')
 ```
 
 > This doesn't include the port number by default (usually the port number will be set by whatever process runner you are using). If you need the port you can use `request.socket.localPort`
@@ -82,202 +80,229 @@ if (['POST', 'PUT'].includes(request.method)) {
 }
 ```
 
-
 ## Input Trimming & Normalization
 
-By default, Laravel includes the `TrimStrings` and `ConvertEmptyStringsToNull` middleware in your application's global middleware stack. These middleware are listed in the stack by the `App\Http\Kernel` class. These middleware will automatically trim all incoming string fields on the request, as well as convert any empty string fields to `null`. This allows you to not have to worry about these normalization concerns in your routes and controllers.
+By default, Looped includes the `TrimStrings` and `ConvertEmptyStringsToNull` middleware in your application's global middleware stack. These middleware are listed in the stack by the `bootstrap/app.ts` file. These middleware will automatically trim all incoming string fields on the request body, as well as convert any empty string fields to `null`. This allows you to not have to worry about these normalization concerns in your routes and controllers.
 
-If you would like to disable this behavior, you may remove the two middleware from your application's middleware stack by removing them from the `$middleware` property of your `App\Http\Kernel` class.
+If you would like to disable this behavior, you may remove the two middleware from your application's middleware stack by removing them from the `middlewares` property of your `bootstrap/app.ts` file.
 
+> Note: Looped does NOT apply this middleware to the query string
 
 ## Retrieving Input
 
 #### Retrieving All Input Data
 
-You may also retrieve all of the input data as an `array` using the `all` method:
+You may also retrieve all of the input data as an `object` using the `body` property:
 
-    $input = $request->all();
+```typescript
+const input = request.body
+```
 
-#### Retrieving An Input Value
+Alternatively, you may use the `@Body()` decorator on a param:
 
-Using a few simple methods, you may access all of the user input from your `Illuminate\Http\Request` instance without worrying about which HTTP verb was used for the request. Regardless of the HTTP verb, the `input` method may be used to retrieve user input:
+```typescript
+@Post("/users")
+store(@Body() body: any) {
+		return body
+}
+```
 
-    $name = $request->input('name');
+#### Retrieving Input From The Body
 
-You may pass a default value as the second argument to the `input` method. This value will be returned if the requested input value is not present on the request:
+To access individual input from the body, you may use the `@BodyParam` decorator. 
 
-    $name = $request->input('name', 'Sally');
+```typescript
+@Post("/users")
+store(@BodyParam('name') name: string) {
+		return name
+}
+```
 
-When working with forms that contain array inputs, use "dot" notation to access the arrays:
+You can specify a default value and type by simply specifying it in your method
 
-    $name = $request->input('products.0.name');
-    
-    $names = $request->input('products.*.name');
+```typescript
+@Post("/users")
+store(@BodyParam('age') age: number = 18) {
+		return age
+}
+```
 
-You may call the `input` method without any arguments in order to retrieve all of the input values as an associative array:
+When working with forms that contain array inputs, use normal JavaScript to access data:
 
-    $input = $request->input();
+```typescript
+const name = body.products[0].name
+
+const names = body.products.map(product => product.name)
+```
 
 #### Retrieving Input From The Query String
 
-While the `input` method retrieves values from entire request payload (including the query string), the `query` method will only retrieve values from the query string:
+The `@QueryParam` method will retrieve values from the query string:
 
-    $name = $request->query('name');
+```typescript
+@Get("/users")
+index(@QueryParam('search') search: string = '*') {
+		return search
+}
+```
 
-If the requested query string value data is not present, the second argument to this method will be returned:
+You may use the `@QueryParams` decorator in order to retrieve all of the query string values as an object:
 
-    $name = $request->query('name', 'Helen');
-
-You may call the `query` method without any arguments in order to retrieve all of the query string values as an associative array:
-
-    $query = $request->query();
-
-#### Retrieving Input Via Dynamic Properties
-
-You may also access user input using dynamic properties on the `Illuminate\Http\Request` instance. For example, if one of your application's forms contains a `name` field, you may access the value of the field like so:
-
-    $name = $request->name;
-
-When using dynamic properties, Laravel will first look for the parameter's value in the request payload. If it is not present, Laravel will search for the field in the route parameters.
-
-#### Retrieving JSON Input Values
-
-When sending JSON requests to your application, you may access the JSON data via the `input` method as long as the `Content-Type` header of the request is properly set to `application/json`. You may even use "dot" syntax to dig into JSON arrays:
-
-    $name = $request->input('user.name');
+```typescript
+@Get("/users")
+index(@QueryParams() query: any) {
+		return query
+}
+```
 
 #### Retrieving A Portion Of The Input Data
 
-If you need to retrieve a subset of the input data, you may use the `only` and `except` methods. Both of these methods accept a single `array` or a dynamic list of arguments:
+If you need to retrieve a subset of the input data, you can use JavaScript's destructoring..
 
-    $input = $request->only(['username', 'password']);
-    
-    $input = $request->only('username', 'password');
-    
-    $input = $request->except(['credit_card']);
-    
-    $input = $request->except('credit_card');
+```typescript
+# Only get username and password
+const { username, password } = request.body
 
-> {tip} The `only` method returns all of the key / value pairs that you request; however, it will not return key / value pairs that are not present on the request.
-
-#### Determining If An Input Value Is Present
-
-You should use the `has` method to determine if a value is present on the request. The `has` method returns `true` if the value is present on the request:
-
-    if ($request->has('name')) {
-        //
-    }
-
-When given an array, the `has` method will determine if all of the specified values are present:
-
-    if ($request->has(['name', 'email'])) {
-        //
-    }
-
-If you would like to determine if a value is present on the request and is not empty, you may use the `filled` method:
-
-    if ($request->filled('name')) {
-        //
-    }
+# Omit credit card data
+const { credit_card, ...data } = request.body
+```
 
 ## Files
 
+You can handle uploaded files via [form-data](#retrieving-uploaded-files) or [raw binary uploads](#binary-uploads).
+
 ### Retrieving Uploaded Files
 
-You may access uploaded files from a `Illuminate\Http\Request` instance using the `file` method or using dynamic properties. The `file` method returns an instance of the `Illuminate\Http\UploadedFile` class, which extends the PHP `SplFileInfo` class and provides a variety of methods for interacting with the file:
+You may access uploaded files using the `@UploadedFile()` decorator. The decorator returns an instance of the [File](https://github.com/expressjs/multer#file-information) class, which provides a variety of properties for interacting with the file:
 
-    $file = $request->file('photo');
-    
-    $file = $request->photo;
+```typescript
+import { File } from 'koa-multer'
 
-You may determine if a file is present on the request using the `hasFile` method:
+@Post("/users")
+store(@UploadedFile("avatar") avatar: File) {
+	  return avatar.name
+}
+```
 
-    if ($request->hasFile('photo')) {
-        //
-    }
+#### File Contents
 
-#### Validating Successful Uploads
+The `File` object will store the contents of the file in memory, inside the `buffer` property.
 
-In addition to checking if the file is present, you may verify that there were no problems uploading the file via the `isValid` method:
+```typescript
+@Post("/users")
+@ContentType('image/png')
+store(@UploadedFile("fileName") file: File) {
+ 		return file.buffer
+}
+```
 
-    if ($request->file('photo')->isValid()) {
-        //
-    }
+#### File Extensions
 
-#### File Paths & Extensions
+The `extension` method will attempt to guess the file's extension based on its contents. This extension may be different from the extension that was supplied by the client:
 
-The `UploadedFile` class also contains methods for accessing the file's fully-qualified path and its extension. The `extension` method will attempt to guess the file's extension based on its contents. This extension may be different from the extension that was supplied by the client:
+It's recommended to decide on an extension based on the mimetype of the file rather than the one provided by the client. You may do this via the 
 
-    $path = $request->photo->path();
-    
-    $extension = $request->photo->extension();
+```typescript
+# yarn add mime-types @types/mime-types
 
-#### Other File Methods
+import { extension } from 'mime-types'
 
-There are a variety of other methods available on `UploadedFile` instances. Check out the [API documentation for the class](https://api.symfony.com/3.0/Symfony/Component/HttpFoundation/File/UploadedFile.html) for more information regarding these methods.
-
+const ext = extension(file.mimetype)
+```
 
 ### Storing Uploaded Files
 
-To store an uploaded file, you will typically use one of your configured [filesystems](/filesystem). The `UploadedFile` class has a `store` method which will move an uploaded file to one of your disks, which may be a location on your local filesystem or even a cloud storage location like Amazon S3.
+If you would like to store the file somewhere automatically, the `@UploadedFile` decorator can be configured to do this by passing an [options](https://github.com/expressjs/multer#multeropts) object in your method.
 
-The `store` method accepts the path where the file should be stored relative to the filesystem's configured root directory. This path should not contain a file name, since a unique ID will automatically be generated to serve as the file name.
+```typescript
+import { Controller, Post, UploadedFile } from 'routing-controllers'
+import { Service } from 'typedi'
+import { File, Options } from 'koa-multer'
 
-The `store` method also accepts an optional second argument for the name of the disk that should be used to store the file. The method will return the path of the file relative to the disk's root:
+const options: Options = {
+    dest: 'uploads/'
+}
 
-    $path = $request->photo->store('images');
-    
-    $path = $request->photo->store('images', 's3');
+@Controller()
+@Service()
+export class ExampleController
+{
+    @Post("/files")
+    store(@UploadedFile("fileName", { options }) file: File) {
+        return file.path
+    }
+}
+```
 
-If you do not want a file name to be automatically generated, you may use the `storeAs` method, which accepts the path, file name, and disk name as its arguments:
+The `destination`, `filename` and `path` properties on the File object are now available instead of the `buffer` property.
 
-    $path = $request->photo->storeAs('images', 'filename.jpg');
-    
-    $path = $request->photo->storeAs('images', 'filename.jpg', 's3');
+If you do not want the file name to be automatically generated, you may [create your own storage method](https://github.com/expressjs/multer#diskstorage) and pass this to options.
+
+```typescript
+import { diskStorage, Options } from 'koa-multer'
+
+const options: Options = {
+    storage: diskStorage({
+        filename(req, file, cb) {
+            cb(null, file.originalname)
+        }
+    })
+}
+```
+
+If you would like to store your files somewhere more reliable, like S3, then it's recommended to use the [multer-s3](https://github.com/badunk/multer-s3) package.
+
+```typescript
+import { Options, StorageEngine } from 'koa-multer'
+import s3storage from 'multer-s3'
+import { S3 } from 'aws-sdk'
+import * as config from '../../../config'
+
+const s3 = new S3({
+    accessKeyId: config.services.s3.key,
+    secretAccessKey: config.services.s3.secret,
+})
+
+const options: Options = {
+    storage: s3storage({ s3, bucket: 'looped-ts' }) as StorageEngine
+}
+```
+
+When using this package, additional properties are available on the `File` object like `location` which contains the URL to the uploaded file.
+
+> If you are uploading multipe files, use the `@UploadedFiles` decorator instead
+
+### Binary Uploads
+
+You can access the raw body using the [raw-body]() package:
+
+```typescript
+import { Controller, Post, Ctx } from 'routing-controllers'
+import { Service } from 'typedi'
+import { Context } from 'koa'
+import getRawBody from 'raw-body'
+
+@Controller()
+@Service()
+export class ExampleController
+{
+    @Post("/files")
+    async store(@Ctx() ctx: Context) {
+        const body = await getRawBody(ctx.req)
+
+        return body
+    }
+}
+```
+
 
 
 ## Configuring Trusted Proxies
 
-When running your applications behind a load balancer that terminates TLS / SSL certificates, you may notice your application sometimes does not generate HTTPS links. Typically this is because your application is being forwarded traffic from your load balancer on port 80 and does not know it should generate secure links.
+When running your applications behind a load balancer that terminates TLS / SSL certificates, you may notice your application sometimes does not generate HTTPS links. Typically this is because your application is being forwarded traffic from your load balancer on port and does not know it should generate secure links.
 
-To solve this, you may use the `App\Http\Middleware\TrustProxies` middleware that is included in your Laravel application, which allows you to quickly customize the load balancers or proxies that should be trusted by your application. Your trusted proxies should be listed as an array on the `$proxies` property of this middleware. In addition to configuring the trusted proxies, you may configure the proxy `$headers` that should be trusted:
+To solve this, you may set the `proxy` property of the Koa application to true in your `bootstrap/app.ts` file.
 
-    <?php
-    
-    namespace App\Http\Middleware;
-    
-    use Illuminate\Http\Request;
-    use Fideloper\Proxy\TrustProxies as Middleware;
-    
-    class TrustProxies extends Middleware
-    {
-        /**
-         * The trusted proxies for this application.
-         *
-         * @var array
-         */
-        protected $proxies = [
-            '192.168.1.1',
-            '192.168.1.2',
-        ];
-    
-        /**
-         * The headers that should be used to detect proxies.
-         *
-         * @var string
-         */
-        protected $headers = Request::HEADER_X_FORWARDED_ALL;
-    }
 
-> {tip} If you are using AWS Elastic Load Balancing, your `$headers` value should be `Request::HEADER_X_FORWARDED_AWS_ELB`. For more information on the constants that may be used in the `$headers` property, check out Symfony's documentation on [trusting proxies](https://symfony.com/doc/current/deployment/proxies.html).
 
-#### Trusting All Proxies
-
-If you are using Amazon AWS or another "cloud" load balancer provider, you may not know the IP addresses of your actual balancers. In this case, you may use `*` to trust all proxies:
-
-    /**
-     * The trusted proxies for this application.
-     *
-     * @var array
-     */
-    protected $proxies = '*';
+App\Http\Middleware\TrustProxies` middleware that is included in your Laravel application, which allows you to quickly customize the load balancers or proxies that should be trusted by your application. Your trusted proxies should be listed as an array on the `$proxies` property of this middleware. 

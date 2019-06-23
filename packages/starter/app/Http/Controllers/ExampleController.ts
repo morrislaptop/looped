@@ -1,27 +1,18 @@
-import { Controller, Get, Req, Res, Post, Body, JsonController, UseBefore } from 'routing-controllers'
-import { Request } from 'express'
-import * as support from '@looped-ts/support'
-import { Inject, Service } from 'typedi'
-import { RequestError } from 'request-promise/errors';
-import { TrimStringsMiddleware } from '@looped-ts/foundation'
+import { Controller, Post, Ctx, Get, Req } from 'routing-controllers'
+import { Service } from 'typedi'
+import { Context, Request } from 'koa'
+import getRawBody from 'raw-body'
 
-@JsonController()
+@Controller()
 @Service()
 export class ExampleController
 {
-    /**
-     * @todo nly works for the memory cache driver
-     */
-    @Get("/")
-    async home()
-    {
-        return 'Hello World'
-    }
-
-    @Post("/test")
-    @UseBefore(TrimStringsMiddleware)
-    getAll(@Req() req: Request, @Body() body: any) {
-        console.log('query', req.query)
-        return Object.assign({}, req.query, req.body)
+    @Get('/test')
+    async store(@Req() req: Request) {
+        return {
+            href: req.href,
+            url: req.href.replace(`?${req.querystring}`, ''),
+            headers: req.header
+        }
     }
 }

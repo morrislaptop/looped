@@ -1,6 +1,7 @@
 module.exports = {
     title: 'Looped',
     description: 'The TypeScript starter kit inspired by the DX of Laravel',
+    port: process.env.PORT,
     themeConfig: {
         logo: '/hero.png',
         sidebar: [
@@ -30,7 +31,7 @@ module.exports = {
                 title: 'Architecture Concepts',
                 collapsable: false,
                 children: [
-                    '/requests.html',
+                    '/lifecycle.html',
                     '/container.html',
                     '/providers.html',
                     '/facades.html',
