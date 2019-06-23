@@ -1,5 +1,5 @@
 import { Controller, Post, Ctx, Get, Req } from 'routing-controllers'
-import { Service } from 'typedi'
+import Container, { Service } from 'typedi'
 import { Context, Request } from 'koa'
 import getRawBody from 'raw-body'
 
@@ -7,12 +7,8 @@ import getRawBody from 'raw-body'
 @Service()
 export class ExampleController
 {
-    @Get('/test')
+    @Get('/')
     async store(@Req() req: Request) {
-        return {
-            href: req.href,
-            url: req.href.replace(`?${req.querystring}`, ''),
-            headers: req.header
-        }
+        return 'Hello'
     }
 }

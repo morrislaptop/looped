@@ -11,6 +11,7 @@
         "@looped-ts/cli": "^0.0.1-alpha.3",
         "@looped-ts/foundation": "^0.0.1-alpha.3",
         "@looped-ts/support": "^0.0.1-alpha.3",
+        "@oclif/command": "^1.5.15",
         "@octokit/rest": "^16.27.3",
         "@types/aws-sdk": "^2.7.0",
         "@types/bluebird": "^3.5.27",
@@ -51,13 +52,20 @@
         "typedi": "^0.8.0",
         "typescript": "^3.5.1"
     },
+    "files": [],
+    "oclif": {
+        "commands": "./lib/Console/Commands",
+        "bin": "looped",
+        "plugins": [
+            "@oclif/plugin-help"
+        ]
+    },
     "scripts": {
         "test": "jest",
         "start": "ts-node bootstrap/server.ts",
+        "cli": "ts-node bootstrap/cli.ts",
         "dev": "nodemon",
-        "debug": "nodemon --config nodemon-debug.json",
-        "docs:dev": "vuepress dev docs",
-        "docs:build": "vuepress build docs"
+        "debug": "nodemon --config nodemon-debug.json"
     },
     "devDependencies": {
         "@types/jest": "^24.0.15",

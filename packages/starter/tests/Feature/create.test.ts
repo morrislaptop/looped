@@ -1,6 +1,7 @@
 import 'reflect-metadata'
 
-import { app } from '../../bootstrap/app'
+import { container } from '../../bootstrap/app'
+import { handle } from '../../app/Http/Kernel'
 
 import request from 'supertest'
 import { dump } from '../../app/helpers';
@@ -10,14 +11,14 @@ describe("create", () => {
 
   test("should create an environment", async () => {
     // Arrange.
+    const app = handle(container).callback()
 
     // Act.
-    const response = await request(app).post("/environments/DR-6").send({
-        repos: ['accounts-api']
-    })
+    const response = await request(app).get('/')
 
     // Assert.
     expect(response.status).toEqual(200)
+    expect(response.text).toEqual('Hello')
   })
 
 })

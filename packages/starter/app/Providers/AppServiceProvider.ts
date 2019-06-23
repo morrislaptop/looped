@@ -5,5 +5,6 @@ export class AppServiceProvider
 {
     register()
     {
+        Container.set('hello', 'world')
     }
 }
