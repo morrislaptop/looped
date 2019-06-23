@@ -18,28 +18,26 @@ The `server.ts` file retrieves an instance of the Looped application from `boots
 
 ### HTTP / Console Kernels
 
-Next, the incoming request is sent to either the HTTP kernel or the console kernel, depending on the type of request that is entering the application. These two kernels serve as the central location that all requests flow through. For now, let's just focus on the HTTP kernel, which is located in `app/Http/Kernel.php`.
+Next, the incoming request is sent to either the HTTP kernel or the console kernel, depending on the type of request that is entering the application. These two kernels serve as the central location that all requests flow through. For now, let's just focus on the HTTP kernel, which is located in `app/Http/Kernel.ts`.
 
-The HTTP kernel extends the `Illuminate\Foundation\Http\Kernel` class, which defines an array of `bootstrappers` that will be run before the request is executed. These bootstrappers configure error handling, configure logging, [detect the application environment](/configuration#environment-configuration), and perform other tasks that need to be done before the request is actually handled.
+The HTTP kernel creates a `Koa` server, which defines an array of `middlewares` that will be run before the request is executed. These middlewares configure error handling, configure logging, and perform other tasks that need to be done before the request is actually handled.
 
-The HTTP kernel also defines a list of HTTP [middleware](/middleware) that all requests must pass through before being handled by the application. These middleware handle reading and writing the [HTTP session](/session), determining if the application is in maintenance mode, [verifying the CSRF token](/csrf), and more.
-
-The method signature for the HTTP kernel's `handle` method is quite simple: receive a `Request` and return a `Response`. Think of the Kernel as being a big black box that represents your entire application. Feed it HTTP requests and it will return HTTP responses.
+The method signature for the HTTP kernel's `handle` method is quite simple: receive a `Container` and return a `Server`. Think of the Kernel as being a big black box that represents your entire application. Feed it HTTP requests and it will return HTTP responses.
 
 #### Service Providers
 
-One of the most important Kernel bootstrapping actions is loading the [service providers](/providers) for your application. All of the service providers for the application are configured in the `config/app.php` configuration file's `providers` array. First, the `register` method will be called on all providers, then, once all providers have been registered, the `boot` method will be called.
+One of the most important Kernel bootstrapping actions is loading the [service providers](/providers) for your application. All of the service providers for the application are configured in the `bootstrap/app.ts`  file. First, the `register` method will be called on all providers, then, once all providers have been registered, the `boot` method will be called.
 
-Service providers are responsible for bootstrapping all of the framework's various components, such as the database, queue, validation, and routing components. Since they bootstrap and configure every feature offered by the framework, service providers are the most important aspect of the entire Laravel bootstrap process.
+Service providers are responsible for bootstrapping all of the framework's various components, such as the database, queue, validation, and routing components. Since they bootstrap and configure every feature offered by the starter kit, service providers are the most important aspect of the entire Looped bootstrap process.
 
 #### Dispatch Request
 
-Once the application has been bootstrapped and all service providers have been registered, the `Request` will be handed off to the router for dispatching. The router will dispatch the request to a route or controller, as well as run any route specific middleware.
+Once the application has been bootstrapped and all service providers have been registered, the `Server` will be asked to listen to a port for requests. The server will dispatch the request to a route or controller, as well as run any route specific middleware.
 
 
 ## Focus On Service Providers
 
-Service providers are truly the key to bootstrapping a Laravel application. The application instance is created, the service providers are registered, and the request is handed to the bootstrapped application. It's really that simple!
+Service providers are truly the key to bootstrapping a Looped application. The application instance is created, the service providers are registered, and the request is handed to the bootstrapped application. It's really that simple!
 
 Having a firm grasp of how a Laravel application is built and bootstrapped via service providers is very valuable. Your application's default service providers are stored in the `app/Providers` directory.
 
