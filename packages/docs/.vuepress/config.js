@@ -34,8 +34,8 @@ module.exports = {
                     '/lifecycle.html',
                     '/container.html',
                     '/providers.html',
-                    '/facades.html',
-                    '/contracts.html',
+                    // '/facades.html',
+                    // '/contracts.html',
                 ]
             },
             {
