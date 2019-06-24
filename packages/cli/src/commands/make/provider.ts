@@ -1,7 +1,7 @@
 import {Command, flags} from '@oclif/command'
 import { make } from '../../make';
 
-export default class MakeController extends Command
+export default class MakeProvider extends Command
 {
   static flags = {
     help: flags.help({char: 'h'}),
@@ -11,8 +11,8 @@ export default class MakeController extends Command
 
   async run()
   {
-    const { args } = this.parse(MakeController)
+    const { args } = this.parse(MakeProvider)
 
-    await make(args, `app/Http/Controllers/${args.name}.ts`, 'controller');
+    await make(args, `app/Providers/${args.name}.ts`, 'provider');
   }
 }

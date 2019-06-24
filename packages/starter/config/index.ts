@@ -1,4 +1,5 @@
 import { config } from "dotenv"
+import { ConnectionOptions } from "typeorm";
 
 config({ path: __dirname + `/../.env.${process.env.NODE_ENV}` })
 config()
@@ -21,7 +22,14 @@ const services = {
     s3: {
         accessKeyId: process.env.AWS_ACCESS_KEY_ID,
         secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
-    }
+    },
+}
+
+const database: ConnectionOptions = {
+    type: 'postgres',
+    url: process.env.DATABASE_URL || 'postgres://127.0.0.1',
+    entities: ['app/*.ts'],
+    synchronize: true,
 }
 
 const cache = {
@@ -31,5 +39,6 @@ const cache = {
 export {
     app,
     services,
-    cache
+    cache,
+    database,
 }

@@ -5,9 +5,6 @@ import { Inject, Service } from 'typedi'
 @Service()
 export class <%= name %>
 {
-    /**
-     * @todo nly works for the memory cache driver
-     */
     @Get("/")
     async home()
     {
