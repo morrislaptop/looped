@@ -1,17 +1,12 @@
-import 'reflect-metadata'
-
-import { container } from '../../bootstrap/app'
-import { handle } from '../../app/Http/Kernel'
-
+import { koa } from '../../bootstrap/test'
 import request from 'supertest'
-import { dump } from '../../app/helpers';
 
 // Run tests
 describe("create", () => {
 
   test("should create an environment", async () => {
     // Arrange.
-    const app = handle(container).callback()
+    const app = (await koa()).callback()
 
     // Act.
     const response = await request(app).get('/')

@@ -1,5 +1,8 @@
-import * as config from '../config'
-import { container } from './app'
+import { container } from './container'
 import { handle } from '../app/Console/Kernel'
 
-handle(container)
+async function run() {
+    handle(await container())
+}
+
+run()

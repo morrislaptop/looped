@@ -10,7 +10,7 @@ export function handle(container: typeof Container)
     // creates express app, registers all controller routes and returns you express app instance
     useContainer(container);
 
-    const app: Koa = createKoaServer({
+    const koa: Koa = createKoaServer({
         controllers,
         middlewares: [
             TrimStringsMiddleware,
@@ -18,10 +18,10 @@ export function handle(container: typeof Container)
         ]
     })
 
-    app.proxy = true
+    koa.proxy = true
     // app.set('views', __dirname + '/../resources/views');
     // app.set('view engine', 'ejs')
     // app.use(express.static('public'))
 
-    return app
+    return koa
 }

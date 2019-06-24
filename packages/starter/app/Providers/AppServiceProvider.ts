@@ -1,10 +1,10 @@
 import { Container } from 'typedi'
 import * as config from '../../config'
+import { Promise } from 'bluebird'
 
 export class AppServiceProvider
 {
-    register()
-    {
-        Container.set('hello', 'world')
-    }
+    async register() { }
+
+    async boot() { }
 }
