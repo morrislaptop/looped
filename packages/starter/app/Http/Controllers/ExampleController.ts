@@ -10,7 +10,7 @@ export class ExampleController
 {
     @Get('/')
     async index(@Req() req: Request) {
-        return 'Hello'
+        return 'Hello Controller'
     }
 
     @Post('/')

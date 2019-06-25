@@ -1,7 +1,6 @@
 import { createKoaServer, useContainer } from 'routing-controllers';
-import { controllers } from '../../routes/controllers'
+import { controllers, routes, middlewares } from '../../routes'
 import Koa from 'koa';
-import { TrimStringsMiddleware, ConvertEmptyStringsToNull } from '@looped-ts/foundation';
 import * as config from '../../config'
 import Container from 'typedi';
 
@@ -12,11 +11,10 @@ export function handle(container: typeof Container)
 
     const koa: Koa = createKoaServer({
         controllers,
-        middlewares: [
-            TrimStringsMiddleware,
-            ConvertEmptyStringsToNull,
-        ]
+        middlewares,
     })
+
+    koa.use(routes)
 
     koa.proxy = true
     // app.set('views', __dirname + '/../resources/views');
