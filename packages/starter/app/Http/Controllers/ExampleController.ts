@@ -1,4 +1,5 @@
-import { Controller, Post, Ctx, Get, Req, Render } from 'routing-controllers'
+import { Controller, Post, Ctx, Get, Req, Render, Param } from 'routing-controllers'
+import {EntityFromParam} from "typeorm-routing-controllers-extensions";
 import Container, { Service } from 'typedi'
 import { Context, Request } from 'koa'
 import getRawBody from 'raw-body'
@@ -16,10 +17,14 @@ export class ExampleController
         }
     }
 
-    @Get('/hello')
-    @Render("hello.ejs")
-    async hello(@Req() req: Request) {
-        return 'Hello Controller'
+    @Get('/hello/:name?')
+    async hello(@Param('name') name: string = 'User') {
+        return `Hello ${name}`
+    }
+
+    @Get('/users/:firstName')
+    async show(@EntityFromParam('firstName', { property: 'firstName' }) user: User) {
+        return 'Hi'
     }
 
     @Post('/')
