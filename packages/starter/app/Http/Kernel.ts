@@ -14,7 +14,7 @@ export function handleWithKoa(container: typeof Container)
 
     const koa: Koa = createKoaServer({
         controllers,
-        // middlewares,
+        middlewares,
     })
 
     koa.proxy = true
