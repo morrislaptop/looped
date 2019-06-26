@@ -1,100 +1,94 @@
 # Routing
 
-- [Basic Routing](#basic-routing)
-    - [Redirect Routes](#redirect-routes)
-    - [View Routes](#view-routes)
-- [Route Parameters](#route-parameters)
-    - [Required Parameters](#required-parameters)
-    - [Optional Parameters](#parameters-optional-parameters)
-    - [Regular Expression Constraints](#parameters-regular-expression-constraints)
-- [Named Routes](#named-routes)
-- [Route Groups](#route-groups)
-    - [Middleware](#route-group-middleware)
-    - [Namespaces](#route-group-namespaces)
-    - [Sub-Domain Routing](#route-group-sub-domain-routing)
-    - [Route Prefixes](#route-group-prefixes)
-    - [Route Name Prefixes](#route-group-name-prefixes)
-- [Route Model Binding](#route-model-binding)
-    - [Implicit Binding](#implicit-binding)
-    - [Explicit Binding](#explicit-binding)
-- [Fallback Routes](#fallback-routes)
-- [Rate Limiting](#rate-limiting)
-- [Form Method Spoofing](#form-method-spoofing)
-- [Accessing The Current Route](#accessing-the-current-route)
-
-
 ## Basic Routing
 
-The most basic Laravel routes accept a URI and a `Closure`, providing a very simple and expressive method of defining routes:
+The most basic Looped routes use the amazing [routing controllers](https://github.com/typestack/routing-controllers) package. This package allows a very simple and express method of defining routes:
 
-    Route::get('foo', function () {
-        return 'Hello World';
-    });
+```typescript
+import { Controller, Get } from 'routing-controllers'
+import { Service } from 'typedi'
+
+@Controller()
+@Service()
+export class ExampleController
+{
+    @Get('/foo')
+    async index() {
+        return 'Hello World'
+    }
+}
+```
 
 #### The Default Route Files
 
-All Laravel routes are defined in your route files, which are located in the `routes` directory. These files are automatically loaded by the framework. The `routes/web.php` file defines routes that are for your web interface. These routes are assigned the `web` middleware group, which provides features like session state and CSRF protection. The routes in `routes/api.php` are stateless and are assigned the `api` middleware group.
+All Looped routes are defined in your route files, which are located in the `routes` directory. These files are automatically loaded by the stater kit. The `routes/controllers.ts` file defines the controllers that are for your web interface.
 
-For most applications, you will begin by defining routes in your `routes/web.php` file. The routes defined in `routes/web.php` may be accessed by entering the defined route's URL in your browser. For example, you may access the following route by navigating to `http://your-app.test/user` in your browser:
+For most applications, you will begin by defining routes in your controllers and registering your controllers in `routes/controllers.ts` file. The routes defined in your controller methods may be accessed by entering the defined route's URL in your browser. For example, you may access the following route by navigating to `http://your-app.test/user` in your browser:
 
-    Route::get('/user', 'UserController@index');
-
-Routes defined in the `routes/api.php` file are nested within a route group by the `RouteServiceProvider`. Within this group, the `/api` URI prefix is automatically applied so you do not need to manually apply it to every route in the file. You may modify the prefix and other route group options by modifying your `RouteServiceProvider` class.
+```typescript
+@Get('/user')
+async index() {
+		return ''
+}
+```
 
 #### Available Router Methods
 
 The router allows you to register routes that respond to any HTTP verb:
 
-    Route::get($uri, $callback);
-    Route::post($uri, $callback);
-    Route::put($uri, $callback);
-    Route::patch($uri, $callback);
-    Route::delete($uri, $callback);
-    Route::options($uri, $callback);
+```typescript
+import {Get, Post, Put, Patch, Delete} from "routing-controllers";
 
-Sometimes you may need to register a route that responds to multiple HTTP verbs. You may do so using the `match` method. Or, you may even register a route that responds to all HTTP verbs using the `any` method:
+@Get('/users');
+@Post('/users');
+@Put('/users/:id');
+@Patch('/users/:id');
+@Delete('/users/:id');
+```
 
-    Route::match(['get', 'post'], '/', function () {
-        //
-    });
+Sometimes you may need to register a route that responds to multiple HTTP verbs. You may do so using the `match` method.
 
-    Route::any('/', function () {
-        //
-    });
-
-#### CSRF Protection
-
-Any HTML forms pointing to `POST`, `PUT`, or `DELETE` routes that are defined in the `web` routes file should include a CSRF token field. Otherwise, the request will be rejected. You can read more about CSRF protection in the [CSRF documentation](/csrf):
-
-    <form method="POST" action="/profile">
-        @csrf
-        ...
-    </form>
-
+```typescript
+@Post('/users');
+@Put('/users/:id');
+@Patch('/users/:id');
+async store() {
+		return User.updateOrCreate()
+}
+```
 
 ### Redirect Routes
 
-If you are defining a route that redirects to another URI, you may use the `Route::redirect` method. This method provides a convenient shortcut so that you do not have to define a full route or controller for performing a simple redirect:
+If you are defining a route that redirects to another URI, you may use the `@Locatio` decorator. This method provides a convenient shortcut so that you do not have to define a full controller method for performing a simple redirect:
 
-    Route::redirect('/here', '/there');
+```typescript
+@Redirect("http://github.com")
+@Get('/gitub')
+```
 
-By default, `Route::redirect` returns a `302` status code. You may customize the status code using the optional third parameter:
+By default, `@Redirect` returns a `302` status code. You may customize the status code using the `@HttpCode` decorator.
 
-    Route::redirect('/here', '/there', 301);
-
-You may use the `Route::permanentRedirect` method to return a `301` status code:
-
-    Route::permanentRedirect('/here', '/there');
-
+```typescript
+@HttpCode(301)
+@Redirect("http://github.com")
+@Get('/gitub')
+```
 
 ### View Routes
 
-If your route only needs to return a view, you may use the `Route::view` method. Like the `redirect` method, this method provides a simple shortcut so that you do not have to define a full route or controller. The `view` method accepts a URI as its first argument and a view name as its second argument. In addition, you may provide an array of data to pass to the view as an optional third argument:
+If your route only needs to return a view, you may use the `Render` method. You may provide an object of data to pass to the view from the return value of the controller method:
 
-    Route::view('/welcome', 'welcome');
+```typescript
+@Get('/')
+@Render("index.ejs")
+async index(@Req() req: Request) {
+		return {
+				hello: 'Looped',
+		}
+}
+```
 
-    Route::view('/welcome', 'welcome', ['name' => 'Taylor']);
-
+> There is a [current bug](https://github.com/typestack/routing-controllers/issues/378) where the rendered version is cached and that response will be used for all future requests. We are working on a fix for this. 
 
 ## Route Parameters
 
@@ -123,7 +117,7 @@ Occasionally you may need to specify a route parameter, but make the presence of
     Route::get('user/{name?}', function ($name = null) {
         return $name;
     });
-
+    
     Route::get('user/{name?}', function ($name = 'John') {
         return $name;
     });
@@ -136,11 +130,11 @@ You may constrain the format of your route parameters using the `where` method o
     Route::get('user/{name}', function ($name) {
         //
     })->where('name', '[A-Za-z]+');
-
+    
     Route::get('user/{id}', function ($id) {
         //
     })->where('id', '[0-9]+');
-
+    
     Route::get('user/{id}/{name}', function ($id, $name) {
         //
     })->where(['id' => '[0-9]+', 'name' => '[a-z]+']);
@@ -158,7 +152,7 @@ If you would like a route parameter to always be constrained by a given regular 
     public function boot()
     {
         Route::pattern('id', '[0-9]+');
-
+    
         parent::boot();
     }
 
@@ -198,7 +192,7 @@ Once you have assigned a name to a given route, you may use the route's name whe
 
     // Generating URLs...
     $url = route('profile');
-
+    
     // Generating Redirects...
     return redirect()->route('profile');
 
@@ -207,7 +201,7 @@ If the named route defines parameters, you may pass the parameters as the second
     Route::get('user/{id}/profile', function ($id) {
         //
     })->name('profile');
-
+    
     $url = route('profile', ['id' => 1]);
 
 #### Inspecting The Current Route
@@ -226,7 +220,7 @@ If you would like to determine if the current request was routed to a given name
         if ($request->route()->named('profile')) {
             //
         }
-
+    
         return $next($request);
     }
 
@@ -246,7 +240,7 @@ To assign middleware to all routes within a group, you may use the `middleware` 
         Route::get('/', function () {
             // Uses first & second Middleware
         });
-
+    
         Route::get('user/profile', function () {
             // Uses first & second Middleware
         });
@@ -336,7 +330,7 @@ To register an explicit binding, use the router's `model` method to specify the 
     public function boot()
     {
         parent::boot();
-
+    
         Route::model('user', App\User::class);
     }
 
@@ -362,7 +356,7 @@ If you wish to use your own resolution logic, you may use the `Route::bind` meth
     public function boot()
     {
         parent::boot();
-
+    
         Route::bind('user', function ($value) {
             return App\User::where('name', $value)->first() ?? abort(404);
         });
@@ -436,9 +430,9 @@ You may use the `@method` Blade directive to generate the `_method` input:
 You may use the `current`, `currentRouteName`, and `currentRouteAction` methods on the `Route` facade to access information about the route handling the incoming request:
 
     $route = Route::current();
-
+    
     $name = Route::currentRouteName();
-
+    
     $action = Route::currentRouteAction();
 
 Refer to the API documentation for both the [underlying class of the Route facade](https://laravel.com/api/{{version}}/Illuminate/Routing/Router.html) and [Route instance](https://laravel.com/api/{{version}}/Illuminate/Routing/Route.html) to review all accessible methods.

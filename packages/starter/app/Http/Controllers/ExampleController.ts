@@ -1,4 +1,4 @@
-import { Controller, Post, Ctx, Get, Req } from 'routing-controllers'
+import { Controller, Post, Ctx, Get, Req, Render } from 'routing-controllers'
 import Container, { Service } from 'typedi'
 import { Context, Request } from 'koa'
 import getRawBody from 'raw-body'
@@ -9,7 +9,16 @@ import { User } from '../../User';
 export class ExampleController
 {
     @Get('/')
+    @Render("index.ejs")
     async index(@Req() req: Request) {
+        return {
+            hello: 'Looped',
+        }
+    }
+
+    @Get('/hello')
+    @Render("hello.ejs")
+    async hello(@Req() req: Request) {
         return 'Hello Controller'
     }
 
