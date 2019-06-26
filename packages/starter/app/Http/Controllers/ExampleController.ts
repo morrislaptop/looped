@@ -1,18 +1,18 @@
 import { Controller, Post, Ctx, Get, Req, Render, Param, Body, JsonController } from 'routing-controllers'
 import {EntityFromParam} from "typeorm-routing-controllers-extensions";
 import Container, { Service } from 'typedi'
-import { Context, Request } from 'koa'
 import getRawBody from 'raw-body'
 import { User } from '../../User'
 import { SlimBody } from '@looped-ts/foundation'
+import { Request, Express } from 'express';
 
-@JsonController()
+@Controller()
 @Service()
 export class ExampleController
 {
     @Get('/')
     @Render("index.ejs")
-    async index(@Req() req: Request) {
+    async index(@Req() req: Express.Multer.File ) {
         return {
             hello: 'Looped',
         }
@@ -31,5 +31,12 @@ export class ExampleController
     @Post('/')
     async store(@SlimBody() slimmed: any, @Body() body: any) {
         return { body, slimmed }
+    }
+
+    @Post("/files")
+    async files(@Req() req: Request) {
+        const body = await getRawBody(req)
+
+        return body
     }
 }

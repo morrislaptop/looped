@@ -5,8 +5,8 @@
 To obtain an instance of the current [HTTP request](https://expressjs.com/en/api.html#req) via dependency injection, you should use the  `@Req()` decorator on your controller method. The incoming request instance will automatically be injected by the [service container](/container):
 
 ```typescript
-import {Controller, Req, Res, Get} from 'routing-controllers'
-import { Request } from 'koa'
+import { Controller, Req, Res, Get } from 'routing-controllers'
+import { Request } from 'express'
 
 @Controller()
 export class UserController {
@@ -25,7 +25,7 @@ If your controller method is also expecting input from a route parameter you sho
 
     @Get("/users/:id")
 
-You may still type-hint the [HTTP request](https://koajs.com/#request) and access your route parameter `id` by defining your controller method as follows:
+You may still type-hint the [HTTP request](https://expressjs.com/en/api.html#req) and access your route parameter `id` by defining your controller method as follows:
 
 ```typescript
 import {Controller, Req, Res, Get} from 'routing-controllers'
@@ -44,7 +44,7 @@ export class UserController {
 
 ### Request Path & Method
 
-The [HTTP request](https://koajs.com/#request) instance provides a variety of methods for examining the HTTP request for your application. We will discuss a few of the most important methods below.
+The [HTTP request](https://expressjs.com/en/api.html#req) instance provides a variety of methods for examining the HTTP request for your application. We will discuss a few of the most important methods below.
 
 #### Retrieving The Request Path
 
@@ -176,10 +176,10 @@ You can handle uploaded files via [form-data](#retrieving-uploaded-files) or [ra
 You may access uploaded files using the `@UploadedFile()` decorator. The decorator returns an instance of the [File](https://github.com/expressjs/multer#file-information) class, which provides a variety of properties for interacting with the file:
 
 ```typescript
-import { File } from 'koa-multer'
+import { Express } from 'express'
 
 @Post("/users")
-store(@UploadedFile("avatar") avatar: File) {
+store(@UploadedFile("avatar") avatar: Express.Multer.File) {
 	  return avatar.name
 }
 ```
@@ -217,7 +217,8 @@ If you would like to store the file somewhere automatically, the `@UploadedFile`
 ```typescript
 import { Controller, Post, UploadedFile } from 'routing-controllers'
 import { Service } from 'typedi'
-import { File, Options } from 'koa-multer'
+import { Express } from 'express'
+import { Options } from 'multer'
 
 const options: Options = {
     dest: 'uploads/'
@@ -228,7 +229,7 @@ const options: Options = {
 export class ExampleController
 {
     @Post("/files")
-    store(@UploadedFile("fileName", { options }) file: File) {
+    store(@UploadedFile("fileName", { options }) file: Express.Multer.File) {
         return file.path
     }
 }
@@ -239,7 +240,7 @@ The `destination`, `filename` and `path` properties on the File object are now a
 If you do not want the file name to be automatically generated, you may [create your own storage method](https://github.com/expressjs/multer#diskstorage) and pass this to options.
 
 ```typescript
-import { diskStorage, Options } from 'koa-multer'
+import { diskStorage, Options } from 'multer'
 
 const options: Options = {
     storage: diskStorage({
@@ -253,7 +254,7 @@ const options: Options = {
 If you would like to store your files somewhere more reliable, like S3, then it's recommended to use the [multer-s3](https://github.com/badunk/multer-s3) package.
 
 ```typescript
-import { Options, StorageEngine } from 'koa-multer'
+import { Options, StorageEngine } from 'multer'
 import s3storage from 'multer-s3'
 import { S3 } from 'aws-sdk'
 import * as config from '../../../config'
@@ -277,9 +278,9 @@ When using this package, additional properties are available on the `File` objec
 You can access the raw body using the [raw-body]() package:
 
 ```typescript
-import { Controller, Post, Ctx } from 'routing-controllers'
+import { Controller, Post, Req } from 'routing-controllers'
 import { Service } from 'typedi'
-import { Context } from 'koa'
+import { Request } from 'express'
 import getRawBody from 'raw-body'
 
 @Controller()
@@ -287,8 +288,8 @@ import getRawBody from 'raw-body'
 export class ExampleController
 {
     @Post("/files")
-    async store(@Ctx() ctx: Context) {
-        const body = await getRawBody(ctx.req)
+    async store(@Req() req: Request) {
+        const body = await getRawBody(req)
 
         return body
     }
@@ -301,8 +302,4 @@ export class ExampleController
 
 When running your applications behind a load balancer that terminates TLS / SSL certificates, you may notice your application sometimes does not generate HTTPS links. Typically this is because your application is being forwarded traffic from your load balancer on port and does not know it should generate secure links.
 
-To solve this, you may set the `proxy` property of the Koa application to true in your `bootstrap/app.ts` file.
-
-
-
-App\Http\Middleware\TrustProxies` middleware that is included in your Laravel application, which allows you to quickly customize the load balancers or proxies that should be trusted by your application. Your trusted proxies should be listed as an array on the `$proxies` property of this middleware. 
+To solve this, you may set the `trust proxy` property of the Express application to true in your `app/Http/Kernel.ts` file.

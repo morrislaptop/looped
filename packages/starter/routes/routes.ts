@@ -1,9 +1,11 @@
-import Router from 'koa-router'
+import express, { RequestHandler } from 'express'
 
-const router = new Router()
+const router = express.Router()
 
-router.get('/router', ctx => {
-    ctx.body = 'Hello Router'
+router.get('/router', (req, res) => {
+    res.send('Hello Router')
 })
 
-export const routes = router.routes()
+export const routes: { [path: string]: RequestHandler } = {
+    '/': router
+}

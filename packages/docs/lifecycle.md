@@ -20,7 +20,7 @@ The `server.ts` file retrieves an instance of the Looped application from `boots
 
 Next, the incoming request is sent to either the HTTP kernel or the console kernel, depending on the type of request that is entering the application. These two kernels serve as the central location that all requests flow through. For now, let's just focus on the HTTP kernel, which is located in `app/Http/Kernel.ts`.
 
-The HTTP kernel creates a `Koa` server, which defines an array of `middlewares` that will be run before the request is executed. These middlewares configure error handling, configure logging, and perform other tasks that need to be done before the request is actually handled.
+The HTTP kernel creates an `Express` server, which defines an array of `middlewares` that will be run before the request is executed. These middlewares configure error handling, configure logging, and perform other tasks that need to be done before the request is actually handled.
 
 The method signature for the HTTP kernel's `handle` method is quite simple: receive a `Container` and return a `Server`. Think of the Kernel as being a big black box that represents your entire application. Feed it HTTP requests and it will return HTTP responses.
 

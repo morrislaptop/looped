@@ -6,9 +6,6 @@ import { AppServiceProvider } from '../app/Providers/AppServiceProvider'
 import { DatabaseServiceProvider } from '../app/Providers/DatabaseServiceProvider'
 import { controllers } from '../routes/controllers'
 import { Container } from 'typedi'
-import { bootstrapMicroframework } from 'microframework'
-import express from 'express';
-import Koa from 'koa'
 import { Promise as bluebird } from 'bluebird'
 
 export async function container() {
