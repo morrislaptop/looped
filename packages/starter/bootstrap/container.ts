@@ -9,7 +9,6 @@ import { Container } from 'typedi'
 import { bootstrapMicroframework } from 'microframework'
 import express from 'express';
 import Koa from 'koa'
-import { TrimStringsMiddleware, ConvertEmptyStringsToNull } from '@looped-ts/foundation'
 import { Promise as bluebird } from 'bluebird'
 
 export async function container() {

@@ -1,4 +1,4 @@
-import { koa } from '../../bootstrap/test'
+import { server } from '../../bootstrap/test'
 import request from 'supertest'
 
 // Run tests

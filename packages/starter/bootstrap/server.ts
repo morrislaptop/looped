@@ -1,11 +1,11 @@
 import { container } from './container'
 import * as config from '../config'
-import { handle } from '../app/Http/Kernel'
+import { handleWithExpress as handle } from '../app/Http/Kernel'
 
 async function run() {
-    const koa = handle(await container())
+    const server = handle(await container())
 
-    koa.listen(config.app.port)
+    server.listen(config.app.port)
 }
 
 run()

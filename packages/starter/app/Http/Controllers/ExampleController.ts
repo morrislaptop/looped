@@ -1,11 +1,12 @@
-import { Controller, Post, Ctx, Get, Req, Render, Param } from 'routing-controllers'
+import { Controller, Post, Ctx, Get, Req, Render, Param, Body, JsonController } from 'routing-controllers'
 import {EntityFromParam} from "typeorm-routing-controllers-extensions";
 import Container, { Service } from 'typedi'
 import { Context, Request } from 'koa'
 import getRawBody from 'raw-body'
-import { User } from '../../User';
+import { User } from '../../User'
+import { SlimBody } from '@looped-ts/foundation'
 
-@Controller()
+@JsonController()
 @Service()
 export class ExampleController
 {
@@ -28,15 +29,7 @@ export class ExampleController
     }
 
     @Post('/')
-    async store() {
-        const user = new User()
-
-        user.firstName = 'Craig'
-        user.lastName = 'Morris'
-        user.age = 33
-
-        await user.save()
-
-        return user
+    async store(@SlimBody() slimmed: any, @Body() body: any) {
+        return { body, slimmed }
     }
 }
