@@ -1,0 +1,12 @@
+import {Middleware, ExpressMiddlewareInterface} from "routing-controllers";
+import { Request, Response, NextFunction } from "express";
+
+@Middleware({ type: "before" })
+export class <%= name %> implements ExpressMiddlewareInterface {
+
+    use(request: Request, response: Response, next: NextFunction): void {
+        console.log("do something...");
+        next();
+    }
+
+}

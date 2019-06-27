@@ -1,10 +1,11 @@
-import { Controller, Post, Ctx, Get, Req, Render, Param, Body, JsonController } from 'routing-controllers'
+import { Controller, Post, Ctx, Get, Req, Render, Param, Body, JsonController, UseBefore } from 'routing-controllers'
 import {EntityFromParam} from "typeorm-routing-controllers-extensions";
 import Container, { Service } from 'typedi'
 import getRawBody from 'raw-body'
 import { User } from '../../User'
 import { SlimBody } from '@looped-ts/foundation'
 import { Request, Express } from 'express';
+import { CheckAge } from '../Middleware/CheckAge';
 
 @Controller()
 @Service()
