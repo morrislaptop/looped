@@ -13,12 +13,30 @@
 
 ## Introduction
 
-Middleware provide a convenient mechanism for filtering HTTP requests entering your application. For example, Laravel includes a middleware that verifies the user of your application is authenticated. If the user is not authenticated, the middleware will redirect the user to the login screen. However, if the user is authenticated, the middleware will allow the request to proceed further into the application.
+Middleware provide a convenient mechanism for filtering HTTP requests entering your application. 
 
 Additional middleware can be written to perform a variety of tasks besides authentication. A CORS middleware might be responsible for adding the proper headers to all responses leaving your application. A logging middleware might log all incoming requests to your application.
 
-There are several middleware included in the Laravel framework, including middleware for authentication and CSRF protection. All of these middleware are located in the `app/Http/Middleware` directory.
+Looped uses the Express framework for handling HTTP requests which has middleware packages available for almost anything that you need in your application. Routing Controllers also provides some easy shortcuts for defining your own middleware and applying it to certain controllers and/or actions. 
 
+## Using Existing Middleware
+
+Existing middleware should be registered directly with express in your `app/Http/Kernel.ts` file. 
+
+```typescript
+import Limiter from 'express-rate-limit'
+
+export function handleWithExpress(container: typeof Container)
+{
+    const server = express()
+
+    server.use(new Limiter({ windowMs: 15 * 60 * 1000, max: 100 }))
+}
+```
+
+
+
+> Register the middleware before or after the `useExpressServer` to control the order of the middleware being applied. 
 
 ## Defining Middleware
 
@@ -29,11 +47,11 @@ To create a new middleware, use the `make:middleware` Artisan command:
 This command will place a new `CheckAge` class within your `app/Http/Middleware` directory. In this middleware, we will only allow access to the route if the supplied `age` is greater than 200. Otherwise, we will redirect the users back to the `home` URI:
 
     <?php
-
+    
     namespace App\Http\Middleware;
-
+    
     use Closure;
-
+    
     class CheckAge
     {
         /**
@@ -48,7 +66,7 @@ This command will place a new `CheckAge` class within your `app/Http/Middleware`
             if ($request->age <= 200) {
                 return redirect('home');
             }
-
+    
             return $next($request);
         }
     }
@@ -64,17 +82,17 @@ It's best to envision middleware as a series of "layers" HTTP requests must pass
 Whether a middleware runs before or after a request depends on the middleware itself. For example, the following middleware would perform some task **before** the request is handled by the application:
 
     <?php
-
+    
     namespace App\Http\Middleware;
-
+    
     use Closure;
-
+    
     class BeforeMiddleware
     {
         public function handle($request, Closure $next)
         {
             // Perform action
-
+    
             return $next($request);
         }
     }
@@ -82,19 +100,19 @@ Whether a middleware runs before or after a request depends on the middleware it
 However, this middleware would perform its task **after** the request is handled by the application:
 
     <?php
-
+    
     namespace App\Http\Middleware;
-
+    
     use Closure;
-
+    
     class AfterMiddleware
     {
         public function handle($request, Closure $next)
         {
             $response = $next($request);
-
+    
             // Perform action
-
+    
             return $response;
         }
     }
@@ -113,7 +131,7 @@ If you want a middleware to run during every HTTP request to your application, l
 If you would like to assign middleware to specific routes, you should first assign the middleware a key in your `app/Http/Kernel.php` file. By default, the `$routeMiddleware` property of this class contains entries for the middleware included with Laravel. To add your own, append it to this list and assign it a key of your choosing:
 
     // Within App\Http\Kernel Class...
-
+    
     protected $routeMiddleware = [
         'auth' => \App\Http\Middleware\Authenticate::class,
         'auth.basic' => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
@@ -141,7 +159,7 @@ You may also assign multiple middleware to the route:
 When assigning middleware, you may also pass the fully qualified class name:
 
     use App\Http\Middleware\CheckAge;
-
+    
     Route::get('admin/profile', function () {
         //
     })->middleware(CheckAge::class);
@@ -167,7 +185,7 @@ Out of the box, Laravel comes with `web` and `api` middleware groups that contai
             \App\Http\Middleware\VerifyCsrfToken::class,
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
         ],
-
+    
         'api' => [
             'throttle:60,1',
             'auth:api',
@@ -179,7 +197,7 @@ Middleware groups may be assigned to routes and controller actions using the sam
     Route::get('/', function () {
         //
     })->middleware('web');
-
+    
     Route::group(['middleware' => ['web']], function () {
         //
     });
@@ -215,11 +233,11 @@ Middleware can also receive additional parameters. For example, if your applicat
 Additional middleware parameters will be passed to the middleware after the `$next` argument:
 
     <?php
-
+    
     namespace App\Http\Middleware;
-
+    
     use Closure;
-
+    
     class CheckRole
     {
         /**
@@ -235,10 +253,10 @@ Additional middleware parameters will be passed to the middleware after the `$ne
             if (! $request->user()->hasRole($role)) {
                 // Redirect...
             }
-
+    
             return $next($request);
         }
-
+    
     }
 
 Middleware parameters may be specified when defining the route by separating the middleware name and parameters with a `:`. Multiple parameters should be delimited by commas:
@@ -253,18 +271,18 @@ Middleware parameters may be specified when defining the route by separating the
 Sometimes a middleware may need to do some work after the HTTP response has been prepared. For example, the "session" middleware included with Laravel writes the session data to storage after the response has been fully prepared. If you define a `terminate` method on your middleware, it will automatically be called after the response is ready to be sent to the browser.
 
     <?php
-
+    
     namespace Illuminate\Session\Middleware;
-
+    
     use Closure;
-
+    
     class StartSession
     {
         public function handle($request, Closure $next)
         {
             return $next($request);
         }
-
+    
         public function terminate($request, $response)
         {
             // Store the session data...

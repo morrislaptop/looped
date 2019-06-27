@@ -1,22 +1,29 @@
-import { createKoaServer, useContainer, createExpressServer } from 'routing-controllers';
+import { createKoaServer, useContainer, createExpressServer, useExpressServer } from 'routing-controllers';
 import { controllers, routes, middlewares } from '../../routes'
 import * as config from '../../config'
 import Container from 'typedi'
 import express, { Express } from 'express'
+import Limiter from 'express-rate-limit'
 
 export function handleWithExpress(container: typeof Container)
 {
     // creates express app, registers all controller routes and returns you express app instance
     useContainer(container);
 
-    const server: Express = createExpressServer({
+    const server = express()
+
+    server.use(new Limiter({ windowMs: 15 * 60 * 1000, max: 100 }))
+
+    useExpressServer(server, {
         controllers,
         middlewares,
+        cors: true,
     })
 
     server.set('trust proxy', true)
     server.set('views', __dirname + '/../../resources/views')
     server.set('view engine', 'ejs')
+
     server.use(express.static('public'))
 
     for (const path in routes) {

@@ -12,7 +12,9 @@ export class ExampleController
 {
     @Get('/')
     @Render("index.ejs")
-    async index(@Req() req: Express.Multer.File ) {
+    async index(@Req() req: any ) {
+        // console.log(req.rateLimit)
+
         return {
             hello: 'Looped',
         }
