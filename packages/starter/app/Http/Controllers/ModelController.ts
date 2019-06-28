@@ -1,13 +1,13 @@
 import { Controller, Get, Post, Put, Delete, Param, Body } from 'routing-controllers'
 import { Inject, Service } from 'typedi'
-<%- model ? `import { ${model} } from '../../${model}'` : '' %>
-<%- model ? 'import { EntityFromParam } from "typeorm-routing-controllers-extensions";' : '' %>
+import { User } from '../../User'
+import { EntityFromParam } from "typeorm-routing-controllers-extensions";
 
-@Controller(<%- prefix ? `'/${prefix}'` : '' %>)
+@Controller('/users')
 @Service()
-export class <%= name %>
+export class ModelController
 {
-    <% if (resource) { %>
+    
     /**
      * Display a listing of the resource.
      */
@@ -21,7 +21,7 @@ export class <%= name %>
      * Store a newly created resource in storage.
      */
     @Post('/')
-    store(<%= model ? `@Body() ${model.toLowerCase()}: ${model}` : '' %>)
+    store(@Body() user: User)
     {
         //
     }
@@ -30,7 +30,7 @@ export class <%= name %>
      * Display the specified resource.
      */
     @Get('/:id')
-    async show(<%- model ? `@EntityFromParam('id') ${model.toLowerCase()}: ${model}` : `@Param('id') id: number` %>)
+    async show(@EntityFromParam('id') user: User)
     {
         //
     }
@@ -39,7 +39,7 @@ export class <%= name %>
      * Update the specified resource in storage.
      */
     @Put('/:id')
-    async update(<%= model ? `@Body() ${model.toLowerCase()}: ${model}` : '' %>)
+    async update(@Body() user: User)
     {
         //
     }
@@ -48,9 +48,9 @@ export class <%= name %>
      * Remove the specified resource from storage.
      */
     @Delete('/:id')
-    async destroy(<%- model ? `@EntityFromParam('id') ${model.toLowerCase()}: ${model}` : `@Param('id') id: number` %>)
+    async destroy(@EntityFromParam('id') user: User)
     {
         //
     }
-    <% } %>
+    
 }

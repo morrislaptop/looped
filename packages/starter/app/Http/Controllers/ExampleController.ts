@@ -14,7 +14,7 @@ export class ExampleController
     @Get('/')
     @Render("index.ejs")
     async index(@Req() req: any ) {
-        // console.log(req.rateLimit)
+        // console.log(req.rateLimit)fw
 
         return {
             hello: 'Looped',
