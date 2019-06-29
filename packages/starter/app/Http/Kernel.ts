@@ -4,7 +4,6 @@ import * as config from '../../config'
 import Container from 'typedi'
 import express, { Express } from 'express'
 import Limiter from 'express-rate-limit'
-import { CheckAge } from './Middleware/CheckAge';
 
 export function handleWithExpress(container: typeof Container)
 {
@@ -18,7 +17,6 @@ export function handleWithExpress(container: typeof Container)
     useExpressServer(server, {
         controllers,
         middlewares: [
-            CheckAge,
         ],
         cors: true,
     })

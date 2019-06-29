@@ -87,99 +87,27 @@ If you are using route model binding and would like the resource controller's me
 
 #### Constructor Injection
 
-The Laravel [service container](/container) is used to resolve all Laravel controllers. As a result, you are able to type-hint any dependencies your controller may need in its constructor. The declared dependencies will automatically be resolved and injected into the controller instance:
+The Looped [service container](/container) is used to resolve all Looped controllers. As a result, you are able to type-hint any dependencies your controller may need in its constructor. The declared dependencies will automatically be resolved and injected into the controller instance:
 
-    <?php
-    
-    namespace App\Http\Controllers;
-    
-    use App\Repositories\UserRepository;
-    
-    class UserController extends Controller
-    {
-        /**
-         * The user repository instance.
-         */
-        protected $users;
-    
-        /**
-         * Create a new controller instance.
-         *
-         * @param  UserRepository  $users
-         * @return void
-         */
-        public function __construct(UserRepository $users)
-        {
-            $this->users = $users;
-        }
+```typescript
+class UserController extends Controller
+{
+  	@Inject('Cache')
+  	cache: any
+  
+  	constructor(private users: UserRepository) {
+      
     }
 
-You may also type-hint any [Laravel contract](/contracts). If the container can resolve it, you can type-hint it. Depending on your application, injecting your dependencies into your controller may provide better testability.
+	  @Get("/users/:id")
+    show(const id: number) {
+        const user = this.users.find(id)
+        
+        this.cache.set('user', user)
 
-#### Method Injection
-
-In addition to constructor injection, you may also type-hint dependencies on your controller's methods. A common use-case for method injection is injecting the `Illuminate\Http\Request` instance into your controller methods:
-
-    <?php
-    
-    namespace App\Http\Controllers;
-    
-    use Illuminate\Http\Request;
-    
-    class UserController extends Controller
-    {
-        /**
-         * Store a new user.
-         *
-         * @param  Request  $request
-         * @return Response
-         */
-        public function store(Request $request)
-        {
-            $name = $request->name;
-    
-            //
-        }
+        return { user }
     }
+}
+```
 
-If your controller method is also expecting input from a route parameter, list your route arguments after your other dependencies. For example, if your route is defined like so:
-
-    Route::put('user/{id}', 'UserController@update');
-
-You may still type-hint the `Illuminate\Http\Request` and access your `id` parameter by defining your controller method as follows:
-
-    <?php
-    
-    namespace App\Http\Controllers;
-    
-    use Illuminate\Http\Request;
-    
-    class UserController extends Controller
-    {
-        /**
-         * Update the given user.
-         *
-         * @param  Request  $request
-         * @param  string  $id
-         * @return Response
-         */
-        public function update(Request $request, $id)
-        {
-            //
-        }
-    }
-
-
-## Route Caching
-
-> {note} Closure based routes cannot be cached. To use route caching, you must convert any Closure routes to controller classes.
-
-If your application is exclusively using controller based routes, you should take advantage of Laravel's route cache. Using the route cache will drastically decrease the amount of time it takes to register all of your application's routes. In some cases, your route registration may even be up to 100x faster. To generate a route cache, just execute the `route:cache` Artisan command:
-
-    php artisan route:cache
-
-After running this command, your cached routes file will be loaded on every request. Remember, if you add any new routes you will need to generate a fresh route cache. Because of this, you should only run the `route:cache` command during your project's deployment.
-
-You may use the `route:clear` command to clear the route cache:
-
-    php artisan route:clear
+Depending on your application, injecting your dependencies into your controller may provide better testability.

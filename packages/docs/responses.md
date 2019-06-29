@@ -73,7 +73,7 @@ Laravel includes a `cache.headers` middleware, which may be used to quickly set 
         Route::get('privacy', function () {
             // ...
         });
-
+    
         Route::get('terms', function () {
             // ...
         });
@@ -95,7 +95,7 @@ The `cookie` method also accepts a few more arguments which are used less freque
 Alternatively, you can use the `Cookie` facade to "queue" cookies for attachment to the outgoing response from your application. The `queue` method accepts a `Cookie` instance or the arguments needed to create a `Cookie` instance. These cookies will be attached to the outgoing response before it is sent to the browser:
 
     Cookie::queue(Cookie::make('name', 'value', $minutes));
-
+    
     Cookie::queue('name', 'value', $minutes);
 
 
@@ -125,7 +125,7 @@ Sometimes you may wish to redirect the user to their previous location, such as 
 
     Route::post('user/profile', function () {
         // Validate the request...
-
+    
         return back()->withInput();
     });
 
@@ -139,7 +139,7 @@ When you call the `redirect` helper with no parameters, an instance of `Illumina
 If your route has parameters, you may pass them as the second argument to the `route` method:
 
     // For a route with the following URI: profile/{id}
-
+    
     return redirect()->route('profile', ['id' => 1]);
 
 #### Populating Parameters Via Eloquent Models
@@ -147,7 +147,7 @@ If your route has parameters, you may pass them as the second argument to the `r
 If you are redirecting to a route with an "ID" parameter that is being populated from an Eloquent model, you may pass the model itself. The ID will be extracted automatically:
 
     // For a route with the following URI: profile/{id}
-
+    
     return redirect()->route('profile', [$user]);
 
 If you would like to customize the value that is placed in the route parameter, you should override the `getRouteKey` method on your Eloquent model:
@@ -181,25 +181,6 @@ If your controller route requires parameters, you may pass them as the second ar
 Sometimes you may need to redirect to a domain outside of your application. You may do so by calling the `away` method, which creates a `RedirectResponse` without any additional URL encoding, validation, or verification:
 
     return redirect()->away('https://www.google.com');
-
-
-### Redirecting With Flashed Session Data
-
-Redirecting to a new URL and [flashing data to the session](/session#flash-data) are usually done at the same time. Typically, this is done after successfully performing an action when you flash a success message to the session. For convenience, you may create a `RedirectResponse` instance and flash data to the session in a single, fluent method chain:
-
-    Route::post('user/profile', function () {
-        // Update the user's profile...
-
-        return redirect('dashboard')->with('status', 'Profile updated!');
-    });
-
-After the user is redirected, you may display the flashed message from the [session](/session). For example, using [Blade syntax](/blade):
-
-    @if (session('status'))
-        <div class="alert alert-success">
-            {{ session('status') }}
-        </div>
-    @endif
 
 
 ## Other Response Types
@@ -239,9 +220,9 @@ If you would like to create a JSONP response, you may use the `json` method in c
 The `download` method may be used to generate a response that forces the user's browser to download the file at the given path. The `download` method accepts a file name as the second argument to the method, which will determine the file name that is seen by the user downloading the file. Finally, you may pass an array of HTTP headers as the third argument to the method:
 
     return response()->download($pathToFile);
-
+    
     return response()->download($pathToFile, $name, $headers);
-
+    
     return response()->download($pathToFile)->deleteFileAfterSend();
 
 > {note} Symfony HttpFoundation, which manages file downloads, requires the file being downloaded to have an ASCII file name.
@@ -262,7 +243,7 @@ Sometimes you may wish to turn the string response of a given operation into a d
 The `file` method may be used to display a file, such as an image or PDF, directly in the user's browser instead of initiating a download. This method accepts the path to the file as its first argument and an array of headers as its second argument:
 
     return response()->file($pathToFile);
-
+    
     return response()->file($pathToFile, $headers);
 
 
@@ -271,12 +252,12 @@ The `file` method may be used to display a file, such as an image or PDF, direct
 If you would like to define a custom response that you can re-use in a variety of your routes and controllers, you may use the `macro` method on the `Response` facade. For example, from a [service provider's](/providers) `boot` method:
 
     <?php
-
+    
     namespace App\Providers;
-
+    
     use Illuminate\Support\ServiceProvider;
     use Illuminate\Support\Facades\Response;
-
+    
     class ResponseMacroServiceProvider extends ServiceProvider
     {
         /**

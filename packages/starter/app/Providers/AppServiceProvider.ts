@@ -4,7 +4,9 @@ import { Promise } from 'bluebird'
 
 export class AppServiceProvider
 {
-    async register() { }
+    async register() {
+        Container.set('Hello', 'World')
+    }
 
     async boot() { }
 }
