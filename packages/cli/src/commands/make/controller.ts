@@ -7,7 +7,7 @@ export default class MakeController extends Command {
   static flags = {
     help: flags.help({char: 'h'}),
     resource: flags.boolean({ default: false }),
-    model: flags.string(),
+    model: flags.string({ default: '' }),
   }
 
   static args = [{name: 'name', required: true}]
