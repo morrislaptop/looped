@@ -47,7 +47,7 @@
   "repository": "morrislaptop/looped-ts",
   "scripts": {
     "posttest": "tslint -p . -t stylish",
-    "prepack": "rm -rf lib && tsc -b",
+    "prepack": "rm -rf lib tsconfig.tsbuildinfo && tsc -b",
     "test": "echo NO TESTS"
   },
   "types": "lib/index.d.ts",
