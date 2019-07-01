@@ -11,31 +11,36 @@ class LoopedTsCreate extends Command {
 
     static args = [{ name: 'dir' }]
 
+    static flags = {
+        version: flags.string({ default: require('../package.json').version })
+    }
+
     async run() {
-        const { args } = this.parse(LoopedTsCreate)
+        const { args, flags } = this.parse(LoopedTsCreate)
 
-        this.log(`Looping in ${args.dir}`)
+        this.log(`Looping in ${args.dir} with ${flags.version}`)
 
-        await this.copyIntoDirectory(args.dir)
+        await this.copyIntoDirectory(args.dir, flags.version!)
         await this.copyEnvExample(args.dir)
         await this.installDependencies(args.dir)
 
         this.log(`Looped!`)
     }
 
-    async copyIntoDirectory(dir: string)
+    async copyIntoDirectory(dir: string, version: string)
     {
         // Get version
-        const version = require('../package.json').version
+
         const prefix = `looped-${version}/packages/starter`
 
         // Download
-        const url = `https://github.com/morrislaptop/looped/archive/v${version}.zip`
+        const file = version === 'master' ? version : `v${version}`
+        const url = `https://github.com/morrislaptop/looped/archive/${file}.zip`
         const buffer = await request({ url, encoding: null })
         const tmp = tmpdir()
 
         // Extract only the app directory
-        await decompress(buffer, tmp, {
+        const files = await decompress(buffer, tmp, {
             filter: file => file.path.startsWith(prefix),
         })
 
