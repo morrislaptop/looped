@@ -19,7 +19,7 @@ $ npm install -g @looped-ts/cli
 $ looped COMMAND
 running command...
 $ looped (-v|--version|version)
-@looped-ts/cli/0.0.1-alpha.3 darwin-x64 node-v12.4.0
+@looped-ts/cli/0.0.1-alpha.4 darwin-x64 node-v12.5.0
 $ looped --help [COMMAND]
 USAGE
   $ looped COMMAND
@@ -30,7 +30,9 @@ USAGE
 <!-- commands -->
 * [`looped help [COMMAND]`](#looped-help-command)
 * [`looped key:generate`](#looped-keygenerate)
-* [`looped make:controller [FILE]`](#looped-makecontroller-file)
+* [`looped make:controller NAME`](#looped-makecontroller-name)
+* [`looped make:middleware NAME`](#looped-makemiddleware-name)
+* [`looped make:provider NAME`](#looped-makeprovider-name)
 
 ## `looped help [COMMAND]`
 
@@ -62,21 +64,43 @@ OPTIONS
   --show
 ```
 
-_See code: [src/commands/key/generate.ts](https://github.com/morrislaptop/looped-ts/blob/v0.0.1-alpha.3/src/commands/key/generate.ts)_
+_See code: [src/commands/key/generate.ts](https://github.com/morrislaptop/looped-ts/blob/v0.0.1-alpha.4/src/commands/key/generate.ts)_
 
-## `looped make:controller [FILE]`
-
-describe the command here
+## `looped make:controller NAME`
 
 ```
 USAGE
-  $ looped make:controller [FILE]
+  $ looped make:controller NAME
 
 OPTIONS
-  -f, --force
-  -h, --help       show CLI help
-  -n, --name=name  name to print
+  -h, --help     show CLI help
+  --model=model
+  --resource
 ```
 
-_See code: [src/commands/make/controller.ts](https://github.com/morrislaptop/looped-ts/blob/v0.0.1-alpha.3/src/commands/make/controller.ts)_
+_See code: [src/commands/make/controller.ts](https://github.com/morrislaptop/looped-ts/blob/v0.0.1-alpha.4/src/commands/make/controller.ts)_
+
+## `looped make:middleware NAME`
+
+```
+USAGE
+  $ looped make:middleware NAME
+
+OPTIONS
+  -h, --help  show CLI help
+```
+
+_See code: [src/commands/make/middleware.ts](https://github.com/morrislaptop/looped-ts/blob/v0.0.1-alpha.4/src/commands/make/middleware.ts)_
+
+## `looped make:provider NAME`
+
+```
+USAGE
+  $ looped make:provider NAME
+
+OPTIONS
+  -h, --help  show CLI help
+```
+
+_See code: [src/commands/make/provider.ts](https://github.com/morrislaptop/looped-ts/blob/v0.0.1-alpha.4/src/commands/make/provider.ts)_
 <!-- commandsstop -->
