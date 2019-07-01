@@ -5,5 +5,9 @@
   "repository": "https://github.com/morrislaptop/looped-ts",
   "author": "morrislaptop",
   "license": "MIT",
-  "main": "src/index"
+  "main": "src/index",
+  "publishConfig": {
+    "access": "public"
+  },
+  "gitHead": "31f11a8fe9b4f429b96438cbb8c29287652fd93b"
 }
