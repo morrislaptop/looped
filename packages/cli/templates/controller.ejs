@@ -1,7 +1,7 @@
 import { Controller, Get, Post, Put, Delete, Param, Body } from 'routing-controllers'
-import { Inject, Service } from 'typedi'
-<%- model ? `import { ${model} } from '../../${model}'` : '' %>
-<%- model ? 'import { EntityFromParam } from "typeorm-routing-controllers-extensions";' : '' %>
+import { Inject, Service } from 'typedi'<% if (model) { %>
+import { <%- model %> } from "../../<%- model %>";
+import { EntityFromParam } from "typeorm-routing-controllers-extensions";<% } %>
 
 @Controller(<%- prefix ? `'/${prefix}'` : '' %>)
 @Service()
