@@ -19,7 +19,7 @@ $ npm install -g @looped-ts/cli
 $ looped COMMAND
 running command...
 $ looped (-v|--version|version)
-@looped-ts/cli/0.0.1-alpha.5 darwin-x64 node-v12.5.0
+@looped-ts/cli/0.0.1-alpha.6 darwin-x64 node-v12.5.0
 $ looped --help [COMMAND]
 USAGE
   $ looped COMMAND
@@ -64,7 +64,7 @@ OPTIONS
   --show
 ```
 
-_See code: [src/commands/key/generate.ts](https://github.com/morrislaptop/looped-ts/blob/v0.0.1-alpha.5/src/commands/key/generate.ts)_
+_See code: [src/commands/key/generate.ts](https://github.com/morrislaptop/looped-ts/blob/v0.0.1-alpha.6/src/commands/key/generate.ts)_
 
 ## `looped make:controller NAME`
 
@@ -78,7 +78,7 @@ OPTIONS
   --resource
 ```
 
-_See code: [src/commands/make/controller.ts](https://github.com/morrislaptop/looped-ts/blob/v0.0.1-alpha.5/src/commands/make/controller.ts)_
+_See code: [src/commands/make/controller.ts](https://github.com/morrislaptop/looped-ts/blob/v0.0.1-alpha.6/src/commands/make/controller.ts)_
 
 ## `looped make:middleware NAME`
 
@@ -90,7 +90,7 @@ OPTIONS
   -h, --help  show CLI help
 ```
 
-_See code: [src/commands/make/middleware.ts](https://github.com/morrislaptop/looped-ts/blob/v0.0.1-alpha.5/src/commands/make/middleware.ts)_
+_See code: [src/commands/make/middleware.ts](https://github.com/morrislaptop/looped-ts/blob/v0.0.1-alpha.6/src/commands/make/middleware.ts)_
 
 ## `looped make:provider NAME`
 
@@ -102,5 +102,5 @@ OPTIONS
   -h, --help  show CLI help
 ```
 
-_See code: [src/commands/make/provider.ts](https://github.com/morrislaptop/looped-ts/blob/v0.0.1-alpha.5/src/commands/make/provider.ts)_
+_See code: [src/commands/make/provider.ts](https://github.com/morrislaptop/looped-ts/blob/v0.0.1-alpha.6/src/commands/make/provider.ts)_
 <!-- commandsstop -->

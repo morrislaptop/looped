@@ -1,6 +1,6 @@
 {
     "name": "@looped-ts/starter",
-    "version": "0.0.1-alpha.5",
+    "version": "0.0.1-alpha.6",
     "private": true,
     "description": "A Laravel inspired TypeScript starter",
     "repository": "git@github.com:morrislaptop/looped.git",
@@ -8,7 +8,7 @@
     "license": "MIT",
     "dependencies": {
         "@atlassian/jira": "^0.1.0",
-        "@looped-ts/cli": "^0.0.1-alpha.5",
+        "@looped-ts/cli": "^0.0.1-alpha.6",
         "@looped-ts/foundation": "^0.0.1-alpha.5",
         "@looped-ts/support": "^0.0.1-alpha.5",
         "@oclif/command": "^1.5.15",

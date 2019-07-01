@@ -1,7 +1,7 @@
 {
   "name": "@looped-ts/create",
   "description": "Create Looped Starter Kit app",
-  "version": "0.0.1-alpha.5",
+  "version": "0.0.1-alpha.6",
   "author": "Craig Morris @morrislaptop",
   "bin": {
     "create": "./bin/run"
