@@ -1,32 +1,5 @@
 # Validation
 
-- [Introduction](#introduction)
-- [Validation Quickstart](#validation-quickstart)
-    - [Defining The Routes](#quick-defining-the-routes)
-    - [Creating The Controller](#quick-creating-the-controller)
-    - [Writing The Validation Logic](#quick-writing-the-validation-logic)
-    - [Displaying The Validation Errors](#quick-displaying-the-validation-errors)
-    - [A Note On Optional Fields](#a-note-on-optional-fields)
-- [Form Request Validation](#form-request-validation)
-    - [Creating Form Requests](#creating-form-requests)
-    - [Authorizing Form Requests](#authorizing-form-requests)
-    - [Customizing The Error Messages](#customizing-the-error-messages)
-    - [Customizing The Validation Attributes](#customizing-the-validation-attributes)
-- [Manually Creating Validators](#manually-creating-validators)
-    - [Automatic Redirection](#automatic-redirection)
-    - [Named Error Bags](#named-error-bags)
-    - [After Validation Hook](#after-validation-hook)
-- [Working With Error Messages](#working-with-error-messages)
-    - [Custom Error Messages](#custom-error-messages)
-- [Available Validation Rules](#available-validation-rules)
-- [Conditionally Adding Rules](#conditionally-adding-rules)
-- [Validating Arrays](#validating-arrays)
-- [Custom Validation Rules](#custom-validation-rules)
-    - [Using Rule Objects](#using-rule-objects)
-    - [Using Closures](#using-closures)
-    - [Using Extensions](#using-extensions)
-
-
 ## Introduction
 
 Laravel provides several different approaches to validate your application's incoming data. By default, Laravel's base controller class uses a `ValidatesRequests` trait which provides a convenient method to validate incoming HTTP request with a variety of powerful validation rules.
@@ -140,6 +113,7 @@ Again, notice that we did not have to explicitly bind the error messages to the 
 
 So, in our example, the user will be redirected to our controller's `create` method when validation fails, allowing us to display the error messages in the view:
 
+::: v-pre
     <!-- /resources/views/post/create.blade.php -->
 
     <h1>Create Post</h1>
@@ -155,11 +129,13 @@ So, in our example, the user will be redirected to our controller's `create` met
     @endif
 
     <!-- Create Post Form -->
+:::
 
 #### The `@error` Directive
 
 You may also use the `@error` [Blade](/blade) directive to quickly check if validation error messages exist for a given attribute. Within an `@error` directive, you may echo the `$message` variable to display the error message:
 
+::: v-pre
     <!-- /resources/views/post/create.blade.php -->
 
     <label for="title">Post Title</label>
@@ -169,7 +145,7 @@ You may also use the `@error` [Blade](/blade) directive to quickly check if vali
     @error('title')
         <div class="alert alert-danger">{{ $message }}</div>
     @enderror
-
+::: v-pre
 
 ### A Note On Optional Fields
 
@@ -386,8 +362,9 @@ If you have multiple forms on a single page, you may wish to name the `MessageBa
 
 You may then access the named `MessageBag` instance from the `$errors` variable:
 
+::: v-pre
     {{ $errors->login->first('email') }}
-
+:::
 
 ### After Validation Hook
 
