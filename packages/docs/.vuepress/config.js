@@ -49,7 +49,7 @@ module.exports = {
                     '/requests.html',
                     '/responses.html',
                     '/views.html',
-                    '/urls.html',
+                    // '/urls.html',
                     // '/session.html',
                     '/validation.html',
                     '/errors.html',
