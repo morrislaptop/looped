@@ -4,20 +4,28 @@ import Container, { Service, Inject } from 'typedi'
 import getRawBody from 'raw-body'
 import { User } from '../../User'
 import { SlimBody } from '@looped-ts/foundation'
-import { promisify } from 'util';
+import { promisify, isString } from 'util';
 import { Request, Express, Response } from 'express';
 import { resolve } from 'path';
 import { readFileSync } from 'fs';
+import { IsString } from 'class-validator'
 
-@Controller()
+class User2 {
+
+    @IsString()
+    firstName: string
+
+}
+
+@JsonController()
 @Service()
 export class ExampleController
 {
-    @Get('/')
-    @ContentType('md')
-    async index(@Res() res: Response) {
-        const data = readFileSync(__dirname + '/../../../../docs/responses.md')
-
-        return data
+    @Post('/')
+    async index(@Body() user: User2) {
+        return {
+            class: user.constructor.name,
+            user
+        }
     }
 }
