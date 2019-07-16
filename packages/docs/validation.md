@@ -4,57 +4,44 @@
 
 Looped provides several different approaches to validate your application's incoming data. By default, Looped validates your incoming requests using [class-validator](https://github.com/typestack/class-validator) and [class-transformer](https://github.com/typestack/class-transformer) which uses [validator.js](https://github.com/validatorjs/validator.js) under the hood. This provides a convenient method to validate and use strongly typed incoming HTTP requests.
 
-> Also checkout [indicative](https://github.com/poppinss/indicative) and [validatorjs](https://github.com/skaterdav85/validatorjs) which are both great validation frameworks inspired by Laravel
-
 ## Validation Quickstart
 
-To learn about Laravel's powerful validation features, let's look at a complete example of validating a form and displaying the error messages back to the user.
+To learn about Looped's powerful validation features, let's look at a complete example of validating a form and displaying the error messages back to the user.
 
 ### Defining The Routes
 
-First, let's assume we have the following routes defined in our `routes/web.php` file:
+First, let's assume we have registered the controller in our `routes/controllers.ts` file:
 
-    Route::get('post/create', 'PostController@create');
-    
-    Route::post('post', 'PostController@store');
+```typescript
+import { PostController } from '../app/Http/Controllers/PostController'
 
-The `GET` route will display a form for the user to create a new blog post, while the `POST` route will store the new blog post in the database.
-
+export const controllers = [
+    PostController
+]
+```
 
 ### Creating The Controller
 
-Next, let's take a look at a simple controller that handles these routes. We'll leave the `store` method empty for now:
+Next, let's take a look at a simple controller that handles these routes.
 
-    <?php
-    
-    namespace App\Http\Controllers;
-    
-    use Illuminate\Http\Request;
-    use App\Http\Controllers\Controller;
-    
-    class PostController extends Controller
-    {
-        /**
-         * Show the form to create a new blog post.
-         *
-         * @return Response
-         */
-        public function create()
-        {
-            return view('post.create');
-        }
-    
-        /**
-         * Store a new blog post.
-         *
-         * @param  Request  $request
-         * @return Response
-         */
-        public function store(Request $request)
-        {
-            // Validate and store the blog post...
+```typescript
+import { Post, Body, JsonController } from 'routing-controllers'
+import { Service } from 'typedi'
+import { CreatePostRequest } from '../Requests/CreatePostRequest';
+
+@JsonController()
+@Service()
+export class PostController
+{
+    @Post('/posts')
+    async store(@Body() post: CreatePostRequest) {
+        return {
+            title: post.title
         }
     }
+}
+
+```
 
 
 ### Writing The Validation Logic
@@ -80,27 +67,6 @@ To get a better understanding of the `validate` method, let's jump back into the
     }
 
 As you can see, we pass the desired validation rules into the `validate` method. Again, if the validation fails, the proper response will automatically be generated. If the validation passes, our controller will continue executing normally.
-
-#### Stopping On First Validation Failure
-
-Sometimes you may wish to stop running validation rules on an attribute after the first validation failure. To do so, assign the `bail` rule to the attribute:
-
-    $request->validate([
-        'title' => 'bail|required|unique:posts|max:255',
-        'body' => 'required',
-    ]);
-
-In this example, if the `unique` rule on the `title` attribute fails, the `max` rule will not be checked. Rules will be validated in the order they are assigned.
-
-#### A Note On Nested Attributes
-
-If your HTTP request contains "nested" parameters, you may specify them in your validation rules using "dot" syntax:
-
-    $request->validate([
-        'title' => 'required|unique:posts|max:255',
-        'author.name' => 'required',
-        'author.description' => 'required',
-    ]);
 
 
 ### Displaying The Validation Errors

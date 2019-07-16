@@ -1,5 +1,5 @@
-import { ExampleController } from '../app/Http/Controllers/ExampleController'
+import { PostController } from '../app/Http/Controllers/PostController'
 
 export const controllers = [
-    ExampleController
+    PostController
 ]
