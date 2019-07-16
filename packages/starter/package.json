@@ -40,6 +40,7 @@
         "express": "^4.17.1",
         "express-rate-limit": "^5.0.0",
         "heroku-client": "^3.0.7",
+        "indicative": "^7.2.0",
         "lodash": "^4.17.11",
         "mime-types": "^2.1.24",
         "multer": "^1.4.1",

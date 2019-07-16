@@ -1779,6 +1779,14 @@
     universal-user-agent "^2.0.0"
     url-template "^2.0.8"
 
+"@slynova/slug@^1.1.2":
+  version "1.1.2"
+  resolved "https://registry.yarnpkg.com/@slynova/slug/-/slug-1.1.2.tgz#c6289781da191b3ea386d678843cb7a7db7844e8"
+  integrity sha512-lFJRP4rqRxqxMjEnIih84jvQC6Xc4a3Yi0Z3gbemWOJX60HBBqEFfFrudmYYA+ga46b6Gxv7ofguZ9+ghl1EMg==
+  dependencies:
+    charmap "^1.1.6"
+    lodash.kebabcase "^4.1.1"
+
 "@types/aws-sdk@^2.7.0":
   version "2.7.0"
   resolved "https://registry.yarnpkg.com/@types/aws-sdk/-/aws-sdk-2.7.0.tgz#83588b3d14ebdca1d4ce5e023387577568ce82f3"
@@ -3577,6 +3585,13 @@ chardet@^0.7.0:
   resolved "https://registry.yarnpkg.com/chardet/-/chardet-0.7.0.tgz#90094849f0937f2eedc2425d0d28a9e5f0cbad9e"
   integrity sha512-mT8iDcrh03qDGRRmoA2hmBJnxpllMR+0/0qlzjqZES6NdiWDcZkCNAk4rPFZ9Q85r27unkiNNg8ZOiwZXBHwcA==
 
+charmap@^1.1.6:
+  version "1.1.6"
+  resolved "https://registry.yarnpkg.com/charmap/-/charmap-1.1.6.tgz#c81f41fb7870523feb268e4a4451b6abb67131cb"
+  integrity sha512-BfgDyIZOETYrvthjHHLY44S3s21o/VRZoLBSbJbbMs/k2XluBvdayklV4BBs4tB0MgiUgAPRWoOkYeBLk58R1w==
+  dependencies:
+    es6-object-assign "^1.1.0"
+
 chokidar@^2.0.2, chokidar@^2.0.3, chokidar@^2.1.5, chokidar@^2.1.6:
   version "2.1.6"
   resolved "https://registry.yarnpkg.com/chokidar/-/chokidar-2.1.6.tgz#b6cad653a929e244ce8a834244164d241fa954c5"
@@ -4519,6 +4534,11 @@ data-urls@^1.0.0:
     whatwg-mimetype "^2.2.0"
     whatwg-url "^7.0.0"
 
+date-fns@^1.30.1:
+  version "1.30.1"
+  resolved "https://registry.yarnpkg.com/date-fns/-/date-fns-1.30.1.tgz#2e71bf0b119153dbb4cc4e88d9ea5acfb50dc05c"
+  integrity sha512-hBSVCvSmWC+QypYObzwGOd9wqdDpOt+0wl0KbU+R+uuZBS1jN8VsD1ss3irQDknRj5NvxiTF6oj/nDRnN/UQNw==
+
 date-now@^0.1.4:
   version "0.1.4"
   resolved "https://registry.yarnpkg.com/date-now/-/date-now-0.1.4.tgz#eaf439fd4d4848ad74e5cc7dbef200672b9e345b"
@@ -5215,6 +5235,11 @@ es-to-primitive@^1.2.0:
     is-callable "^1.1.4"
     is-date-object "^1.0.1"
     is-symbol "^1.0.2"
+
+es6-object-assign@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/es6-object-assign/-/es6-object-assign-1.1.0.tgz#c2c3582656247c39ea107cb1e6652b6f9f24523c"
+  integrity sha1-wsNYJlYkfDnqEHyx5mUrb58kUjw=
 
 es6-promise@^4.0.3, es6-promise@^4.1.0:
   version "4.2.8"
@@ -6273,6 +6298,11 @@ hashring@3.2.x:
     connection-parse "0.0.x"
     simple-lru-cache "0.0.x"
 
+haye@^2.0.2:
+  version "2.0.2"
+  resolved "https://registry.yarnpkg.com/haye/-/haye-2.0.2.tgz#758043af17e3d5014cece82a3fc23525d4704ff3"
+  integrity sha512-C+jeFipAuwLLmQziwQrXuHzUIihDzqoLpCpwDWYFQVCIyqi5ZvC+4YtzawPTmd1tIKo0ULf+4P0Mw8irUdXIpg==
+
 he@1.2.x, he@^1.1.0:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/he/-/he-1.2.0.tgz#84ae65fa7eafb165fddb61566ae14baf05664f0f"
@@ -6619,6 +6649,58 @@ indexes-of@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/indexes-of/-/indexes-of-1.0.1.tgz#f30f716c8e2bd346c7b67d3df3915566a7c05607"
   integrity sha1-8w9xbI4r00bHtn0985FVZqfAVgc=
+
+indicative-compiler@^7.0.2:
+  version "7.0.2"
+  resolved "https://registry.yarnpkg.com/indicative-compiler/-/indicative-compiler-7.0.2.tgz#2f30c78e9cce57ff8eaec7072c3f699abffc377c"
+  integrity sha512-2jh7UeUC1vNAD8yfgG+U99VrTLZym8TNLUPAGNdvcMTWETjRPa3XwJFFBfAkXMKRL50djAhJMxoQZ/HxxmKCgA==
+  dependencies:
+    indicative-parser "^7.0.1"
+    isobject "^4.0.0"
+    lodash.get "^4.4.2"
+    lodash.memoize "^4.1.2"
+    lodash.set "^4.3.2"
+
+indicative-formatters@^7.2.1:
+  version "7.2.1"
+  resolved "https://registry.yarnpkg.com/indicative-formatters/-/indicative-formatters-7.2.1.tgz#2b7364e0e605687419be4e677a9a704c7e1dbb09"
+  integrity sha512-OdS0hWw8DwCfZXVLHLSnkU1nYwhEIqBxT05Q3DzKDkuaEAUJh4LdbqFadszKdVZGA62eogLoKOAeqCgbEUbg5Q==
+
+indicative-parser@^7.0.1:
+  version "7.0.1"
+  resolved "https://registry.yarnpkg.com/indicative-parser/-/indicative-parser-7.0.1.tgz#c9f6c7e42e38ec3a17a49c120503884c4b9e10ed"
+  integrity sha512-79oGjvumSWPdXkJlGUGB4pcPSf4glz72v7iqfQbwAxmZBVb8K+GUmVNVEpj3oux9jGcp6ftzcmYkdycIkznZyg==
+  dependencies:
+    haye "^2.0.2"
+
+indicative-rules@^7.2.1:
+  version "7.2.1"
+  resolved "https://registry.yarnpkg.com/indicative-rules/-/indicative-rules-7.2.1.tgz#de11b4a4c8609f831cd6f5f566a35c1c968b9c39"
+  integrity sha512-QvfG3imNVe2rV0NCNtUU+I0PS3dBoldmnXYUAQ/tIL10TaEJZborY80AG6EoqIPiB7xR92Ttfi1SKtprZvrL7Q==
+  dependencies:
+    "@slynova/slug" "^1.1.2"
+    date-fns "^1.30.1"
+    indicative-utils "^7.0.1"
+    pluralize "^8.0.0"
+    striptags "^3.1.1"
+    validator "^11.1.0"
+
+indicative-utils@^7.0.1:
+  version "7.0.1"
+  resolved "https://registry.yarnpkg.com/indicative-utils/-/indicative-utils-7.0.1.tgz#5a0fec900c3ecae8d5242f488ebc6e5fd55cb04d"
+  integrity sha512-VwAfdu4NU4T8IvZGrBBP4JpHLrrRXBbXJZJeHnM/FXONjdaqrvO3ZX+nF+jPlzUrSJy4U9MAA/dG+PyNENkLmg==
+  dependencies:
+    lodash.get "^4.4.2"
+
+indicative@^7.2.0:
+  version "7.2.0"
+  resolved "https://registry.yarnpkg.com/indicative/-/indicative-7.2.0.tgz#6d29067826d80bc8afcbb49b6dc3400ff3634128"
+  integrity sha512-WpQ9r4KaWLV4hG1Lgkoseaxy8svdbMUts4qzgAtzNB1xjn2zoZfSizHbLL7g+eWN5kMkATQxgECvNwTXFoPwBA==
+  dependencies:
+    indicative-compiler "^7.0.2"
+    indicative-formatters "^7.2.1"
+    indicative-parser "^7.0.1"
+    indicative-rules "^7.2.1"
 
 inflight@^1.0.4:
   version "1.0.6"
@@ -11451,6 +11533,11 @@ strip-json-comments@~2.0.1:
   resolved "https://registry.yarnpkg.com/strip-json-comments/-/strip-json-comments-2.0.1.tgz#3c531942e908c2697c0ec344858c286c7ca0a60a"
   integrity sha1-PFMZQukIwml8DsNEhYwobHygpgo=
 
+striptags@^3.1.1:
+  version "3.1.1"
+  resolved "https://registry.yarnpkg.com/striptags/-/striptags-3.1.1.tgz#c8c3e7fdd6fb4bb3a32a3b752e5b5e3e38093ebd"
+  integrity sha1-yMPn/db7S7OjKjt1LltePjgJPr0=
+
 strong-log-transformer@^2.0.0:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/strong-log-transformer/-/strong-log-transformer-2.1.0.tgz#0f5ed78d325e0421ac6f90f7f10e691d6ae3ae10"
@@ -12389,6 +12476,11 @@ validator@9.2.0:
   version "9.2.0"
   resolved "https://registry.yarnpkg.com/validator/-/validator-9.2.0.tgz#ad216eed5f37cac31a6fe00ceab1f6b88bded03e"
   integrity sha512-6Ij4Eo0KM4LkR0d0IegOwluG5453uqT5QyF5SV5Ezvm8/zmkKI/L4eoraafZGlZPC9guLkwKzgypcw8VGWWnGA==
+
+validator@^11.1.0:
+  version "11.1.0"
+  resolved "https://registry.yarnpkg.com/validator/-/validator-11.1.0.tgz#ac18cac42e0aa5902b603d7a5d9b7827e2346ac4"
+  integrity sha512-qiQ5ktdO7CD6C/5/mYV4jku/7qnqzjrxb3C/Q5wR3vGGinHTgJZN/TdFT3ZX4vXhX2R1PXx42fB1cn5W+uJ4lg==
 
 vary@^1, vary@~1.1.2:
   version "1.1.2"

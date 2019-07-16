@@ -1,7 +1,6 @@
 import 'reflect-metadata'
 import * as config from '../config'
 import { createKoaServer, useContainer, createExpressServer } from 'routing-controllers'
-import { ExampleController } from '../app/Http/Controllers/ExampleController'
 import { AppServiceProvider } from '../app/Providers/AppServiceProvider'
 import { DatabaseServiceProvider } from '../app/Providers/DatabaseServiceProvider'
 import { controllers } from '../routes/controllers'
