@@ -18,6 +18,7 @@ export function handleWithExpress(container: typeof Container)
         controllers,
         middlewares: [
         ],
+        defaultErrorHandler: false,
         cors: true,
     })
 

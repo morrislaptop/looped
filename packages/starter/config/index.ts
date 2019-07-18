@@ -6,7 +6,8 @@ config()
 
 const app = {
     port: process.env.PORT || '3000',
-    name: process.env.APP_NAME || 'Looped'
+    name: process.env.APP_NAME || 'Looped',
+    debug: process.env.APP_DEBUG === 'true',
 }
 
 const services = {
