@@ -14,6 +14,8 @@ export default class ExampleCommand extends Command {
     async run() {
         const { args } = this.parse(ExampleCommand)
 
+        throw new Error('blah blah blah')
+
         this.log(`Hello, ${args.name}`)
 
         this.log('Continer, ' + Container.get('hello'))

@@ -30,7 +30,7 @@ const database: ConnectionOptions = {
     type: 'postgres',
     url: process.env.DATABASE_URL || 'postgres://127.0.0.1',
     entities: ['app/*.ts'],
-    synchronize: true,
+    synchronize: false,
 }
 
 const cache = {

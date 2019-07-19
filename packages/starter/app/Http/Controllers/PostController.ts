@@ -1,6 +1,8 @@
-import { Post, Body, JsonController } from 'routing-controllers'
+import { Post, Body, JsonController, Get } from 'routing-controllers'
 import { Service } from 'typedi'
+import { CreatePostRequest } from '../Requests/CreatePostRequest';
 import { validate } from 'indicative/validator'
+import { abort } from '@looped-ts/support'
 
 @JsonController()
 @Service()
@@ -13,5 +15,19 @@ export class PostController
         return {
             title: post.title
         }
+    }
+
+    @Post('/posts2')
+    async store2(@Body() post: CreatePostRequest) {
+        return {
+            title: post.title
+        }
+    }
+
+    @Get('/abort')
+    async abort() {
+        abort(419, 'Im a teapot')
+
+        return 'hello world';
     }
 }

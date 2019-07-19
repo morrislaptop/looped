@@ -4,6 +4,7 @@ import * as config from '../../config'
 import Container from 'typedi'
 import express, { Express } from 'express'
 import Limiter from 'express-rate-limit'
+import { CustomErrorHandler } from '../Exceptions/Handler'
 
 export function handleWithExpress(container: typeof Container)
 {
@@ -17,6 +18,7 @@ export function handleWithExpress(container: typeof Container)
     useExpressServer(server, {
         controllers,
         middlewares: [
+            CustomErrorHandler,
         ],
         defaultErrorHandler: false,
         cors: true,
