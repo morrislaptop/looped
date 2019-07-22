@@ -7,6 +7,7 @@ config()
 const app = {
     port: process.env.PORT || '3000',
     name: process.env.APP_NAME || 'Looped',
+    env: process.env.APP_ENV || 'local',
     debug: process.env.APP_DEBUG === 'true',
 }
 

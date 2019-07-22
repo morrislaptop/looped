@@ -3,6 +3,7 @@ import * as config from '../config'
 import { createKoaServer, useContainer, createExpressServer } from 'routing-controllers'
 import { AppServiceProvider } from '../app/Providers/AppServiceProvider'
 import { DatabaseServiceProvider } from '../app/Providers/DatabaseServiceProvider'
+import { LoggingServiceProvider } from '../app/Providers/LoggingServiceProvider'
 import { controllers } from '../routes/controllers'
 import { Container } from 'typedi'
 import { Promise as bluebird } from 'bluebird'
@@ -12,6 +13,7 @@ export async function container() {
     const providers = [
         new AppServiceProvider,
         new DatabaseServiceProvider,
+        new LoggingServiceProvider,
     ]
 
     // register
