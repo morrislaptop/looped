@@ -1,8 +1,8 @@
 import { Container } from 'typedi'
 import * as config from '../../config'
 import { createLogger, Logger, transports, format } from 'winston';
-
-
+import SlackHook from "winston-slack-webhook-transport";
+import { logFormat } from '@looped-ts/support';
 
 export class LoggingServiceProvider
 {
@@ -13,16 +13,13 @@ export class LoggingServiceProvider
      */
     async register() {
         const logger = createLogger({
-            format: format.combine(
-                format.timestamp({ format: 'YYYY-MM-DD hh:mm:ss' }),
-                format.simple(),
-                format.printf((info) => {
-                    const { timestamp, level, message, ...rest } = info
-                    return `[${info.timestamp}] ${config.app.env}.${info.level.toUpperCase()}: ${info.message} ${JSON.stringify(rest)}`
-                }),
-            ),
+            format: logFormat(config.app.env),
             transports: [
-                new transports.Console()
+                new transports.Console(),
+                new SlackHook({
+                    webhookUrl: config.services.slack.log_webhook_url,
+                    level: 'error',
+                }),
             ]
         })
 

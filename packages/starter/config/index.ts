@@ -25,6 +25,9 @@ const services = {
         accessKeyId: process.env.AWS_ACCESS_KEY_ID,
         secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
     },
+    slack: {
+        log_webhook_url: 'https://hooks.slack.com/services/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'
+    }
 }
 
 const database: ConnectionOptions = {

@@ -10742,7 +10742,7 @@ request-promise@^4.2.4:
     stealthy-require "^1.1.1"
     tough-cookie "^2.3.3"
 
-request@^2.87.0:
+request@^2.87.0, request@^2.88.0:
   version "2.88.0"
   resolved "https://registry.yarnpkg.com/request/-/request-2.88.0.tgz#9c2fca4f7d35b592efe57c7f0a55e81052124fef"
   integrity sha512-NAqBSrijGLZdM0WZNsInLJpkJokL72XYjUpnB0iwsRgxh7dB6COrHnTBNwN0E+lHDAJzu7kLAkDeY08z2/A0hg==
@@ -12944,6 +12944,14 @@ windows-release@^3.1.0:
   integrity sha512-QTlz2hKLrdqukrsapKsINzqMgOUpQW268eJ0OaOpJN32h272waxR9fkB9VoWRtK7uKHG5EHJcTXQBD8XZVJkFA==
   dependencies:
     execa "^1.0.0"
+
+winston-slack-webhook-transport@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/winston-slack-webhook-transport/-/winston-slack-webhook-transport-1.1.0.tgz#852f79d2fb8ac27d2c4e018bf08fd5c25781d05d"
+  integrity sha512-fsG/MOrapp1GXDs48oFQ/di0M0YFKo5qs+GLHiDCDkxIdh3z8xQIdGuE3Gusd7xjkneaaix/PxMhNKjENosBbw==
+  dependencies:
+    request "^2.88.0"
+    winston-transport "^4.3.0"
 
 winston-transport@^4.3.0:
   version "4.3.0"

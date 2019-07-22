@@ -11,6 +11,7 @@
   },
   "gitHead": "31f11a8fe9b4f429b96438cbb8c29287652fd93b",
   "dependencies": {
-    "routing-controllers": "^0.7.7"
+    "routing-controllers": "^0.7.7",
+    "winston": "^3.2.1"
   }
 }
