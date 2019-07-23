@@ -10,9 +10,7 @@ module.exports = {
                 collapsable: false,
                 children: [
                     '/introduction.html',
-                    // '/upgrade.html',
                     '/contributions.html',
-                    // '/api-documentation.html',
                 ]
             },
             {
@@ -22,9 +20,6 @@ module.exports = {
                     '/installation.html',
                     '/configuration.html',
                     '/structure.html',
-                    // '/homestead.html',
-                    // '/valet.html',
-                    // '/deployment.html',
                 ]
             },
             {
@@ -34,8 +29,6 @@ module.exports = {
                     '/lifecycle.html',
                     '/container.html',
                     '/providers.html',
-                    // '/facades.html',
-                    // '/contracts.html',
                 ]
             },
             {
@@ -44,26 +37,15 @@ module.exports = {
                 children: [
                     '/routing.html',
                     '/middleware.html',
-                    // '/csrf.html',
                     '/controllers.html',
                     '/requests.html',
                     '/responses.html',
                     '/views.html',
-                    // '/urls.html',
-                    // '/session.html',
+                    '/templates.html',
                     '/validation.html',
                     '/errors.html',
                     '/logging.html',
-                ]
-            },
-            {
-                title: 'Frontend',
-                collapsable: false,
-                children: [
-                    '/ejs.html',
                     '/localization.html',
-                    '/frontend.html',
-                    '/mix.html',
                 ]
             },
             {

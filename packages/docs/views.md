@@ -34,4 +34,4 @@ Views may also be nested within sub-directories of the `resources/views` directo
 @Render('admin/profile.ejs');
 ```
 
->  Looking for more information on how to write EJS templates? Check out the full [EJS documentation](https://ejs.co/#docs) to get started.
+>  Looking for more information on how to write EJS templates? Check out the full [EJS documentation](/templates) to get started.
