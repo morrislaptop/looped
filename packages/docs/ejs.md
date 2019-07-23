@@ -99,13 +99,15 @@ Blade views may be returned from routes using the global `view` helper:
 
 Components and slots provide similar benefits to sections and layouts; however, some may find the mental model of components and slots easier to understand. First, let's imagine a reusable "alert" component we would like to reuse throughout our application:
 
+::: v-pre
     <!-- /resources/views/alert.blade.php -->
 
     <div class="alert alert-danger">
         {{ $slot }}
     </div>
+:::
 
-The `{{ $slot }}` variable will contain the content we wish to inject into the component. Now, to construct this component, we can use the `@component` Blade directive:
+The `$slot` variable will contain the content we wish to inject into the component. Now, to construct this component, we can use the `@component` Blade directive:
 
     @component('alert')
         <strong>Whoops!</strong> Something went wrong!
@@ -113,6 +115,7 @@ The `{{ $slot }}` variable will contain the content we wish to inject into the c
 
 Sometimes it is helpful to define multiple slots for a component. Let's modify our alert component to allow for the injection of a "title". Named slots may be displayed by "echoing" the variable that matches their name:
 
+::: v-pre
     <!-- /resources/views/alert.blade.php -->
 
     <div class="alert alert-danger">
@@ -120,6 +123,7 @@ Sometimes it is helpful to define multiple slots for a component. Let's modify o
 
         {{ $slot }}
     </div>
+:::
 
 Now, we can inject content into the named slot using the `@slot` directive. Any content not within a `@slot` directive will be passed to the component in the `$slot` variable:
 
@@ -170,19 +174,25 @@ You may display data passed to your Blade views by wrapping the variable in curl
 
 You may display the contents of the `name` variable like so:
 
+:::-pre
     Hello, {{ $name }}.
+:::
 
-> {tip} Blade `{{ }}` statements are automatically sent through PHP's `htmlspecialchars` function to prevent XSS attacks.
+> {tip} EJS `<%= %>` statements are automatically sent through PHP's `htmlspecialchars` function to prevent XSS attacks.
 
 You are not limited to displaying the contents of the variables passed to the view. You may also echo the results of any PHP function. In fact, you can put any PHP code you wish inside of a Blade echo statement:
 
+::: v-pre
     The current UNIX timestamp is {{ time() }}.
+:::
 
 #### Displaying Unescaped Data
 
-By default, Blade `{{ }}` statements are automatically sent through PHP's `htmlspecialchars` function to prevent XSS attacks. If you do not want your data to be escaped, you may use the following syntax:
+By default, EJS `<%= %>` statements are automatically sent through PHP's `htmlspecialchars` function to prevent XSS attacks. If you do not want your data to be escaped, you may use the following syntax:
 
+::: v-pre
     Hello, {!! $name !!}.
+:::
 
 > {note} Be very careful when echoing content that is supplied by users of your application. Always use the escaped, double curly brace syntax to prevent XSS attacks when displaying user supplied data.
 
@@ -239,22 +249,25 @@ By default, Blade (and the Laravel `e` helper) will double encode HTML entities.
 
 Since many JavaScript frameworks also use "curly" braces to indicate a given expression should be displayed in the browser, you may use the `@` symbol to inform the Blade rendering engine an expression should remain untouched. For example:
 
+::: v-pre
     <h1>Laravel</h1>
 
     Hello, @{{ name }}.
+:::
 
-In this example, the `@` symbol will be removed by Blade; however, `{{ name }}` expression will remain untouched by the Blade engine, allowing it to instead be rendered by your JavaScript framework.
+In this example, the `@` symbol will be removed by Blade; however, `name` expression will remain untouched by the Blade engine, allowing it to instead be rendered by your JavaScript framework.
 
 #### The `@verbatim` Directive
 
 If you are displaying JavaScript variables in a large portion of your template, you may wrap the HTML in the `@verbatim` directive so that you do not have to prefix each Blade echo statement with an `@` symbol:
 
+::: v-pre
     @verbatim
         <div class="container">
             Hello, {{ name }}.
         </div>
     @endverbatim
-
+:::
 
 ## Control Structures
 
@@ -346,6 +359,7 @@ Switch statements can be constructed using the `@switch`, `@case`, `@break`, `@d
 
 In addition to conditional statements, Blade provides simple directives for working with PHP's loop structures. Again, each of these directives functions identically to their PHP counterparts:
 
+::: v-pre
     @for ($i = 0; $i < 10; $i++)
         The current value is {{ $i }}
     @endfor
@@ -363,11 +377,13 @@ In addition to conditional statements, Blade provides simple directives for work
     @while (true)
         <p>I'm looping forever.</p>
     @endwhile
+:::
 
 > {tip} When looping, you may use the [loop variable](#the-loop-variable) to gain valuable information about the loop, such as whether you are in the first or last iteration through the loop.
 
 When using loops you may also end the loop or skip the current iteration:
 
+::: v-pre
     @foreach ($users as $user)
         @if ($user->type == 1)
             @continue
@@ -379,9 +395,11 @@ When using loops you may also end the loop or skip the current iteration:
             @break
         @endif
     @endforeach
+:::
 
 You may also include the condition with the directive declaration in one line:
 
+::: v-pre
     @foreach ($users as $user)
         @continue($user->type == 1)
 
@@ -389,12 +407,13 @@ You may also include the condition with the directive declaration in one line:
 
         @break($user->number == 5)
     @endforeach
-
+:::
 
 ### The Loop Variable
 
 When looping, a `$loop` variable will be available inside of your loop. This variable provides access to some useful bits of information such as the current loop index and whether this is the first or last iteration through the loop:
 
+::: v-pre
     @foreach ($users as $user)
         @if ($loop->first)
             This is the first iteration.
@@ -406,6 +425,7 @@ When looping, a `$loop` variable will be available inside of your loop. This var
 
         <p>This is user {{ $user->id }}</p>
     @endforeach
+:::
 
 If you are in a nested loop, you may access the parent loop's `$loop` variable via the `parent` property:
 
@@ -437,8 +457,9 @@ Property  | Description
 
 Blade also allows you to define comments in your views. However, unlike HTML comments, Blade comments are not included in the HTML returned by your application:
 
+::: v-pre
     {{-- This comment will not be present in the rendered HTML --}}
-
+:::
 
 ### PHP
 
@@ -480,6 +501,7 @@ Since HTML forms can't make `PUT`, `PATCH`, or `DELETE` requests, you will need 
 
 The `@error` directive may be used to quickly check if [validation error messages](/validation#quick-displaying-the-validation-errors) exist for a given attribute. Within an `@error` directive, you may echo the `$message` variable to display the error message:
 
+::: v-pre
     <!-- /resources/views/post/create.blade.php -->
 
     <label for="title">Post Title</label>
@@ -489,7 +511,7 @@ The `@error` directive may be used to quickly check if [validation error message
     @error('title')
         <div class="alert alert-danger">{{ $message }}</div>
     @enderror
-
+:::
 
 ## Including Sub-Views
 
@@ -525,7 +547,9 @@ To include the first view that exists from a given array of views, you may use t
 
 If your Blade includes are stored in a sub-directory, you may wish to alias them for easier access. For example, imagine a Blade include that is stored at `resources/views/includes/input.blade.php` with the following content:
 
+::: v-pre
     <input type="{{ $type ?? 'text' }}">
+:::
 
 You may use the `include` method to alias the include from `includes.input` to `input`. Typically, this should be done in the `boot` method of your `AppServiceProvider`:
 
@@ -586,12 +610,13 @@ If you would like to prepend content onto the beginning of a stack, you should u
 
 The `@inject` directive may be used to retrieve a service from the Laravel [service container](/container). The first argument passed to `@inject` is the name of the variable the service will be placed into, while the second argument is the class or interface name of the service you wish to resolve:
 
+::: v-pre
     @inject('metrics', 'App\Services\MetricsService')
 
     <div>
         Monthly Revenue: {{ $metrics->monthlyRevenue() }}.
     </div>
-
+:::
 
 ## Extending Blade
 

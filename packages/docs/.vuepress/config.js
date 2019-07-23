@@ -60,7 +60,7 @@ module.exports = {
                 title: 'Frontend',
                 collapsable: false,
                 children: [
-                    '/blade.html',
+                    '/ejs.html',
                     '/localization.html',
                     '/frontend.html',
                     '/mix.html',

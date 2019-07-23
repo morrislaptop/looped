@@ -100,11 +100,13 @@ You may retrieve lines from language files using the `__` helper function. The `
 
     echo __('I love programming.');
 
-If you are using the [Blade templating engine](/blade), you may use the `{{ }}` syntax to echo the translation string or use the `@lang` directive:
+If you are using the [Blade templating engine](/blade), you may use the `{ }` syntax to echo the translation string or use the `@lang` directive:
 
+::: v-pre
     {{ __('messages.welcome') }}
 
     @lang('messages.welcome')
+:::
 
 If the specified translation string does not exist, the `__` function will return the translation string key. So, using the example above, the `__` function would return `messages.welcome` if the translation string does not exist.
 
