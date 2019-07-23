@@ -6,15 +6,18 @@
     <title>Hello Bulma!</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.min.css">
     <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+    <script>
+        var app = <%- JSON.stringify(user) %>
+    </script>
   </head>
   <body>
   <section class="section">
     <div class="container">
-      <h1 class="title">
-        Hello, <%= hello %>
-      </h1>
-      <p class="subtitle">
-        My first website with <strong>Looped!</strong>!
+      <%- include('hello.ejs', { friend: 'Craig' }) %>
+      <p class="subtitle" :user='<%- JSON.stringify(user) %>'>
+        The current UNIX timestamp is <%= Date.now() %>
+      </p>
+      <p>
       </p>
     </div>
   </section>
