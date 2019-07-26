@@ -1,3 +1,4 @@
 <h1 class="title">
-    Hello, <%= user.name %> and <%= friend %>
+    <%= __('hello', { Name: user.name }) %>
 </h1>
+<p><%= __n('You have %s cat', 3, { name: 'Kitty' }) %>

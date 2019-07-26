@@ -9,6 +9,7 @@ const app = {
     name: process.env.APP_NAME || 'Looped',
     env: process.env.APP_ENV || 'local',
     debug: process.env.APP_DEBUG === 'true',
+    locale: 'en',
 }
 
 const services = {

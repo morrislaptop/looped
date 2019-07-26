@@ -1,5 +1,7 @@
-import { Get, Render, Controller } from 'routing-controllers'
+import { Get, Render, Controller, Req } from 'routing-controllers'
 import { Service } from 'typedi'
+import { getLocale } from 'i18n';
+import { Request } from 'express';
 
 @Controller()
 @Service()

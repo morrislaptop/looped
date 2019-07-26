@@ -4,9 +4,9 @@ import { createKoaServer, useContainer, createExpressServer } from 'routing-cont
 import { AppServiceProvider } from '../app/Providers/AppServiceProvider'
 import { DatabaseServiceProvider } from '../app/Providers/DatabaseServiceProvider'
 import { LoggingServiceProvider } from '../app/Providers/LoggingServiceProvider'
+import { LocalizationServiceProvider } from '../app/Providers/LocalizationServiceProvider'
 import { controllers } from '../routes/controllers'
 import { Container } from 'typedi'
-import { Promise as bluebird } from 'bluebird'
 
 export async function container() {
     // service providers
@@ -14,15 +14,11 @@ export async function container() {
         new AppServiceProvider,
         new DatabaseServiceProvider,
         new LoggingServiceProvider,
+        new LocalizationServiceProvider,
     ]
 
-    // register
-    const registrars = providers.map(p => p.register)
-    await bluebird.each(registrars, fn => fn())
-
-    // boot
-    const booters = providers.map(p => p.boot)
-    await bluebird.each(booters, fn => fn())
+    await Promise.all(providers.map(p => p.register()))
+    await Promise.all(providers.map(p => p.boot()))
 
     return Container
 }

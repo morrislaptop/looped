@@ -5,6 +5,7 @@ import Container from 'typedi'
 import express, { Express } from 'express'
 import Limiter from 'express-rate-limit'
 import { CustomErrorHandler } from '../Exceptions/Handler'
+import { init as i18n } from 'i18n'
 
 export function handleWithExpress(container: typeof Container)
 {
@@ -14,6 +15,7 @@ export function handleWithExpress(container: typeof Container)
     const server = express()
 
     server.use(new Limiter({ windowMs: 15 * 60 * 1000, max: 100 }))
+    server.use(i18n)
 
     useExpressServer(server, {
         controllers,

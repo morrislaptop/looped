@@ -1,6 +1,5 @@
 import { Inject, Service } from 'typedi'
 const debug = require('debug')
-import { using } from 'bluebird';
 
 export function getOrElse<T>(cache: any, key: string, fn: () => T ): T {
     return cache.getOrElse(key, fn)

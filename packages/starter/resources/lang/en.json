@@ -1,0 +1,8 @@
+{
+	"hello2": "hello2",
+	"hello": "hello",
+	"You have %s cat": {
+		"one": "You have %s cat",
+		"other": "You have %s cats"
+	}
+}
