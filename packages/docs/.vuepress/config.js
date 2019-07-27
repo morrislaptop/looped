@@ -53,7 +53,6 @@ module.exports = {
                 collapsable: false,
                 children: [
                     '/authentication.html',
-                    '/api-authentication.html',
                     '/authorization.html',
                     '/verification.html',
                     '/encryption.html',
