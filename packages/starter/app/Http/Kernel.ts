@@ -1,4 +1,4 @@
-import { useContainer, useExpressServer } from 'routing-controllers';
+import { useContainer, useExpressServer, Action } from 'routing-controllers';
 import { controllers, routes } from '../../routes'
 import * as config from '../../config'
 import Container from 'typedi'
@@ -6,6 +6,7 @@ import express, { Express } from 'express'
 import Limiter from 'express-rate-limit'
 import { CustomErrorHandler } from '../Exceptions/Handler'
 import { init as i18n } from 'i18n'
+import { User } from '../User';
 
 export function handleWithExpress(container: typeof Container)
 {
@@ -24,6 +25,11 @@ export function handleWithExpress(container: typeof Container)
         ],
         defaultErrorHandler: false,
         cors: true,
+        currentUserChecker: async (action: Action) => {
+            const api_token = action.request.query.api_token;
+
+            return api_token ? User.findOneOrFail({ api_token }) : null;
+        }
     })
 
     server.set('trust proxy', true)

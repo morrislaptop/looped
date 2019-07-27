@@ -7,12 +7,9 @@ export class User extends BaseEntity {
     id: number;
 
     @Column()
-    firstName: string;
+    email: string;
 
     @Column()
-    lastName: string;
-
-    @Column()
-    age: number;
+    api_token: string;
 
 }
